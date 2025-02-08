@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:07:48 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/08 15:49:16 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/08 17:38:37 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@
 
 # include "libft.h"
 # include "get_next_line.h"
+
+#define AMB_ELE 3
+#define CAM_ELE 4
+#define LIG_ELE 4
+#define SPH_ELE 4
+#define PLA_ELE 4
+#define CYL_ELE 6
+#define COLOR_MAX 255
 
 typedef enum e_otype
 {
@@ -125,15 +133,17 @@ typedef struct s_mini
 }	t_mini;
 
 //exit.c
-void		print_error(char *str);
-int			free_mini(t_mini *mini);
-int			free_exit(t_mini *mini);
-void		print_free_exit(t_mini *mini, char *str, int status);
+void			print_error(char *str);
+int				free_mini(t_mini *mini);
+int				free_exit(t_mini *mini);
+void			print_free_exit(t_mini *mini, char *str, int status);
 
-void	read_scene(t_mini *mini, char *file);
+void			read_scene(t_mini *mini, char *file);
+t_a_lighting	*set_amb(t_mini *mini, char **strs);
+char			**rt_split(t_mini *mini, char *str);
+int				rt_strslen(char **strs);
+short			rt_atos(t_mini *mini, char **strs, char *str, int *index);
 
-char	**rt_split(t_mini *mini, char *str);
-
-void	free_strs(char **strs);
+void			free_strs(char **strs);
 
 #endif

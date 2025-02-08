@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:17:02 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/08 16:07:41 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/08 18:56:00 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	main(int ac, char *av[])
 		print_free_exit(NULL, "need a scene in format *.rt\n", -1);
 	mini = init_mini();
 	read_scene(mini, av[1]);
-	(void)av;
 	mini->mlx = mlx_init();
 	if (!mini->mlx)
 		print_free_exit(mini, "error at mlx_init\n", -1);

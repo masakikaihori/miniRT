@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 17:44:59 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/08 15:48:51 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/08 17:37:44 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,16 @@ void	parse_strs(t_mini *mini, char **strs)
 {
 	t_object		*new;
 	t_otype			indentifer;
-	int				index;
 
 	indentifer = get_identifer(strs[0]);
-	if (indentifer == UNKNOWN)
-		print_free_exit(mini, "invaild identifer\n", -1);
-	new = (t_object *)malloc(sizeof(t_object) * 1);
-	if (!new)
-		print_free_exit(mini, NULL, errno);
-	index = 0;
+	if (indentifer == AMBIENT_LIGHTNING)
+		mini->object.a_lighting = set_amb(mini, strs);
+	else if (indentifer == CAMERA)
+		mini->object.camera = set_camera(mini, strs);
+	else if (indentifer == LIGHT)
+		mini->object.light = set_light(mini, strs);
+	else
+		mini->object.object = set_obj(mini, strs);
 	return ;
 }
 
