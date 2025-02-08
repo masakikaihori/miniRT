@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:17:02 by mkaihori          #+#    #+#             */
-/*   Updated: 2024/12/30 18:17:07 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/02 17:17:07 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ int	deal_key(int key, void *param)
 
 	mini = (t_mini *)param;
 	if (key == 65307)
-		free_exit(mini, 0);
-	printf("%d\n", key);
+		mlx_loop_end(mini->mlx);
+	else
+		printf("%d\n", key);
 	return (mini->status);
 }
 
@@ -48,10 +49,12 @@ int	main(int ac, char *av[])
 	mini->object = read_scene(mini, av[1]);
 	mini->mlx = mlx_init();
 	if (!mini->mlx)
-		print_free_exit(mini, "mlx_init_error\n", -1);
+		print_free_exit(mini, "error at mlx_init\n", -1);
 	mini->win = mlx_new_window(mini->mlx, 500, 500, "miniRT");
+	if (!mini->win)
+		print_free_exit(mini, "error at mlx_new_window", -1);
 	mlx_key_hook(mini->win, deal_key, mini);
 	mlx_hook(mini->win, 17, 0, free_exit, mini);
 	mlx_loop(mini->mlx);
-	return (0);
+	return (free_mini(mini));
 }

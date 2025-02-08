@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:17:15 by mkaihori          #+#    #+#             */
-/*   Updated: 2024/12/30 18:17:16 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/02 16:49:45 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ void	print_error(char *str)
 	return ;
 }
 
-int	free_exit(t_mini *mini, int status)
+int	free_mini(t_mini *mini)
 {
+	int	status;
+
+	status = EXIT_SUCCESS;
 	if (mini)
 	{
 		if (mini->win)
@@ -33,14 +36,24 @@ int	free_exit(t_mini *mini, int status)
 			mlx_destroy_display(mini->mlx);
 			free(mini->mlx);
 		}
+		status = mini->status;
 		free(mini);
 	}
-	exit(status);
+	return (status);
+}
+
+int	free_exit(t_mini *mini)
+{
+	exit(free_mini(mini));
 }
 
 void	print_free_exit(t_mini *mini, char *str, int status)
 {
 	print_error(str);
-	free_exit(mini, status);
-	return ;
+	if (mini)
+	{
+		mini->status = status;
+		exit(free_mini(mini));
+	}
+	exit(status);
 }

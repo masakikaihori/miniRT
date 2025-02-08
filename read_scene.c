@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 17:44:59 by mkaihori          #+#    #+#             */
-/*   Updated: 2024/12/30 23:28:33 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/02 19:19:16 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	open_rtfile(t_mini *mini, char *file)
 	return (-1);
 }
 
-t_objecttype	get_identifer(char *str)
+t_otype	get_identifer(char *str)
 {
 	size_t	str_size;
 
@@ -57,7 +57,7 @@ t_objecttype	get_identifer(char *str)
 t_object	*parse_strs(char **strs)
 {
 	t_object		*new;
-	t_objecttype	indentifer;
+	t_otype			indentifer;
 	int				index;
 
 	indentifer = get_identifer(strs[0]);
@@ -81,17 +81,17 @@ t_object	*read_scene(t_mini *mini, char *file)
 	head = NULL;
 	fd = open_rtfile(mini, file);
 	str = get_next_line(fd);
-	if (str)
+	while (str)
 	{
-		strs = ft_split(str, ' ');
-		free(str);
-		if (!strs)
-			print_free_exit(mini, "not *.rt file\n", -1);
-		new = parse_strs(strs);
-		free(strs);
-		if (!new)
-			print_free_exit(mini, "parse error\n", -1);
-		ft_lstadd_back(&head, new);
+		strs = rt_split(mini, str);
+		if (strs)
+		{
+			new = parse_strs(strs);
+			free_strs(strs);
+			if (!new)
+				print_free_exit(mini, "parse error\n", -1);
+			ft_lstadd_back(&head, new);
+		}
 		str = get_next_line(fd);
 	}
 	return (head);
