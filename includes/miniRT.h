@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
+/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:07:48 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/02 19:21:04 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/08 15:49:16 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,44 +34,77 @@ typedef enum e_otype
 	PLANE,
 	CYLINDER,
 	UNKNOWN,
-}	t_otype;
+}t_otype;
 
-typedef	struct s_rgb
+typedef struct s_rgb
 {
 	short	red;
 	short	green;
 	short	blue;
-}	t_rgb;
+}t_rgb;
+
+typedef struct s_xyz
+{
+	float	x;
+	float	y;
+	float	z;
+}t_xyz;
 
 typedef	struct s_a_lighting
 {
 	float			ratio;
-	struct s_rbg	color;
-}	t_a_lighting;
+	struct s_rgb	color;
+}t_a_lighting;
 
 typedef struct s_camera
 {
-	struct s_xyz	coordinates;
-	struct s_vector	vector;
+	struct s_xyz	coord;
+	struct s_xyz	vec;
 	short			fov;
-}	t_camera;
+}t_camera;
 
 typedef struct s_light
 {
 	struct s_xyz	coordinates;
 	float			ratio;
-	struct s_rbg	color;
+	struct s_rgb	color;
 }	t_light;
 
-struct union u_oinfo
+typedef struct s_sphere
 {
-	
+	struct s_xyz	coord;
+	float			diameter;
+	struct s_rgb	color;
+}t_sphere;
+
+typedef struct s_plane
+{
+	struct s_xyz	coord;
+	struct s_xyz	vec;
+	struct s_rgb	color;
+}t_plane;
+
+typedef struct s_cylinder
+{
+	struct s_xyz	coord;
+	struct s_xyz	vec;
+	float			diameter;
+	float			height;
+	struct s_rgb	color;
+}t_cylinder;
+
+
+typedef union u_oinfo
+{
+	struct s_sphere		sphere;
+	struct s_plane		plane;
+	struct s_cylinder	cylinder;
 }	t_oinfo;
 
 typedef struct s_object
 {
-	struct e_objecttype	type;
-	struct u_oinfo		info;
+	enum e_otype		type;
+	union u_oinfo		info;
 	struct s_object		*next;
 }	t_object;
 
@@ -97,7 +130,7 @@ int			free_mini(t_mini *mini);
 int			free_exit(t_mini *mini);
 void		print_free_exit(t_mini *mini, char *str, int status);
 
-t_object	*read_scene(t_mini *mini, char *file);
+void	read_scene(t_mini *mini, char *file);
 
 char	**rt_split(t_mini *mini, char *str);
 

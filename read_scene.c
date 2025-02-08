@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
+/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 17:44:59 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/02 19:19:16 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/08 15:48:51 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_otype	get_identifer(char *str)
 	return (UNKNOWN);
 }
 
-t_object	*parse_strs(char **strs)
+void	parse_strs(t_mini *mini, char **strs)
 {
 	t_object		*new;
 	t_otype			indentifer;
@@ -62,23 +62,20 @@ t_object	*parse_strs(char **strs)
 
 	indentifer = get_identifer(strs[0]);
 	if (indentifer == UNKNOWN)
-		return (NULL);
+		print_free_exit(mini, "invaild identifer\n", -1);
 	new = (t_object *)malloc(sizeof(t_object) * 1);
 	if (!new)
-		return (NULL);
+		print_free_exit(mini, NULL, errno);
 	index = 0;
-	return (new);
+	return ;
 }
 
-t_object	*read_scene(t_mini *mini, char *file)
+void	read_scene(t_mini *mini, char *file)
 {
-	t_object	*head;
-	t_object	*new;
 	char		*str;
 	char		**strs;
 	int			fd;
 
-	head = NULL;
 	fd = open_rtfile(mini, file);
 	str = get_next_line(fd);
 	while (str)
@@ -86,13 +83,10 @@ t_object	*read_scene(t_mini *mini, char *file)
 		strs = rt_split(mini, str);
 		if (strs)
 		{
-			new = parse_strs(strs);
+			parse_strs(mini, strs);
 			free_strs(strs);
-			if (!new)
-				print_free_exit(mini, "parse error\n", -1);
-			ft_lstadd_back(&head, new);
 		}
 		str = get_next_line(fd);
 	}
-	return (head);
+	return ;
 }
