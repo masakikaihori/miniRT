@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:16:15 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/11 18:11:48 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:23:28 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	rt_atof_e(t_mini *mini, char **strs, char *str, int *index)
 	sign = 1;
 	if (str[i] == '\0')
 		return (0);
-	else if (str[i] == 'e' || str[i == 'E'])
+	else if (str[i] == 'e' || str[i] == 'E')
 		i++;
 	else
 		print_frees_exit(mini, "atof error\n", -1, strs);
@@ -63,8 +63,7 @@ int	rt_atof_e(t_mini *mini, char **strs, char *str, int *index)
 		i++;
 	if (str[i] != '\0')
 		print_frees_exit(mini, "atof error\n", -1, strs);
-	if (index)
-		*index = i;
+	*index = i;
 	return (num * sign);
 }
 

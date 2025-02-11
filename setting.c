@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:40:02 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/11 17:40:40 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:23:48 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,15 @@ t_rgb	set_color(t_mini *mini, char **strs, char *str)
 	index = 0;
 	new.red = rt_atos(mini, strs, str, &index);
 	if (str[index++] == '\0')
-	{
-		free_strs(strs);
-		print_free_exit(mini, "color element\n", -1);
-	}
+		print_frees_exit(mini, "color element\n", -1, strs);
 	str = str + index;
 	new.green = rt_atos(mini, strs, str, &index);
 	if (str[index++] == '\0')
-	{
-		free_strs(strs);
-		print_free_exit(mini, "color element\n", -1);
-	}
+		print_frees_exit(mini, "color element\n", -1, str);
 	str = str + index;
 	new.blue = rt_atos(mini, strs, str, &index);
 	if (str[index] != '\0')
-	{
-		free_strs(strs);
-		print_free_exit(mini, "color element\n", -1);
-	}
+		print_frees_exit(mini, "color element\n", -1, strs);
 	return (new);
 }
 
