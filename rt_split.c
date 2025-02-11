@@ -6,11 +6,11 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:08:15 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/02 17:50:12 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:40:33 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/miniRT.h"
+#include "./includes/mini_rt.h"
 
 int	count_words(char *str)
 {

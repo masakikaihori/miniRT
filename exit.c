@@ -6,11 +6,11 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:17:15 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/08 18:05:25 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:58:15 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/miniRT.h"
+#include "./includes/mini_rt.h"
 
 void	print_error(char *str)
 {
@@ -56,4 +56,11 @@ void	print_free_exit(t_mini *mini, char *str, int status)
 		exit(free_mini(mini));
 	}
 	exit(status);
+}
+
+void	print_frees_exit(t_mini *mini, char *str, int status, char **strs)
+{
+	free_strs(strs);
+	print_free_exit(mini, str, status);
+	return ;
 }

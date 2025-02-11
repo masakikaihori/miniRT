@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   mini_rt.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:07:48 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/08 17:38:37 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:58:27 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef MINI_RT_H
+# define MINI_RT_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -19,19 +19,22 @@
 # include <stdbool.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <math.h>
 
 # include "mlx.h"
 
 # include "libft.h"
 # include "get_next_line.h"
 
-#define AMB_ELE 3
-#define CAM_ELE 4
-#define LIG_ELE 4
-#define SPH_ELE 4
-#define PLA_ELE 4
-#define CYL_ELE 6
-#define COLOR_MAX 255
+# define AMB_ELE 3
+# define CAM_ELE 4
+# define LIG_ELE 4
+# define SPH_ELE 4
+# define PLA_ELE 4
+# define CYL_ELE 6
+# define COLOR_MAX 255
+
+# define OK_CHARSET "0123456789+-.,eE"
 
 typedef enum e_otype
 {
@@ -42,34 +45,34 @@ typedef enum e_otype
 	PLANE,
 	CYLINDER,
 	UNKNOWN,
-}t_otype;
+}	t_otype;
 
 typedef struct s_rgb
 {
 	short	red;
 	short	green;
 	short	blue;
-}t_rgb;
+}	t_rgb;
 
 typedef struct s_xyz
 {
 	float	x;
 	float	y;
 	float	z;
-}t_xyz;
+}	t_xyz;
 
-typedef	struct s_a_lighting
+typedef struct s_a_lighting
 {
 	float			ratio;
 	struct s_rgb	color;
-}t_a_lighting;
+}	t_a_lighting;
 
 typedef struct s_camera
 {
 	struct s_xyz	coord;
 	struct s_xyz	vec;
 	short			fov;
-}t_camera;
+}	t_camera;
 
 typedef struct s_light
 {
@@ -83,14 +86,14 @@ typedef struct s_sphere
 	struct s_xyz	coord;
 	float			diameter;
 	struct s_rgb	color;
-}t_sphere;
+}	t_sphere;
 
 typedef struct s_plane
 {
 	struct s_xyz	coord;
 	struct s_xyz	vec;
 	struct s_rgb	color;
-}t_plane;
+}	t_plane;
 
 typedef struct s_cylinder
 {
@@ -99,8 +102,7 @@ typedef struct s_cylinder
 	float			diameter;
 	float			height;
 	struct s_rgb	color;
-}t_cylinder;
-
+}	t_cylinder;
 
 typedef union u_oinfo
 {
@@ -137,12 +139,14 @@ void			print_error(char *str);
 int				free_mini(t_mini *mini);
 int				free_exit(t_mini *mini);
 void			print_free_exit(t_mini *mini, char *str, int status);
+void			print_frees_exit(t_mini *mini, char *str, int status, char **strs);
 
 void			read_scene(t_mini *mini, char *file);
 t_a_lighting	*set_amb(t_mini *mini, char **strs);
 char			**rt_split(t_mini *mini, char *str);
 int				rt_strslen(char **strs);
 short			rt_atos(t_mini *mini, char **strs, char *str, int *index);
+float			rt_atof(t_mini *mini, char **strs, char *str, int *index);
 
 void			free_strs(char **strs);
 

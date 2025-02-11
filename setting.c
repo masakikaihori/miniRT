@@ -6,11 +6,11 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:40:02 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/08 17:43:08 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:40:40 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/miniRT.h"
+#include "./includes/mini_rt.h"
 
 t_rgb	set_color(t_mini *mini, char **strs, char *str)
 {
@@ -41,27 +41,40 @@ t_rgb	set_color(t_mini *mini, char **strs, char *str)
 	return (new);
 }
 
+bool	not_available(char **strs)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (strs[i])
+	{
+		j = 0;
+		while (strs[i][j])
+		{
+			if(ft_strchr(OK_CHARSET, strs[i][j]))
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 t_a_lighting	*set_amb(t_mini *mini, char **strs)
 {
 	t_a_lighting	*new;
 
 	if (mini->object.a_lighting)
-	{
-		free_strs(strs);
-		print_free_exit(mini, "ambient_lighting is declared more than once\n", -1);
-	}
+		print_frees_exit(mini, "ambient_lighting is declared more than once\n", -1, strs);
 	new = (t_a_lighting *)malloc(sizeof(t_a_lighting));
 	if (!new)
-	{
-		free_strs(strs);
-		print_free_exit(mini, NULL, errno);
-	}
+		print_frees_exit(mini, NULL, errno, strs);
 	if (rt_strslen(strs) != AMB_ELE)
-	{
-		free_strs(strs);
-		print_free_exit(mini, "ambient_lighting amount of element\n", -1);
-	}
-	new->ratio = rt_atof(mini, strs, strs[1]);
+		print_frees_exit(mini, "ambient_lighting amount of element\n", -1, strs);
+	if (not_available(strs + 1))
+		print_frees_exit(mini, "ambient lighting character\n", -1, strs);
+	new->ratio = rt_atof(mini, strs, strs[1], NULL);
 	new->color = set_color(mini, strs, strs[2]);
 	mini->object.a_lighting = new;
 	return ;

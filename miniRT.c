@@ -6,11 +6,11 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:17:02 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/08 18:56:00 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:51:22 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/miniRT.h"
+#include "./includes/mini_rt.h"
 
 t_mini	*init_mini(void)
 {
