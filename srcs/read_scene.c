@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/mini_rt.h"
+#include "../includes/mini_rt.h"
 
 int	open_rtfile(t_mini *mini, char *file)
 {

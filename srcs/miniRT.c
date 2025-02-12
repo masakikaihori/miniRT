@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/mini_rt.h"
+#include "../includes/mini_rt.h"
 
 t_mini	*init_mini(void)
 {

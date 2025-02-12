@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/mini_rt.h"
+#include "../includes/mini_rt.h"
 
 t_rgb	set_color(t_mini *mini, char **strs, char *str)
 {

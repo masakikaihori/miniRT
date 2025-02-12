@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/mini_rt.h"
+#include "../includes/mini_rt.h"
 
 float	rt_atof_util(t_mini *mini, char **strs, char *str, int *index)
 {

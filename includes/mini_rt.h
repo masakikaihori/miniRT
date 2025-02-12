@@ -21,10 +21,10 @@
 # include <fcntl.h>
 # include <math.h>
 
-# include "mlx.h"
+# include "../minilibx-linux/mlx.h"
 
-# include "libft.h"
-# include "get_next_line.h"
+# include "../libft/libft.h"
+# include "../libft/get_next_line.h"
 
 # define AMB_ELE 3
 # define CAM_ELE 4
