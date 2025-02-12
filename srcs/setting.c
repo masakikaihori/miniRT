@@ -59,13 +59,13 @@ void	set_amb(t_mini *mini, char **strs)
 	new = (t_a_lightning *)malloc(sizeof(t_a_lightning));
 	if (!new)
 		print_frees_exit(mini, NULL, errno, strs);
+	mini->a_lightning = new;
 	if (rt_strslen(strs) != AMB_ELE)
 		print_frees_exit(mini, "ambient_lighting amount of element\n", -1, strs);
 	if (not_available(strs + 1))
 		print_frees_exit(mini, "ambient lighting character\n", -1, strs);
-	new->ratio = rt_atof(mini, strs, strs[1], NULL);
-	new->color = set_color(mini, strs, strs[2]);
-	mini->a_lightning = new;
+	mini->a_lightning->ratio = rt_atof(mini, strs, strs[1], NULL);
+	mini->a_lightning->color = set_color(mini, strs, strs[2]);
 	return ;
 }
 

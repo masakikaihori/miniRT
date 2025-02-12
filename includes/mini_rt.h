@@ -150,5 +150,7 @@ void    		free_objects(t_mini *mini);
 
 //debug
 void    		print_mini(t_mini *mini);
+void			*debug_malloc(size_t size);
+void			debug_free(void *prt);
 
 #endif

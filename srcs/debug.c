@@ -1,5 +1,23 @@
 #include "../includes/mini_rt.h"
 
+void	debug_free(void *ptr)
+{
+	printf("free %p\n", ptr);
+	free(ptr);
+	return ;
+}
+
+void	*debug_malloc(size_t size)
+{
+	void	*ptr;
+
+	ptr = malloc(size);
+	if (!ptr)
+		return (NULL);
+	printf("malloc : %p\n", ptr);
+	return (ptr);
+}
+
 void    print_xyz(t_xyz xyz, char *str)
 {
 	printf("%s x : %f\n", str, xyz.x);
