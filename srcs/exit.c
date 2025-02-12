@@ -36,6 +36,9 @@ int	free_mini(t_mini *mini)
 			mlx_destroy_display(mini->mlx);
 			free(mini->mlx);
 		}
+		free_objects(mini);
+		if (mini->fd)
+			rt_close(mini);
 		status = mini->status;
 		free(mini);
 	}

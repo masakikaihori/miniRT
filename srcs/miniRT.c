@@ -21,11 +21,12 @@ t_mini	*init_mini(void)
 		print_free_exit(mini, NULL, errno);
 	mini->mlx = NULL;
 	mini->win = NULL;
-	mini->object.a_lighting = NULL;
-	mini->object.camera = NULL;
-	mini->object.light = NULL;
-	mini->object.object = NULL;
+	mini->a_lightning = NULL;
+	mini->camera = NULL;
+	mini->light = NULL;
+	mini->object = NULL;
 	mini->status = EXIT_SUCCESS;
+	mini->fd = 0;
 	return (mini);
 }
 
@@ -58,6 +59,7 @@ int	main(int ac, char *av[])
 		print_free_exit(mini, "error at mlx_new_window", -1);
 	mlx_key_hook(mini->win, deal_key, mini);
 	mlx_hook(mini->win, 17, 0, free_exit, mini);
+	print_mini(mini);
 	mlx_loop(mini->mlx);
 	return (free_mini(mini));
 }

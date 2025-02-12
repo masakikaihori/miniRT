@@ -12,23 +12,6 @@
 
 #include "../includes/mini_rt.h"
 
-void	free_strs(char **strs)
-{
-	int	index;
-
-	if (strs)
-	{
-		index = 0;
-		while (strs[index])
-		{
-			free(strs[index]);
-			index++;
-		}
-		free(strs);
-	}
-	return ;
-}
-
 int	rt_strslen(char **strs)
 {
 	int	size;
@@ -66,4 +49,18 @@ short	rt_atos(t_mini *mini, char **strs, char *str, int *index)
 	if (index)
 		*index += i; 
 	return ((short)num);
+}
+
+void	rt_close(t_mini *mini)
+{
+	int	value;
+
+	if (mini->fd)
+	{
+		value = close(mini->fd);
+		mini->fd = 0;
+		if (value)
+			print_free_exit(mini, NULL, errno);
+	}
+	return ;
 }

@@ -104,5 +104,6 @@ char	**rt_split(t_mini *mini, char *str)
 	}
 	strs[word_count] = NULL;
 	splited(mini, strs, str);
+	free(str);
 	return (strs);
 }

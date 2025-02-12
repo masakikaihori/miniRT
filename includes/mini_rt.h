@@ -61,11 +61,11 @@ typedef struct s_xyz
 	float	z;
 }	t_xyz;
 
-typedef struct s_a_lighting
+typedef struct s_a_lightning
 {
 	float			ratio;
 	struct s_rgb	color;
-}	t_a_lighting;
+}	t_a_lightning;
 
 typedef struct s_camera
 {
@@ -76,7 +76,7 @@ typedef struct s_camera
 
 typedef struct s_light
 {
-	struct s_xyz	coordinates;
+	struct s_xyz	coord;
 	float			ratio;
 	struct s_rgb	color;
 }	t_light;
@@ -118,20 +118,16 @@ typedef struct s_object
 	struct s_object		*next;
 }	t_object;
 
-typedef struct s_obj
-{
-	struct s_a_lighting	*a_lighting;
-	struct s_camera		*camera;
-	struct s_light		*light;
-	struct s_object		*object;
-}	t_obj;
-
 typedef struct s_mini
 {
-	void				*mlx;
-	void				*win;
-	struct s_obj		object;
-	int					status;
+	void					*mlx;
+	void					*win;
+	struct s_a_lightning	*a_lightning;
+	struct s_camera			*camera;
+	struct s_light			*light;
+	struct s_object			*object;
+	int						status;
+	int						fd;
 }	t_mini;
 
 //exit.c
@@ -142,12 +138,17 @@ void			print_free_exit(t_mini *mini, char *str, int status);
 void			print_frees_exit(t_mini *mini, char *str, int status, char **strs);
 
 void			read_scene(t_mini *mini, char *file);
-t_a_lighting	*set_amb(t_mini *mini, char **strs);
+void			set_amb(t_mini *mini, char **strs);
 char			**rt_split(t_mini *mini, char *str);
 int				rt_strslen(char **strs);
 short			rt_atos(t_mini *mini, char **strs, char *str, int *index);
 float			rt_atof(t_mini *mini, char **strs, char *str, int *index);
+void			rt_close(t_mini *mini);
 
 void			free_strs(char **strs);
+void    		free_objects(t_mini *mini);
+
+//debug
+void    		print_mini(t_mini *mini);
 
 #endif

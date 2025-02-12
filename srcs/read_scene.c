@@ -56,18 +56,17 @@ t_otype	get_identifer(char *str)
 
 void	parse_strs(t_mini *mini, char **strs)
 {
-	t_object		*new;
 	t_otype			indentifer;
 
 	indentifer = get_identifer(strs[0]);
 	if (indentifer == AMBIENT_LIGHTNING)
-		mini->object.a_lighting = set_amb(mini, strs);
-	else if (indentifer == CAMERA)
-		mini->object.camera = set_camera(mini, strs);
-	else if (indentifer == LIGHT)
-		mini->object.light = set_light(mini, strs);
-	else
-		mini->object.object = set_obj(mini, strs);
+		set_amb(mini, strs);
+	// else if (indentifer == CAMERA)
+	// 	mini->object.camera = set_camera(mini, strs);
+	// else if (indentifer == LIGHT)
+	// 	mini->object.light = set_light(mini, strs);
+	// else
+	// 	mini->object.object = set_obj(mini, strs);
 	return ;
 }
 
@@ -75,10 +74,9 @@ void	read_scene(t_mini *mini, char *file)
 {
 	char		*str;
 	char		**strs;
-	int			fd;
 
-	fd = open_rtfile(mini, file);
-	str = get_next_line(fd);
+	mini->fd = open_rtfile(mini, file);
+	str = get_next_line(mini->fd);
 	while (str)
 	{
 		strs = rt_split(mini, str);
@@ -87,7 +85,8 @@ void	read_scene(t_mini *mini, char *file)
 			parse_strs(mini, strs);
 			free_strs(strs);
 		}
-		str = get_next_line(fd);
+		str = get_next_line(mini->fd);
 	}
+	rt_close(mini);
 	return ;
 }
