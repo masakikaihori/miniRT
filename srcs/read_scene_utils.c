@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:52:09 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/11 18:24:01 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/13 19:33:04 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,19 @@ short	rt_atos(t_mini *mini, char **strs, char *str, int *index)
 
 	i = 0;
 	num = 0;
+	if (str[0] == '+')
+		i++;
 	while (ft_isdigit(str[i]))
 	{
 		num = num * 10 + str[i] - '0';
-		if (num > COLOR_MAX)
-		{
-			free_strs(strs);
-			print_free_exit(mini, "color range over\n", -1);
-		}
+		if (num > ATOS_MAX)
+			print_frees_exit(mini, "atos range over\n", -1, strs);
 		i++;
 	}
 	if (i == 0 || (str[i] != '\0' && str[i] != ','))
-	{
-		free_strs(strs);
-		print_free_exit(mini, "color element\n", -1);
-	}
+		print_frees_exit(mini, "atos character error\n", -1, strs);
 	if (index)
-		*index += i; 
+		*index += i;
 	return ((short)num);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:07:48 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/11 16:58:27 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/13 19:35:33 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@
 # define SPH_ELE 4
 # define PLA_ELE 4
 # define CYL_ELE 6
-# define COLOR_MAX 255
+# define ATOS_MAX 255
+# define FOV_MAX 180
 
 # define OK_CHARSET "0123456789+-.,eE"
 
