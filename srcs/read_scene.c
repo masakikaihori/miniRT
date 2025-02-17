@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 17:44:59 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/17 17:48:12 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/17 18:20:04 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,20 @@ void	parse_strs(t_mini *mini, char **strs)
 	t_otype			indentifer;
 
 	indentifer = get_identifer(strs[0]);
-	if (indentifer == AMBIENT_LIGHTNING)
+	if (indentifer == UNKNOWN)
+		print_frees_exit(mini, "identifer is not available", -1, strs);
+	else if (indentifer == AMBIENT_LIGHTNING)
 		set_amb(mini, strs);
 	else if (indentifer == CAMERA)
 		set_camera(mini, strs);
 	else if (indentifer == LIGHT)
 		set_light(mini, strs);
-	// else
-	// 	mini->object.object = set_obj(mini, strs);
+	else if (indentifer == SPHERE)
+		set_sphere(mini, strs);
+	// else if (indentifer == PLANE)
+	// 	set_plane(mini, strs);
+	// else if (indentifer == CYLINDER)
+	// 	set_cylinder(mini, strs);
 	return ;
 }
 

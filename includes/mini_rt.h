@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:07:48 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/13 19:35:33 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/17 18:17:47 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,9 @@ void			print_frees_exit(t_mini *mini, char *str, int status, char **strs);
 
 void			read_scene(t_mini *mini, char *file);
 void			set_amb(t_mini *mini, char **strs);
+void			set_camera(t_mini *mini, char **strs);
+void			set_light(t_mini *mini, char **strs);
+void			set_sphere(t_mini *mini, char **strs);
 char			**rt_split(t_mini *mini, char *str);
 int				rt_strslen(char **strs);
 short			rt_atos(t_mini *mini, char **strs, char *str, int *index);

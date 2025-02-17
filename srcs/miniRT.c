@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:17:02 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/11 16:51:22 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/17 18:17:06 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,16 @@ int	main(int ac, char *av[])
 		print_free_exit(NULL, "need a scene in format *.rt\n", -1);
 	mini = init_mini();
 	read_scene(mini, av[1]);
-	mini->mlx = mlx_init();
-	if (!mini->mlx)
-		print_free_exit(mini, "error at mlx_init\n", -1);
-	mini->win = mlx_new_window(mini->mlx, 500, 500, "miniRT");
-	if (!mini->win)
-		print_free_exit(mini, "error at mlx_new_window", -1);
-	mlx_key_hook(mini->win, deal_key, mini);
-	mlx_hook(mini->win, 17, 0, free_exit, mini);
 	print_mini(mini);
-	mlx_loop(mini->mlx);
+	// mini->mlx = mlx_init();
+	// if (!mini->mlx)
+	// 	print_free_exit(mini, "error at mlx_init\n", -1);
+	// mini->win = mlx_new_window(mini->mlx, 500, 500, "miniRT");
+	// if (!mini->win)
+	// 	print_free_exit(mini, "error at mlx_new_window", -1);
+	// mlx_key_hook(mini->win, deal_key, mini);
+	// mlx_hook(mini->win, 17, 0, free_exit, mini);
+	// print_mini(mini);
+	// mlx_loop(mini->mlx);
 	return (free_mini(mini));
 }
