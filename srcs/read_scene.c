@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 17:44:59 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/13 19:24:43 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:48:12 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	parse_strs(t_mini *mini, char **strs)
 		set_amb(mini, strs);
 	else if (indentifer == CAMERA)
 		set_camera(mini, strs);
-	// else if (indentifer == LIGHT)
-	// 	mini->object.light = set_light(mini, strs);
+	else if (indentifer == LIGHT)
+		set_light(mini, strs);
 	// else
 	// 	mini->object.object = set_obj(mini, strs);
 	return ;
