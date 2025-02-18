@@ -35,10 +35,8 @@ int	deal_key(int key, void *param)
 	t_mini	*mini;
 
 	mini = (t_mini *)param;
-	if (key == 65307)
+	if (key == ESC_KEY)
 		mlx_loop_end(mini->mlx);
-	else
-		printf("%d\n", key);
 	return (mini->status);
 }
 
@@ -51,16 +49,14 @@ int	main(int ac, char *av[])
 		print_free_exit(NULL, "need a scene in format *.rt\n", -1);
 	mini = init_mini();
 	read_scene(mini, av[1]);
-	print_mini(mini);
-	// mini->mlx = mlx_init();
-	// if (!mini->mlx)
-	// 	print_free_exit(mini, "error at mlx_init\n", -1);
-	// mini->win = mlx_new_window(mini->mlx, 500, 500, "miniRT");
-	// if (!mini->win)
-	// 	print_free_exit(mini, "error at mlx_new_window", -1);
-	// mlx_key_hook(mini->win, deal_key, mini);
-	// mlx_hook(mini->win, 17, 0, free_exit, mini);
-	// print_mini(mini);
-	// mlx_loop(mini->mlx);
+	mini->mlx = mlx_init();
+	if (!mini->mlx)
+		print_free_exit(mini, "error at mlx_init\n", -1);
+	mini->win = mlx_new_window(mini->mlx, 500, 500, "miniRT");
+	if (!mini->win)
+		print_free_exit(mini, "error at mlx_new_window", -1);
+	mlx_key_hook(mini->win, deal_key, mini);
+	mlx_hook(mini->win, 17, 0, free_exit, mini);
+	mlx_loop(mini->mlx);
 	return (free_mini(mini));
 }
