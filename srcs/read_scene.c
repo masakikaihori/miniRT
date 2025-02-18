@@ -69,10 +69,10 @@ void	parse_strs(t_mini *mini, char **strs)
 		set_light(mini, strs);
 	else if (indentifer == SPHERE)
 		set_sphere(mini, strs);
-	// else if (indentifer == PLANE)
-	// 	set_plane(mini, strs);
-	// else if (indentifer == CYLINDER)
-	// 	set_cylinder(mini, strs);
+	else if (indentifer == PLANE)
+		set_plane(mini, strs);
+	else if (indentifer == CYLINDER)
+		set_cylinder(mini, strs);
 	return ;
 }
 

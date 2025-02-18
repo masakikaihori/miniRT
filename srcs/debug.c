@@ -76,30 +76,36 @@ void    print_mini(t_mini *mini)
 			printf("no light ptr\n");
 		if (tmp)
 		{
-			if (tmp->type == SPHERE)
+			while (tmp)
 			{
-				printf("sphere ptr : %p\n", tmp);
-				print_xyz(tmp->info.sphere.coord, "sphere coord");
-				printf("sphere diameter : %f\n", tmp->info.sphere.diameter);
-				print_color(tmp->info.sphere.color, "sphere color");
+				if (tmp->type == SPHERE)
+				{
+					printf("sphere ptr : %p\n", tmp);
+					print_xyz(tmp->info.sphere.coord, "sphere coord");
+					printf("sphere diameter : %f\n", tmp->info.sphere.diameter);
+					print_color(tmp->info.sphere.color, "sphere color");
+					printf("next ptr : %p\n", tmp->next);
+				}
+				else if (tmp->type == PLANE)
+				{
+					printf("plane ptr : %p\n", tmp);
+					print_xyz(tmp->info.plane.coord, "plane coord");
+					print_xyz(tmp->info.plane.vec, "plane vec");
+					print_color(tmp->info.plane.color, "plane color");
+					printf("next ptr : %p\n", tmp->next);
+				}
+				else if (tmp->type == CYLINDER)
+				{
+					printf("cylinder ptr : %p\n", tmp);
+					print_xyz(tmp->info.cylinder.coord, "cylinder coord");
+					print_xyz(tmp->info.cylinder.vec, "cylinder vec");
+					printf("cylinder diameter : %f\n", tmp->info.cylinder.diameter);
+					printf("cylinder height : %f\n", tmp->info.cylinder.height);
+					print_color(tmp->info.cylinder.color, "cylinder color");
+					printf("next ptr : %p\n", tmp->next);
+				}
+				tmp = tmp->next;
 			}
-			else if (tmp->type == PLANE)
-			{
-				printf("plane ptr : %p\n", tmp);
-				print_xyz(tmp->info.plane.coord, "plane coord");
-				print_xyz(tmp->info.plane.vec, "plane vec");
-				print_color(tmp->info.plane.color, "palne color");
-			}
-			else if (tmp->type == CYLINDER)
-			{
-				printf("cylinder ptr : %p\n", tmp);
-				print_xyz(tmp->info.cylinder.coord, "cylinder coord");
-				print_xyz(tmp->info.cylinder.vec, "cylinder vec");
-				printf("cylinder diameter : %f\n", tmp->info.cylinder.diameter);
-				printf("cylinder height : %f\n", tmp->info.cylinder.height);
-				print_color(tmp->info.cylinder.color, "cylinder color");
-			}
-			tmp = tmp->next;
 		}
 		else
 			printf("no bject ptr\n");

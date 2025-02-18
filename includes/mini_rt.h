@@ -139,10 +139,19 @@ void			print_free_exit(t_mini *mini, char *str, int status);
 void			print_frees_exit(t_mini *mini, char *str, int status, char **strs);
 
 void			read_scene(t_mini *mini, char *file);
+
 void			set_amb(t_mini *mini, char **strs);
 void			set_camera(t_mini *mini, char **strs);
 void			set_light(t_mini *mini, char **strs);
 void			set_sphere(t_mini *mini, char **strs);
+void			set_plane(t_mini *mini, char **strs);
+void			set_cylinder(t_mini *mini, char **strs);
+
+t_xyz			set_xyz(t_mini *mini, char **strs, char *str);
+t_rgb			set_rgb(t_mini *mini, char **strs, char *str);
+bool			not_available(char **strs);
+bool			vec_range(t_xyz vec);
+
 char			**rt_split(t_mini *mini, char *str);
 int				rt_strslen(char **strs);
 short			rt_atos(t_mini *mini, char **strs, char *str, int *index);
