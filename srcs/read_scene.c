@@ -60,7 +60,7 @@ void	parse_strs(t_mini *mini, char **strs)
 
 	indentifer = get_identifer(strs[0]);
 	if (indentifer == UNKNOWN)
-		print_frees_exit(mini, "identifer is not available", -1, strs);
+		print_frees_exit(mini, "identifer is not available\n", -1, strs);
 	else if (indentifer == AMBIENT_LIGHTNING)
 		set_amb(mini, strs);
 	else if (indentifer == CAMERA)
