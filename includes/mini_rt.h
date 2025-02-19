@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:07:48 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/19 16:38:28 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/19 19:40:22 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ bool			vec_range(t_xyz vec);
 short			rt_atos(t_mini *mini, char **strs, char *str, int *index);
 float			rt_atof(t_mini *mini, char **strs, char *str, int *index);
 int				rt_strslen(char **strs);
+
+void			print_display(t_mini *mini);
+
 //debug
 void			print_mini(t_mini *mini);
 void			*debug_malloc(size_t size);
