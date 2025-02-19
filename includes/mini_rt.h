@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:07:48 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/17 18:17:47 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:38:28 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@
 void			print_error(char *str);
 int				free_exit(t_mini *mini);
 void			print_free_exit(t_mini *mini, char *str, int status);
-void			print_frees_exit(t_mini *mini, char *str, int status, char **strs);
+void			print_frees_exit(t_mini *mini, char *str,
+					int status, char **strs);
 //free
 int				free_mini(t_mini *mini);
 void			free_strs(char **strs);
-void    		free_objects(t_mini *mini);
+void			free_objects(t_mini *mini);
 //read_scene
 void			read_scene(t_mini *mini, char *file);
 //read_scene_utiles
@@ -59,7 +60,7 @@ short			rt_atos(t_mini *mini, char **strs, char *str, int *index);
 float			rt_atof(t_mini *mini, char **strs, char *str, int *index);
 int				rt_strslen(char **strs);
 //debug
-void    		print_mini(t_mini *mini);
+void			print_mini(t_mini *mini);
 void			*debug_malloc(size_t size);
 void			debug_free(void *prt);
 

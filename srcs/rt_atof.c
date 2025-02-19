@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:16:15 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/17 18:24:56 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:36:35 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ float	rt_atof(t_mini *mini, char **strs, char *str, int *index)
 	}
 	while (ft_isdigit(str[i]))
 		num = num * 10.0 + str[i++] - '0';
-	if ((i == 0 && str[i] != '.')
-		|| (str[i] != '\0' && str[i] != '.' && str[i] != 'e' && str[i] != 'E' && str[i] != ','))
+	if ((i == 0 && str[i] != '.') || (str[i] != '\0' && str[i] != '.'
+			&& str[i] != 'e' && str[i] != 'E' && str[i] != ','))
 		print_frees_exit(mini, "atof error\n", -1, strs);
 	num += rt_atof_util(mini, strs, str, &i);
 	num = num * pow(10.0, (double)rt_atof_e(mini, strs, str, &i));

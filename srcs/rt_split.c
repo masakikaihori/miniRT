@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:08:15 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/11 16:40:33 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:03:35 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,10 @@ char	**rt_split(t_mini *mini, char *str)
 
 	word_count = count_words(str);
 	if (!word_count)
+	{
+		free(str);
 		return (NULL);
+	}
 	strs = (char **)malloc(sizeof(char *) * (word_count + 1));
 	if (!strs)
 	{

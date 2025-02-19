@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:40:02 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/17 18:26:22 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:28:32 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ void	set_camera(t_mini *mini, char **strs)
 	mini->camera->vec = set_xyz(mini, strs, strs[2]);
 	if (!vec_range(mini->camera->vec))
 		print_frees_exit(mini, "camera vec is out of range\n", -1, strs);
-	mini->camera->fov = rt_atos(mini, strs, strs[3], NULL);
-	if (mini->camera->fov > FOV_MAX)
-		print_frees_exit(mini, "camera fov is out of range\n", -1, strs);
+	mini->camera->hfov = (float)rt_atos(mini, strs, strs[3], NULL);
+	if (mini->camera->hfov > HFOV_MAX)
+		print_frees_exit(mini, "camera hfov is out of range\n", -1, strs);
+	mini->camera->vfov = (2 * atan(tan((mini->camera->hfov / 180 * M_PI) / 2)
+				/ (WIDTH / HEIGHT))) / M_PI * 180;
 	return ;
 }
 

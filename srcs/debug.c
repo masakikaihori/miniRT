@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   debug.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/19 16:37:04 by mkaihori          #+#    #+#             */
+/*   Updated: 2025/02/19 17:26:05 by mkaihori         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/mini_rt.h"
 
 void	debug_free(void *ptr)
@@ -18,7 +30,7 @@ void	*debug_malloc(size_t size)
 	return (ptr);
 }
 
-void    print_xyz(t_xyz xyz, char *str)
+void	print_xyz(t_xyz xyz, char *str)
 {
 	printf("%s x : %f\n", str, xyz.x);
 	printf("%s y : %f\n", str, xyz.y);
@@ -26,16 +38,16 @@ void    print_xyz(t_xyz xyz, char *str)
 	return ;
 }
 
-void    print_color(t_rgb color, char *str)
+void	print_color(t_rgb color, char *str)
 {
 	printf("%s red : %d\n", str, color.red);
 	printf("%s green : %d\n", str, color.green);
 	printf("%s blue : %d\n", str, color.blue);
 }
 
-void    print_mini(t_mini *mini)
+void	print_mini(t_mini *mini)
 {
-	t_object    *tmp;
+	t_object	*tmp;
 
 	tmp = mini->object;
 	if (mini)
@@ -61,7 +73,8 @@ void    print_mini(t_mini *mini)
 			printf("camera ptr : %p\n", mini->camera);
 			print_xyz(mini->camera->coord, "camera coord");
 			print_xyz(mini->camera->vec, "camera vec");
-			printf("camera fov : %d\n", mini->camera->fov);
+			printf("camera hfov : %f\n", mini->camera->hfov);
+			printf("camera vfov : %f\n", mini->camera->vfov);
 		}
 		else
 			printf("no camera ptr\n");
@@ -99,7 +112,8 @@ void    print_mini(t_mini *mini)
 					printf("cylinder ptr : %p\n", tmp);
 					print_xyz(tmp->info.cylinder.coord, "cylinder coord");
 					print_xyz(tmp->info.cylinder.vec, "cylinder vec");
-					printf("cylinder diameter : %f\n", tmp->info.cylinder.diameter);
+					printf("cylinder diameter : %f\n",
+						tmp->info.cylinder.diameter);
 					printf("cylinder height : %f\n", tmp->info.cylinder.height);
 					print_color(tmp->info.cylinder.color, "cylinder color");
 					printf("next ptr : %p\n", tmp->next);

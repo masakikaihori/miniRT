@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_rt_define.h                                   :+:      :+:    :+:   */
+/*   print_display.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 16:38:34 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/19 17:23:29 by mkaihori         ###   ########.fr       */
+/*   Created: 2025/02/19 16:44:27 by mkaihori          #+#    #+#             */
+/*   Updated: 2025/02/19 17:25:46 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_RT_DEFINE_H
-# define MINI_RT_DEFINE_H
+#include "../includes/mini_rt.h"
 
-# define WIDTH 640.0
-# define HEIGHT 480.0
-
-# define AMB_ELE 3
-# define CAM_ELE 4
-# define LIG_ELE 4
-# define SPH_ELE 4
-# define PLA_ELE 4
-# define CYL_ELE 6
-
-# define ATOS_MAX 255
-# define HFOV_MAX 180
-
-# define ESC_KEY 65307
-
-# define OK_CHARSET "0123456789+-.,eE"
-
-#endif
+// void	print_display(t_mini *mini)
+// {
+	
+// 	return ;
+// }

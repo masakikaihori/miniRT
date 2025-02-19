@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_rt_type.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/19 16:38:32 by mkaihori          #+#    #+#             */
+/*   Updated: 2025/02/19 17:21:29 by mkaihori         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINI_RT_TYPE_H
 # define MINI_RT_TYPE_H
 
@@ -36,7 +48,8 @@ typedef struct s_camera
 {
 	struct s_xyz	coord;
 	struct s_xyz	vec;
-	short			fov;
+	float			hfov;
+	float			vfov;
 }	t_camera;
 
 typedef struct s_light
