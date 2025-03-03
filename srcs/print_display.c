@@ -6,11 +6,17 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:44:27 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/19 22:27:25 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:21:06 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_rt.h"
+
+void	print_display(t_mini *mini)
+{
+	set_screen(mini);
+	return ;
+}
 
 void	print_display(t_mini *mini)
 {

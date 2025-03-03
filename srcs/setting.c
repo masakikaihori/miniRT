@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:40:02 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/19 17:28:32 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:16:54 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,19 @@ void	set_light(t_mini *mini, char **strs)
 	if (mini->light->ratio > 1.0 || mini->light->ratio < 0.0)
 		print_frees_exit(mini, "light ratio is out of range\n", -1, strs);
 	mini->light->color = set_rgb(mini, strs, strs[3]);
+	return ;
+}
+
+void	set_screen(t_mini *mini)
+{
+	t_xyz	up;
+
+	up = set_vec(0 ,1, 0);
+	if (mini->camera->vec.x == 0 && mini->camera->vec.z == 0)
+		mini->camera->vec.x == 0.000001;
+	mini->right_vec = cross_product(up, mini->camera->vec);
+	mini->up_vec = cross_product(mini->camera->vec, mini->right_vec);
+	normalize(&(mini->right_vec));
+	normalize(&(mini->up_vec));
 	return ;
 }

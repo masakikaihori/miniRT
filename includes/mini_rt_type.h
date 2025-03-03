@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:38:32 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/19 17:21:29 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:53:28 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ typedef struct s_mini
 	struct s_camera			*camera;
 	struct s_light			*light;
 	struct s_object			*object;
+	struct s_xyz			right_vec;
+	struct s_xyz			up_vec;
 	int						status;
 	int						fd;
 }	t_mini;

@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:07:48 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/19 19:40:22 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:18:23 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void			set_light(t_mini *mini, char **strs);
 void			set_sphere(t_mini *mini, char **strs);
 void			set_plane(t_mini *mini, char **strs);
 void			set_cylinder(t_mini *mini, char **strs);
+void			set_screen(t_mini *mini);
 //set_utiles
 t_xyz			set_xyz(t_mini *mini, char **strs, char *str);
 t_rgb			set_rgb(t_mini *mini, char **strs, char *str);
@@ -66,5 +67,11 @@ void			print_display(t_mini *mini);
 void			print_mini(t_mini *mini);
 void			*debug_malloc(size_t size);
 void			debug_free(void *prt);
+
+//vec
+float			vec_norm(t_xyz a);
+void			normalize(t_xyz *a);
+t_xyz			cross_product(t_xyz a, t_xyz b);
+t_xyz			set_vec(float x, float y, float z);
 
 #endif
