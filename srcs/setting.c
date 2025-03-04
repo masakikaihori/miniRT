@@ -29,7 +29,7 @@ void	set_amb(t_mini *mini, char **strs)
 	if (mini->a_lightning->ratio > 1.0 || mini->a_lightning->ratio < 0.0)
 		print_frees_exit(mini,
 			"ambient_lightning ratio is out of range\n", -1, strs);
-	mini->a_lightning->color = set_rgb(mini, strs, strs[2]);
+	mini->a_lightning->colors = set_rgb(mini, strs, strs[2]);
 	return ;
 }
 
@@ -56,6 +56,7 @@ void	set_camera(t_mini *mini, char **strs)
 	mini->camera->hfov = mini->camera->hfov / 180 * M_PI;
 	mini->camera->vfov = (2 * atan(tan((mini->camera->hfov) / 2)
 				/ (WIDTH / HEIGHT)));
+	mini->distance = WIDTH / 2.0 / tan(mini->camera->hfov / 2.0);
 	return ;
 }
 
@@ -74,7 +75,7 @@ void	set_light(t_mini *mini, char **strs)
 	mini->light->ratio = rt_atof(mini, strs, strs[2], NULL);
 	if (mini->light->ratio > 1.0 || mini->light->ratio < 0.0)
 		print_frees_exit(mini, "light ratio is out of range\n", -1, strs);
-	mini->light->color = set_rgb(mini, strs, strs[3]);
+	mini->light->colors = set_rgb(mini, strs, strs[3]);
 	return ;
 }
 

@@ -12,6 +12,11 @@
 
 #include "../includes/mini_rt.h"
 
+int	int_color(t_rgb colors)
+{
+	return (colors.red << 16 | colors.green << 8 | colors.blue);
+}
+
 bool	vec_range(t_xyz vec)
 {
 	if (vec.x <= 1 && vec.y >= -1 && vec.y <= 1 && vec.y >= -1
@@ -46,13 +51,13 @@ t_rgb	set_rgb(t_mini *mini, char **strs, char *str)
 	index = 0;
 	new.red = rt_atos(mini, strs, str, &index);
 	if (str[index++] == '\0')
-		print_frees_exit(mini, "color element1\n", -1, strs);
+		print_frees_exit(mini, "colors element1\n", -1, strs);
 	new.green = rt_atos(mini, strs, str + index, &index);
 	if (str[index++] == '\0')
-		print_frees_exit(mini, "color element2\n", -1, strs);
+		print_frees_exit(mini, "colors element2\n", -1, strs);
 	new.blue = rt_atos(mini, strs, str + index, &index);
 	if (str[index] != '\0')
-		print_frees_exit(mini, "color element3\n", -1, strs);
+		print_frees_exit(mini, "colors element3\n", -1, strs);
 	return (new);
 }
 

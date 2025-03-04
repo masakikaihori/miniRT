@@ -38,11 +38,11 @@ void	print_xyz(t_xyz xyz, char *str)
 	return ;
 }
 
-void	print_color(t_rgb color, char *str)
+void	print_colors(t_rgb colors, char *str)
 {
-	printf("%s red : %d\n", str, color.red);
-	printf("%s green : %d\n", str, color.green);
-	printf("%s blue : %d\n", str, color.blue);
+	printf("%s red : %d\n", str, colors.red);
+	printf("%s green : %d\n", str, colors.green);
+	printf("%s blue : %d\n", str, colors.blue);
 }
 
 void	print_mini(t_mini *mini)
@@ -64,7 +64,7 @@ void	print_mini(t_mini *mini)
 		{
 			printf("a_lightning ptr : %p\n", mini->a_lightning);
 			printf("a_lightning ratio : %f\n", mini->a_lightning->ratio);
-			print_color(mini->a_lightning->color, "a_lightning color");
+			print_colors(mini->a_lightning->colors, "a_lightning colors");
 		}
 		else
 			printf("no a_lightning ptr\n");
@@ -83,7 +83,7 @@ void	print_mini(t_mini *mini)
 			printf("light ptr : %p\n", mini->light);
 			print_xyz(mini->light->coord, "light coord");
 			printf("light ratio : %f\n", mini->light->ratio);
-			print_color(mini->light->color, "light color");
+			print_colors(mini->light->colors, "light colors");
 		}
 		else
 			printf("no light ptr\n");
@@ -96,7 +96,7 @@ void	print_mini(t_mini *mini)
 					printf("sphere ptr : %p\n", tmp);
 					print_xyz(tmp->info.sphere.coord, "sphere coord");
 					printf("sphere diameter : %f\n", tmp->info.sphere.diameter);
-					print_color(tmp->info.sphere.color, "sphere color");
+					print_colors(tmp->info.sphere.colors, "sphere colors");
 					printf("next ptr : %p\n", tmp->next);
 				}
 				else if (tmp->type == PLANE)
@@ -104,7 +104,7 @@ void	print_mini(t_mini *mini)
 					printf("plane ptr : %p\n", tmp);
 					print_xyz(tmp->info.plane.coord, "plane coord");
 					print_xyz(tmp->info.plane.vec, "plane vec");
-					print_color(tmp->info.plane.color, "plane color");
+					print_colors(tmp->info.plane.colors, "plane colors");
 					printf("next ptr : %p\n", tmp->next);
 				}
 				else if (tmp->type == CYLINDER)
@@ -115,7 +115,7 @@ void	print_mini(t_mini *mini)
 					printf("cylinder diameter : %f\n",
 						tmp->info.cylinder.diameter);
 					printf("cylinder height : %f\n", tmp->info.cylinder.height);
-					print_color(tmp->info.cylinder.color, "cylinder color");
+					print_colors(tmp->info.cylinder.colors, "cylinder colors");
 					printf("next ptr : %p\n", tmp->next);
 				}
 				tmp = tmp->next;
