@@ -44,6 +44,6 @@ t_xyz	set_vec(float x, float y, float z)
 
 	vec.x = x;
 	vec.y = y;
-	vec.z - z;
+	vec.z = z;
 	return (vec);
 }
