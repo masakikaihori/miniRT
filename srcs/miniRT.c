@@ -27,6 +27,7 @@ t_mini	*init_mini(void)
 	mini->object = NULL;
 	mini->status = EXIT_SUCCESS;
 	mini->fd = 0;
+	mini->world_up = set_vec(0, 1, 0);
 	return (mini);
 }
 

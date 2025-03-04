@@ -104,6 +104,7 @@ typedef struct s_mini
 	struct s_camera			*camera;
 	struct s_light			*light;
 	struct s_object			*object;
+	struct s_xyz			world_up;
 	struct s_xyz			right_vec;
 	struct s_xyz			up_vec;
 	int						status;

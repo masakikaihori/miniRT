@@ -49,11 +49,13 @@ void	set_camera(t_mini *mini, char **strs)
 	mini->camera->vec = set_xyz(mini, strs, strs[2]);
 	if (!vec_range(mini->camera->vec))
 		print_frees_exit(mini, "camera vec is out of range\n", -1, strs);
+	normalize(&(mini->camera->vec));
 	mini->camera->hfov = (float)rt_atos(mini, strs, strs[3], NULL);
 	if (mini->camera->hfov > HFOV_MAX)
 		print_frees_exit(mini, "camera hfov is out of range\n", -1, strs);
-	mini->camera->vfov = (2 * atan(tan((mini->camera->hfov / 180 * M_PI) / 2)
-				/ (WIDTH / HEIGHT))) / M_PI * 180;
+	mini->camera->hfov = mini->camera->hfov / 180 * M_PI;
+	mini->camera->vfov = (2 * atan(tan((mini->camera->hfov) / 2)
+				/ (WIDTH / HEIGHT)));
 	return ;
 }
 
@@ -78,12 +80,9 @@ void	set_light(t_mini *mini, char **strs)
 
 void	set_screen(t_mini *mini)
 {
-	t_xyz	up;
-
-	up = set_vec(0 ,1, 0);
 	if (mini->camera->vec.x == 0 && mini->camera->vec.z == 0)
-		mini->camera->vec.x == 0.000001;
-	mini->right_vec = cross_product(up, mini->camera->vec);
+		mini->camera->vec.z = 0.000001;
+	mini->right_vec = cross_product(mini->world_up, mini->camera->vec);
 	mini->up_vec = cross_product(mini->camera->vec, mini->right_vec);
 	normalize(&(mini->right_vec));
 	normalize(&(mini->up_vec));

@@ -12,6 +12,31 @@
 
 #include "../includes/mini_rt.h"
 
+t_xyz	get_ray(t_mini *mini, float distance, float display_x, float display_y)
+{
+	t_xyz	toward_dir;
+	t_xyz	right_dir;
+	t_xyz	up_dir;
+	t_xyz	ray_direction;
+
+	toward_dir = vec_multiplied(distance, mini->camera->vec);
+	right_dir = vec_multiplied(display_x, mini->right_vec);
+	up_dir = vec_multiplied(display_y, mini->up_vec);
+	ray_direction = vec_addition(toward_dir, vec_addition(right_dir, up_dir));
+	normalize(&ray_direction);
+	return (ray_direction);
+}
+
+t_xyz	vec_addition(t_xyz a, t_xyz b)
+{
+	return (set_vec(a.x + b.x, a.y + b.y, a.z + b.z));
+}
+
+t_xyz	vec_multiplied(float scalar, t_xyz vec)
+{
+	return (set_vec(vec.x * scalar, vec.y * scalar, vec.z * scalar));
+}
+
 float	vec_norm(t_xyz a)
 {
 	return (sqrtf(a.x * a.x + a.y * a.y + a.z * a.z));

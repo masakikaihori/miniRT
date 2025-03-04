@@ -73,5 +73,8 @@ float			vec_norm(t_xyz a);
 void			normalize(t_xyz *a);
 t_xyz			cross_product(t_xyz a, t_xyz b);
 t_xyz			set_vec(float x, float y, float z);
+t_xyz			vec_multiplied(float scalar, t_xyz vec);
+t_xyz			vec_addition(t_xyz a, t_xyz b);
+t_xyz			get_ray(t_mini *mini, float distance, float display_x, float display_y);
 
 #endif
