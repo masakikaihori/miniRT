@@ -12,9 +12,9 @@
 
 #include "../includes/mini_rt.h"
 
-int	int_color(t_rgb colors)
+int	int_color(short red, short green, short blue)
 {
-	return (colors.red << 16 | colors.green << 8 | colors.blue);
+	return (red << 16 | green << 8 | blue);
 }
 
 bool	vec_range(t_xyz vec)

@@ -45,7 +45,8 @@ void	set_sphere(t_mini *mini, char **strs)
 	obj->info.sphere.coord = set_xyz(mini, strs, strs[1]);
 	obj->info.sphere.diameter = rt_atof(mini, strs, strs[2], NULL);
 	obj->info.sphere.colors = set_rgb(mini, strs, strs[3]);
-	obj->info.sphere.color = int_color(obj->info.sphere.colors);
+	obj->info.sphere.color = int_color(obj->info.sphere.colors.red,
+		obj->info.sphere.colors.green, obj->info.sphere.colors.blue);
 	return ;
 }
 
@@ -67,8 +68,10 @@ void	set_plane(t_mini *mini, char **strs)
 	obj->info.plane.vec = set_xyz(mini, strs, strs[2]);
 	if (!vec_range(obj->info.plane.vec))
 		print_frees_exit(mini, "plane vec is out of range", -1, strs);
+	normalize(&(obj->info.plane.vec));
 	obj->info.plane.colors = set_rgb(mini, strs, strs[3]);
-	obj->info.plane.color = int_color(obj->info.plane.colors);
+	obj->info.plane.color = int_color(obj->info.plane.colors.red,
+			obj->info.plane.colors.green, obj->info.plane.colors.blue);
 	return ;
 }
 
@@ -90,9 +93,11 @@ void	set_cylinder(t_mini *mini, char **strs)
 	obj->info.cylinder.vec = set_xyz(mini, strs, strs[2]);
 	if (!vec_range(obj->info.cylinder.vec))
 		print_frees_exit(mini, "cylinder vec is out of range\n", -1, strs);
+	normalize(&(obj->info.cylinder.vec));
 	obj->info.cylinder.diameter = rt_atof(mini, strs, strs[3], NULL);
 	obj->info.cylinder.height = rt_atof(mini, strs, strs[4], NULL);
 	obj->info.cylinder.colors = set_rgb(mini, strs, strs[5]);
-	obj->info.cylinder.color = int_color(obj->info.cylinder.colors);
+	obj->info.cylinder.color = int_color(obj->info.cylinder.colors.red,
+			obj->info.cylinder.colors.green, obj->info.cylinder.colors.blue);
 	return ;
 }

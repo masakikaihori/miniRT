@@ -60,7 +60,7 @@ bool			vec_range(t_xyz vec);
 short			rt_atos(t_mini *mini, char **strs, char *str, int *index);
 float			rt_atof(t_mini *mini, char **strs, char *str, int *index);
 int				rt_strslen(char **strs);
-int				int_color(t_rgb colors);
+int				int_color(short red, short green, short blue);
 
 void			print_display(t_mini *mini);
 
@@ -81,5 +81,6 @@ t_xyz			vec_subtraction(t_xyz a, t_xyz b);
 t_xyz			get_ray(t_mini *mini, float distance, float display_x, float display_y);
 
 void			ray_sphere(t_xyz ray, t_sphere obj, t_hit *hit, t_xyz camera);
+void			ray_plane(t_xyz ray, t_plane obj, t_hit *hit, t_xyz camera);
 
 #endif

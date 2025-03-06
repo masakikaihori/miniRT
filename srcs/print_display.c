@@ -18,16 +18,19 @@ void	expand_ray(t_mini *mini, t_xyz ray, int x, int y)
 	t_hit		hit;
 
 	tmp_obj = mini->object;
+	hit.t = -1;
 	while (tmp_obj)
 	{
 		if (tmp_obj->type == SPHERE)
 			ray_sphere(ray, tmp_obj->info.sphere, &hit, mini->camera->coord);
-		// else if (tmp_obj->type == PLANE)
-		// 	ray_plane(ray, tmp_obj->info.plane, &hit, mini->camera->coord);
+		else if (tmp_obj->type == PLANE)
+			ray_plane(ray, tmp_obj->info.plane, &hit, mini->camera->coord);
 		// else if (tmp_obj->type == CYLINDER)
 		// 	ray_cylinder(ray, tmp_obj->info.cylinder, &hit, mini->camera->coord);
 		tmp_obj = tmp_obj->next;
 	}
+	if (hit.t < 0)
+		hit.color = int_color(0, 0, 0);
 	mlx_pixel_put(mini->mlx, mini->win, x, y, hit.color);
 	return ;
 }
