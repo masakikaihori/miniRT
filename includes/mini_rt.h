@@ -60,6 +60,7 @@ bool			vec_range(t_xyz vec);
 short			rt_atos(t_mini *mini, char **strs, char *str, int *index);
 float			rt_atof(t_mini *mini, char **strs, char *str, int *index);
 int				rt_strslen(char **strs);
+int				int_color(t_rgb colors);
 
 void			print_display(t_mini *mini);
 
@@ -71,10 +72,14 @@ void			debug_free(void *prt);
 //vec
 float			vec_norm(t_xyz a);
 void			normalize(t_xyz *a);
+float			innner_product(t_xyz a, t_xyz b);
 t_xyz			cross_product(t_xyz a, t_xyz b);
 t_xyz			set_vec(float x, float y, float z);
 t_xyz			vec_multiplied(float scalar, t_xyz vec);
 t_xyz			vec_addition(t_xyz a, t_xyz b);
+t_xyz			vec_subtraction(t_xyz a, t_xyz b);
 t_xyz			get_ray(t_mini *mini, float distance, float display_x, float display_y);
+
+void			ray_sphere(t_xyz ray, t_sphere obj, t_hit *hit, t_xyz camera);
 
 #endif

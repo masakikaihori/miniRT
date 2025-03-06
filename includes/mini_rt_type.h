@@ -81,7 +81,7 @@ typedef struct s_plane
 	struct s_xyz	coord;
 	struct s_xyz	vec;
 	struct s_rgb	colors;
-	int				color
+	int				color;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -120,6 +120,8 @@ typedef struct s_mini
 	struct s_xyz			right_vec;
 	struct s_xyz			up_vec;
 	float					distance;
+	float					x_pixel;
+	float					y_pixel;
 	int						status;
 	int						fd;
 }	t_mini;

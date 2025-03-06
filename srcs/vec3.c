@@ -27,6 +27,11 @@ t_xyz	get_ray(t_mini *mini, float distance, float display_x, float display_y)
 	return (ray_direction);
 }
 
+t_xyz	vec_subtraction(t_xyz a, t_xyz b)
+{
+	return (set_vec(a.x - b.x, a.y - b.y, a.z - b.z));
+}
+
 t_xyz	vec_addition(t_xyz a, t_xyz b)
 {
 	return (set_vec(a.x + b.x, a.y + b.y, a.z + b.z));
@@ -61,6 +66,11 @@ t_xyz	cross_product(t_xyz a, t_xyz b)
 	cross.y = a.z * b.x - a.x * b.z + 0.0;
 	cross.z = a.x * b.y - a.y * b.x + 0.0;
 	return (cross);
+}
+
+float	innner_product(t_xyz a, t_xyz b)
+{
+	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
 t_xyz	set_vec(float x, float y, float z)

@@ -21,11 +21,11 @@ void	expand_ray(t_mini *mini, t_xyz ray, int x, int y)
 	while (tmp_obj)
 	{
 		if (tmp_obj->type == SPHERE)
-			ray_sphere(ray, tmp_obj, &hit);
-		else if (tmp_obj->type == PLANE)
-			ray_plane(ray, tmp_obj, &hit);
-		else if (tmp_obj->type == CYLINDER)
-			ray_cylinder(ray, tmp_obj, &hit);
+			ray_sphere(ray, tmp_obj->info.sphere, &hit, mini->camera->coord);
+		// else if (tmp_obj->type == PLANE)
+		// 	ray_plane(ray, tmp_obj->info.plane, &hit, mini->camera->coord);
+		// else if (tmp_obj->type == CYLINDER)
+		// 	ray_cylinder(ray, tmp_obj->info.cylinder, &hit, mini->camera->coord);
 		tmp_obj = tmp_obj->next;
 	}
 	mlx_pixel_put(mini->mlx, mini->win, x, y, hit.color);
@@ -39,16 +39,15 @@ void	print_display(t_mini *mini)
 	float	display_y;
 	int		x;
 	int		y;
-	int		i = 1;
 
 	display_y = HEIGHT / 2.0;
 	set_screen(mini);
 	y = 0;
-	while (display_y > -HEIGHT / 2.0)
+	while (y < HEIGHT)
 	{
 		x = 0;
 		display_x = -WIDTH / 2.0;
-		while (display_x < WIDTH / 2.0)
+		while (x < WIDTH)
 		{
 			ray_direction = get_ray(mini, mini->distance, display_x, display_y);
 			expand_ray(mini, ray_direction, x, y);

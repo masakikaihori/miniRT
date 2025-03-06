@@ -51,15 +51,15 @@ int	main(int ac, char *av[])
 	mini = init_mini();
 	read_scene(mini, av[1]);
 	// print_mini(mini);
+	mini->mlx = mlx_init();
+	if (!mini->mlx)
+	print_free_exit(mini, "error at mlx_init\n", -1);
+	mini->win = mlx_new_window(mini->mlx, WIDTH, HEIGHT, "miniRT");
+	if (!mini->win)
+	print_free_exit(mini, "error at mlx_new_window", -1);
+	mlx_key_hook(mini->win, deal_key, mini);
+	mlx_hook(mini->win, 17, 0, free_exit, mini);
 	print_display(mini);
-	// mini->mlx = mlx_init();
-	// if (!mini->mlx)
-	// 	print_free_exit(mini, "error at mlx_init\n", -1);
-	// mini->win = mlx_new_window(mini->mlx, WIDTH, HEIGHT, "miniRT");
-	// if (!mini->win)
-	// 	print_free_exit(mini, "error at mlx_new_window", -1);
-	// mlx_key_hook(mini->win, deal_key, mini);
-	// mlx_hook(mini->win, 17, 0, free_exit, mini);
-	// mlx_loop(mini->mlx);
+	mlx_loop(mini->mlx);
 	return (free_mini(mini));
 }

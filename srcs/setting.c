@@ -57,6 +57,8 @@ void	set_camera(t_mini *mini, char **strs)
 	mini->camera->vfov = (2 * atan(tan((mini->camera->hfov) / 2)
 				/ (WIDTH / HEIGHT)));
 	mini->distance = WIDTH / 2.0 / tan(mini->camera->hfov / 2.0);
+	mini->x_pixel = tan(mini->camera->hfov / 2.0);
+	mini->y_pixel = tan(mini->camera->vfov / 2.0);
 	return ;
 }
 
