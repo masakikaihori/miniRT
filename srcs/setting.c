@@ -50,7 +50,7 @@ void	set_camera(t_mini *mini, char **strs)
 	if (!vec_range(mini->camera->vec))
 		print_frees_exit(mini, "camera vec is out of range\n", -1, strs);
 	normalize(&(mini->camera->vec));
-	mini->camera->hfov = (float)rt_atos(mini, strs, strs[3], NULL);
+	mini->camera->hfov = (double)rt_atos(mini, strs, strs[3], NULL);
 	if (mini->camera->hfov > HFOV_MAX)
 		print_frees_exit(mini, "camera hfov is out of range\n", -1, strs);
 	mini->camera->hfov = mini->camera->hfov / 180 * M_PI;

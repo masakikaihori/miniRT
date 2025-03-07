@@ -58,7 +58,7 @@ t_rgb			set_rgb(t_mini *mini, char **strs, char *str);
 bool			not_available(char **strs);
 bool			vec_range(t_xyz vec);
 short			rt_atos(t_mini *mini, char **strs, char *str, int *index);
-float			rt_atof(t_mini *mini, char **strs, char *str, int *index);
+double			rt_atof(t_mini *mini, char **strs, char *str, int *index);
 int				rt_strslen(char **strs);
 int				int_color(short red, short green, short blue);
 
@@ -70,15 +70,15 @@ void			*debug_malloc(size_t size);
 void			debug_free(void *prt);
 
 //vec
-float			vec_norm(t_xyz a);
+double			vec_norm(t_xyz a);
 void			normalize(t_xyz *a);
-float			innner_product(t_xyz a, t_xyz b);
+double			innner_product(t_xyz a, t_xyz b);
 t_xyz			cross_product(t_xyz a, t_xyz b);
-t_xyz			set_vec(float x, float y, float z);
-t_xyz			vec_multiplied(float scalar, t_xyz vec);
+t_xyz			set_vec(double x, double y, double z);
+t_xyz			vec_multiplied(double scalar, t_xyz vec);
 t_xyz			vec_addition(t_xyz a, t_xyz b);
 t_xyz			vec_subtraction(t_xyz a, t_xyz b);
-t_xyz			get_ray(t_mini *mini, float distance, float display_x, float display_y);
+t_xyz			get_ray(t_mini *mini, double distance, double display_x, double display_y);
 
 void			ray_sphere(t_xyz ray, t_sphere obj, t_hit *hit, t_xyz camera);
 void			ray_plane(t_xyz ray, t_plane obj, t_hit *hit, t_xyz camera);

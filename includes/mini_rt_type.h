@@ -33,21 +33,21 @@ typedef struct s_rgb
 
 typedef struct s_xyz
 {
-	float	x;
-	float	y;
-	float	z;
+	double	x;
+	double	y;
+	double	z;
 }	t_xyz;
 
 typedef struct s_hit
 {
-	float			t;
+	double			t;
 	struct s_rgb	colors;
 	int				color;
 }	t_hit;
 
 typedef struct s_a_lightning
 {
-	float			ratio;
+	double			ratio;
 	struct s_rgb	colors;
 	int				color;
 }	t_a_lightning;
@@ -56,14 +56,14 @@ typedef struct s_camera
 {
 	struct s_xyz	coord;
 	struct s_xyz	vec;
-	float			hfov;
-	float			vfov;
+	double			hfov;
+	double			vfov;
 }	t_camera;
 
 typedef struct s_light
 {
 	struct s_xyz	coord;
-	float			ratio;
+	double			ratio;
 	struct s_rgb	colors;
 	int				color;
 }	t_light;
@@ -71,7 +71,7 @@ typedef struct s_light
 typedef struct s_sphere
 {
 	struct s_xyz	coord;
-	float			diameter;
+	double			diameter;
 	struct s_rgb	colors;
 	int				color;
 }	t_sphere;
@@ -88,8 +88,8 @@ typedef struct s_cylinder
 {
 	struct s_xyz	coord;
 	struct s_xyz	vec;
-	float			diameter;
-	float			height;
+	double			diameter;
+	double			height;
 	struct s_rgb	colors;
 	int				color;
 }	t_cylinder;
@@ -119,9 +119,9 @@ typedef struct s_mini
 	struct s_xyz			world_up;
 	struct s_xyz			right_vec;
 	struct s_xyz			up_vec;
-	float					distance;
-	float					x_pixel;
-	float					y_pixel;
+	double					distance;
+	double					x_pixel;
+	double					y_pixel;
 	int						status;
 	int						fd;
 }	t_mini;

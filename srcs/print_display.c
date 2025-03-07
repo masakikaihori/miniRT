@@ -38,8 +38,8 @@ void	expand_ray(t_mini *mini, t_xyz ray, int x, int y)
 void	print_display(t_mini *mini)
 {
 	t_xyz	ray_direction;
-	float	display_x;
-	float	display_y;
+	double	display_x;
+	double	display_y;
 	int		x;
 	int		y;
 
@@ -55,20 +55,20 @@ void	print_display(t_mini *mini)
 			ray_direction = get_ray(mini, mini->distance, display_x, display_y);
 			expand_ray(mini, ray_direction, x, y);
 			x++;
-			display_x += mini->distance * tan(mini->camera->hfov / 2.0) / (WIDTH / 2);
+			display_x += mini->distance * mini->x_pixel / (WIDTH / 2.0);
 		}
 		y++;
-		display_y -= mini->distance * tan(mini->camera->vfov / 2.0) / (HEIGHT / 2);
+		display_y -= mini->distance * mini->y_pixel / (HEIGHT / 2.0);
 	}
 	return ;
 }
 
 // void	print_display(t_mini *mini)
 // {
-// 	float	w;
-// 	float	h;
-// 	float	hfov;
-// 	float	vfov;
+// 	double	w;
+// 	double	h;
+// 	double	hfov;
+// 	double	vfov;
 // 	int		i;
 // 	t_xyz	tmp;
 

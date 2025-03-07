@@ -12,11 +12,11 @@
 
 #include "../includes/mini_rt.h"
 
-float	rt_atof_util(t_mini *mini, char **strs, char *str, int *index)
+double	rt_atof_util(t_mini *mini, char **strs, char *str, int *index)
 {
 	int		i;
-	float	num;
-	float	base;
+	double	num;
+	double	base;
 
 	i = *index;
 	num = 0.0;
@@ -67,9 +67,9 @@ int	rt_atof_e(t_mini *mini, char **strs, char *str, int *index)
 	return (num * sign);
 }
 
-float	rt_atof(t_mini *mini, char **strs, char *str, int *index)
+double	rt_atof(t_mini *mini, char **strs, char *str, int *index)
 {
-	float	num;
+	double	num;
 	int		i;
 	int		sign;
 

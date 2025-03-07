@@ -12,7 +12,7 @@
 
 #include "../includes/mini_rt.h"
 
-t_xyz	get_ray(t_mini *mini, float distance, float display_x, float display_y)
+t_xyz	get_ray(t_mini *mini, double distance, double display_x, double display_y)
 {
 	t_xyz	toward_dir;
 	t_xyz	right_dir;
@@ -37,19 +37,19 @@ t_xyz	vec_addition(t_xyz a, t_xyz b)
 	return (set_vec(a.x + b.x, a.y + b.y, a.z + b.z));
 }
 
-t_xyz	vec_multiplied(float scalar, t_xyz vec)
+t_xyz	vec_multiplied(double scalar, t_xyz vec)
 {
 	return (set_vec(vec.x * scalar, vec.y * scalar, vec.z * scalar));
 }
 
-float	vec_norm(t_xyz a)
+double	vec_norm(t_xyz a)
 {
 	return (sqrtf(a.x * a.x + a.y * a.y + a.z * a.z));
 }
 
 void	normalize(t_xyz *a)
 {
-	float	norm;
+	double	norm;
 
 	norm = vec_norm(*a);
 	a->x /= norm;
@@ -68,12 +68,12 @@ t_xyz	cross_product(t_xyz a, t_xyz b)
 	return (cross);
 }
 
-float	innner_product(t_xyz a, t_xyz b)
+double	innner_product(t_xyz a, t_xyz b)
 {
 	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
-t_xyz	set_vec(float x, float y, float z)
+t_xyz	set_vec(double x, double y, double z)
 {
 	t_xyz	vec;
 
