@@ -99,5 +99,7 @@ void	set_cylinder(t_mini *mini, char **strs)
 	obj->info.cylinder.colors = set_rgb(mini, strs, strs[5]);
 	obj->info.cylinder.color = int_color(obj->info.cylinder.colors.red,
 			obj->info.cylinder.colors.green, obj->info.cylinder.colors.blue);
+	obj->info.cylinder.max_hight = obj->info.cylinder.height / 2.0;
+	obj->info.cylinder.max_hight = obj->info.cylinder.height / 2.0;
 	return ;
 }

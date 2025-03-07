@@ -25,8 +25,11 @@ void	expand_ray(t_mini *mini, t_xyz ray, int x, int y)
 			ray_sphere(ray, tmp_obj->info.sphere, &hit, mini->camera->coord);
 		else if (tmp_obj->type == PLANE)
 			ray_plane(ray, tmp_obj->info.plane, &hit, mini->camera->coord);
-		// else if (tmp_obj->type == CYLINDER)
-		// 	ray_cylinder(ray, tmp_obj->info.cylinder, &hit, mini->camera->coord);
+		else if (tmp_obj->type == CYLINDER)
+		{
+			ray_cylinder_side(ray, tmp_obj->info.cylinder, &hit, mini->camera->coord);
+			ray_cylinder_surface(ray, tmp_obj->info.cylinder, &hit, mini->camera->coord);
+		}
 		tmp_obj = tmp_obj->next;
 	}
 	if (hit.t < 0)

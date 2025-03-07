@@ -74,6 +74,8 @@ t_xyz			get_ray(t_mini *mini, double distance, double display_x, double display_
 void			print_display(t_mini *mini);
 void			ray_sphere(t_xyz ray, t_sphere obj, t_hit *hit, t_xyz camera);
 void			ray_plane(t_xyz ray, t_plane obj, t_hit *hit, t_xyz camera);
+void			ray_cylinder_side(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera);
+void			ray_cylinder_surface(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera);
 
 //debug
 void			print_mini(t_mini *mini);
