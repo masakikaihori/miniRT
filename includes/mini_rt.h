@@ -26,8 +26,7 @@
 
 # include "../minilibx-linux/mlx.h"
 
-# include "../libft/libft.h"
-# include "../libft/get_next_line.h"
+# include "../libft/includes/libft.h"
 
 //exit
 void			print_error(char *str);
@@ -61,14 +60,6 @@ short			rt_atos(t_mini *mini, char **strs, char *str, int *index);
 double			rt_atof(t_mini *mini, char **strs, char *str, int *index);
 int				rt_strslen(char **strs);
 int				int_color(short red, short green, short blue);
-
-void			print_display(t_mini *mini);
-
-//debug
-void			print_mini(t_mini *mini);
-void			*debug_malloc(size_t size);
-void			debug_free(void *prt);
-
 //vec
 double			vec_norm(t_xyz a);
 void			normalize(t_xyz *a);
@@ -79,8 +70,14 @@ t_xyz			vec_multiplied(double scalar, t_xyz vec);
 t_xyz			vec_addition(t_xyz a, t_xyz b);
 t_xyz			vec_subtraction(t_xyz a, t_xyz b);
 t_xyz			get_ray(t_mini *mini, double distance, double display_x, double display_y);
-
+//display
+void			print_display(t_mini *mini);
 void			ray_sphere(t_xyz ray, t_sphere obj, t_hit *hit, t_xyz camera);
 void			ray_plane(t_xyz ray, t_plane obj, t_hit *hit, t_xyz camera);
+
+//debug
+void			print_mini(t_mini *mini);
+void			*debug_malloc(size_t size);
+void			debug_free(void *prt);
 
 #endif
