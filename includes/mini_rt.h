@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:07:48 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/03 19:18:23 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/08 16:50:45 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 # include "../minilibx-linux/mlx.h"
 
-# include "../libft/includes/libft.h"
+# include "..//libft/includes/libft.h"
 
 //exit
 void			print_error(char *str);
