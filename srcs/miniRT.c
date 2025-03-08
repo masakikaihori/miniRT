@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
+/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:17:02 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/03 19:18:35 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/08 16:11:37 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ int	main(int ac, char *av[])
 	// print_mini(mini);
 	mini->mlx = mlx_init();
 	if (!mini->mlx)
-	print_free_exit(mini, "error at mlx_init\n", -1);
+		print_free_exit(mini, "error at mlx_init\n", -1);
 	mini->win = mlx_new_window(mini->mlx, WIDTH, HEIGHT, "miniRT");
 	if (!mini->win)
-	print_free_exit(mini, "error at mlx_new_window", -1);
+		print_free_exit(mini, "error at mlx_new_window", -1);
 	mlx_key_hook(mini->win, deal_key, mini);
 	mlx_hook(mini->win, 17, 0, free_exit, mini);
 	print_display(mini);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_object.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
+/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:36:55 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/19 16:37:02 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/08 16:16:00 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	set_sphere(t_mini *mini, char **strs)
 	obj->info.sphere.diameter = rt_atof(mini, strs, strs[2], NULL);
 	obj->info.sphere.colors = set_rgb(mini, strs, strs[3]);
 	obj->info.sphere.color = int_color(obj->info.sphere.colors.red,
-		obj->info.sphere.colors.green, obj->info.sphere.colors.blue);
+			obj->info.sphere.colors.green, obj->info.sphere.colors.blue);
 	return ;
 }
 
@@ -99,7 +99,5 @@ void	set_cylinder(t_mini *mini, char **strs)
 	obj->info.cylinder.colors = set_rgb(mini, strs, strs[5]);
 	obj->info.cylinder.color = int_color(obj->info.cylinder.colors.red,
 			obj->info.cylinder.colors.green, obj->info.cylinder.colors.blue);
-	obj->info.cylinder.max_hight = obj->info.cylinder.height / 2.0;
-	obj->info.cylinder.max_hight = obj->info.cylinder.height / 2.0;
 	return ;
 }

@@ -1,5 +1,15 @@
 #include "../includes/mini_rt.h"
 
+bool	in_height(t_xyz ray, t_cylinder obj, t_xyz camera, double t)
+{
+	if (((obj.height / -2.0 - innner_product(vec_subtraction(camera, obj.coord), obj.vec)) / (innner_product(ray, obj.vec))) < t)
+	{
+		if (((obj.height / 2.0 - innner_product(vec_subtraction(camera, obj.coord), obj.vec)) / (innner_product(ray, obj.vec))) > t)
+			return (true);
+	}
+	return (false);
+}
+
 void	set_hit(t_hit *hit, int color, double t)
 {
 	hit->t = t;
@@ -14,7 +24,8 @@ void	ray_sphere(t_xyz ray, t_sphere obj, t_hit *hit, t_xyz camera)
 
 	f[A] = pow(vec_norm(ray), 2.0);
 	f[B] = 2.0 * (innner_product(camera, ray) - innner_product(obj.coord, ray));
-	f[C] = pow(vec_norm(vec_subtraction(camera, obj.coord)), 2.0) - pow(obj.diameter / 2.0, 2.0);
+	f[C] = pow(vec_norm(vec_subtraction(camera, obj.coord)), 2.0)
+		- pow(obj.diameter / 2.0, 2.0);
 	f[D] = pow(f[B], 2.0) - (4.0 * f[A] * f[C]);
 	if (f[D] >= 0.0)
 	{
@@ -59,17 +70,17 @@ void	ray_cylinder_side(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera)
 	if (f[D] >= 0.0)
 	{
 		t = (-f[B] + sqrt(f[D])) / (2.0 * f[A]);
-		if (t >= 0.0 && (hit->t == -1.0 || hit->t > t))
+		if (t >= 0.0 && in_height(ray, obj, camera, t) && (hit->t == -1.0 || hit->t > t))
 			set_hit(hit, obj.color, t);
 		t = (-f[B] - sqrt(f[D])) / (2.0 * f[A]);
-		if (t >= 0.0 && (hit->t == -1.0 || hit->t > t))
+		if (t >= 0.0 && in_height(ray, obj, camera, t) && (hit->t == -1.0 || hit->t > t))
 			set_hit(hit, obj.color, t);
 	}
 	return ;
 }
 
-void	ray_cylinder_surface(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera)
-{
+// void	ray_cylinder_surface(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera)
+// {
 
-	return ;
-}
+// 	return ;
+// }
