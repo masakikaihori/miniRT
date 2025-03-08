@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_rt_type.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:38:32 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/08 16:09:13 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/08 19:55:40 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ typedef struct s_cylinder
 	double			height;
 	struct s_rgb	colors;
 	int				color;
+	t_xyz			upside;
+	t_xyz			downside;
 }	t_cylinder;
 
 typedef union u_oinfo

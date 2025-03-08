@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_display.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:44:27 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/08 16:21:48 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/08 20:30:26 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	expand_ray(t_mini *mini, t_xyz ray, int x, int y)
 		else if (tmp_obj->type == CYLINDER)
 		{
 			ray_cylinder_side(ray, tmp_obj->info.cylinder, &hit, mini->camera->coord);
-		// 	ray_cylinder_surface(ray, tmp_obj->info.cylinder, &hit, mini->camera->coord);
+			ray_cylinder_surface(ray, tmp_obj->info.cylinder, &hit, mini->camera->coord);
 		}
 		tmp_obj = tmp_obj->next;
 	}

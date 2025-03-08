@@ -1,22 +1,5 @@
 #include "../includes/mini_rt.h"
 
-bool	in_height(double t, double h[2])
-{
-	if (h[0] < t)
-	{
-		if (h[1] > t)
-			return (true);
-	}
-	return (false);
-}
-
-void	set_hit(t_hit *hit, int color, double t)
-{
-	hit->t = t;
-	hit->color = color;
-	return ;
-}
-
 void	ray_sphere(t_xyz ray, t_sphere obj, t_hit *hit, t_xyz camera)
 {
 	double	t;
@@ -84,11 +67,15 @@ void	ray_cylinder_side(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera)
 
 void	ray_cylinder_surface(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera)
 {
-	t_xyz	up_down;
-	t_xyz	down_down;
+	double	t;
 
-	up_down = vec_multiplied(obj.height / 2.0, obj.vec);
-	down_down = vec_multiplied(obj.height / -2.0, obj.vec);
-
+	if (innner_product(ray, obj.vec) == 0)
+		return ;
+	t = -innner_product(vec_subtraction(camera, vec_addition(obj.coord, obj.upside)), obj.vec) / innner_product(ray, obj.vec);
+	if (t >=0 && in_upcircle(ray, obj, camera, t) && (hit->t == -1.0 || hit->t > t))
+		set_hit(hit, obj.color, t);
+	t = -innner_product(vec_subtraction(camera, vec_addition(obj.downside, obj.downside)), obj.vec) / innner_product(ray, obj.vec);
+	if (t >=0 && in_downcircle(ray, obj, camera, t) && (hit->t == -1.0 || hit->t > t))
+		set_hit(hit, obj.color, t);
 	return ;
 }

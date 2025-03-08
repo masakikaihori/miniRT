@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 17:38:38 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/03 19:14:00 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/08 20:25:11 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_xyz	vec_multiplied(double scalar, t_xyz vec)
 
 double	vec_norm(t_xyz a)
 {
-	return (sqrtf(a.x * a.x + a.y * a.y + a.z * a.z));
+	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
 }
 
 void	normalize(t_xyz *a)

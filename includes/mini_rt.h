@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:07:48 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/08 16:50:45 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/08 20:27:08 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ void			ray_sphere(t_xyz ray, t_sphere obj, t_hit *hit, t_xyz camera);
 void			ray_plane(t_xyz ray, t_plane obj, t_hit *hit, t_xyz camera);
 void			ray_cylinder_side(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera);
 void			ray_cylinder_surface(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera);
+
+bool			in_height(double t, double h[2]);
+void			set_hit(t_hit *hit, int color, double t);
+bool			in_upcircle(t_xyz ray, t_cylinder obj, t_xyz camera, double t);
+bool			in_downcircle(t_xyz ray, t_cylinder obj, t_xyz camera, double t);
 
 //debug
 void			print_mini(t_mini *mini);
