@@ -30,10 +30,21 @@ bool	in_downcircle(t_xyz ray, t_cylinder obj, t_xyz camera, double t)
 
 bool	in_height(double t, double h[2])
 {
-	if (h[0] < t)
+	if (h[0] <= h[1])
 	{
-		if (h[1] > t)
-			return (true);
+		if (h[0] < t)
+		{
+			if (h[1] > t)
+				return (true);
+		}
+	}
+	else
+	{
+		if (h[1] < t)
+		{
+			if (h[0] > t)
+				return (true);
+		}
 	}
 	return (false);
 }

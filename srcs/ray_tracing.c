@@ -73,9 +73,9 @@ void	ray_cylinder_surface(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera)
 		return ;
 	t = -innner_product(vec_subtraction(camera, vec_addition(obj.coord, obj.upside)), obj.vec) / innner_product(ray, obj.vec);
 	if (t >=0 && in_upcircle(ray, obj, camera, t) && (hit->t == -1.0 || hit->t > t))
-		set_hit(hit, obj.color, t);
-	t = -innner_product(vec_subtraction(camera, vec_addition(obj.downside, obj.downside)), obj.vec) / innner_product(ray, obj.vec);
+		set_hit(hit, int_color(0, 0, 150), t);
+	t = -innner_product(vec_subtraction(camera, vec_addition(obj.coord, obj.downside)), obj.vec) / innner_product(ray, obj.vec);
 	if (t >=0 && in_downcircle(ray, obj, camera, t) && (hit->t == -1.0 || hit->t > t))
-		set_hit(hit, obj.color, t);
+		set_hit(hit, int_color(0, 0, 50), t);
 	return ;
 }
