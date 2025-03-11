@@ -49,9 +49,19 @@ bool	in_height(double t, double h[2])
 	return (false);
 }
 
-void	set_hit(t_hit *hit, int color, double t)
+void	set_hit_cylinder(t_hit *hit, double t, t_cylinder obj, t_cyl_inter p)
+{
+	hit->t = t;
+	hit->color = obj.color;
+	hit->index = obj.index;
+	hit->cylinder = p;
+	return ;
+}
+
+void	set_hit(t_hit *hit, int color, double t, int index)
 {
 	hit->t = t;
 	hit->color = color;
+	hit->index = index;
 	return ;
 }

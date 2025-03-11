@@ -12,20 +12,31 @@
 
 #include "../includes/mini_rt.h"
 
-void	add_object(t_mini *mini, t_object *new)
+int	add_object(t_mini *mini, t_object *new)
 {
 	t_object	*tmp;
+	int			index;
 
+	index = 1;
 	tmp = mini->object;
 	if (tmp == NULL)
+	{
 		mini->object = new;
+		new->index = 0;
+		return (0);
+	}
 	else
 	{
 		while (tmp->next)
+		{
 			tmp = tmp->next;
+			index++;
+		}
 		tmp->next = new;
+		new->index = index;
+		return (index);
 	}
-	return ;
+	return (-1);
 }
 
 void	set_sphere(t_mini *mini, char **strs)
@@ -37,7 +48,7 @@ void	set_sphere(t_mini *mini, char **strs)
 		print_frees_exit(mini, NULL, errno, strs);
 	obj->type = SPHERE;
 	obj->next = NULL;
-	add_object(mini, obj);
+	obj->info.sphere.index = add_object(mini, obj);
 	if (rt_strslen(strs) != SPH_ELE)
 		print_frees_exit(mini, "sphere amout of element\n", -1, strs);
 	if (not_available(strs + 1))
@@ -59,7 +70,7 @@ void	set_plane(t_mini *mini, char **strs)
 		print_frees_exit(mini, NULL, errno, strs);
 	obj->type = PLANE;
 	obj->next = NULL;
-	add_object(mini, obj);
+	obj->info.plane.index = add_object(mini, obj);
 	if (rt_strslen(strs) != PLA_ELE)
 		print_frees_exit(mini, "plane amout of element\n", -1, strs);
 	if (not_available(strs + 1))
@@ -84,7 +95,7 @@ void	set_cylinder(t_mini *mini, char **strs)
 		print_frees_exit(mini, NULL, errno, strs);
 	obj->type = CYLINDER;
 	obj->next = NULL;
-	add_object(mini, obj);
+	obj->info.cylinder.index = add_object(mini, obj);
 	if (rt_strslen(strs) != CYL_ELE)
 		print_frees_exit(mini, "cylinder amout of element\n", -1, strs);
 	if (not_available(strs + 1))

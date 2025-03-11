@@ -24,6 +24,13 @@ typedef enum e_otype
 	UNKNOWN,
 }	t_otype;
 
+typedef enum e_cyl_inter
+{
+	CYL_SIDE,
+	CYL_UP,
+	CYL_DOWN,
+}	t_cyl_inter;
+
 typedef struct s_rgb
 {
 	short	red;
@@ -38,94 +45,100 @@ typedef struct s_xyz
 	double	z;
 }	t_xyz;
 
-typedef struct s_hit
-{
-	double			t;
-	struct s_rgb	colors;
-	int				color;
-}	t_hit;
-
 typedef struct s_a_lightning
 {
-	double			ratio;
-	struct s_rgb	colors;
-	int				color;
+	double	ratio;
+	t_rgb	colors;
+	int		color;
 }	t_a_lightning;
 
 typedef struct s_camera
 {
-	struct s_xyz	coord;
-	struct s_xyz	vec;
-	double			hfov;
-	double			vfov;
+	t_xyz	coord;
+	t_xyz	vec;
+	double	hfov;
+	double	vfov;
 }	t_camera;
 
 typedef struct s_light
 {
-	struct s_xyz	coord;
-	double			ratio;
-	struct s_rgb	colors;
-	int				color;
+	t_xyz	coord;
+	double	ratio;
+	t_rgb	colors;
+	int		color;
 }	t_light;
 
 typedef struct s_sphere
 {
-	struct s_xyz	coord;
-	double			diameter;
-	struct s_rgb	colors;
-	int				color;
+	int		index;
+	t_xyz	coord;
+	double	diameter;
+	t_rgb	colors;
+	int		color;
 }	t_sphere;
 
 typedef struct s_plane
 {
-	struct s_xyz	coord;
-	struct s_xyz	vec;
-	struct s_rgb	colors;
-	int				color;
+	int		index;
+	t_xyz	coord;
+	t_xyz	vec;
+	t_rgb	colors;
+	int		color;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	struct s_xyz	coord;
-	struct s_xyz	vec;
-	double			diameter;
-	double			height;
-	struct s_rgb	colors;
-	int				color;
-	t_xyz			upside;
-	t_xyz			downside;
+	int		index;
+	t_xyz	coord;
+	t_xyz	vec;
+	double	diameter;
+	double	height;
+	t_rgb	colors;
+	int		color;
+	t_xyz	upside;
+	t_xyz	downside;
 }	t_cylinder;
+
+typedef struct s_hit
+{
+	double		t;
+	int			color;
+	int			index;
+	t_xyz		intersection;
+	t_cyl_inter	cylinder;
+}	t_hit;
 
 typedef union u_oinfo
 {
-	struct s_sphere		sphere;
-	struct s_plane		plane;
-	struct s_cylinder	cylinder;
+	t_sphere	sphere;
+	t_plane		plane;
+	t_cylinder	cylinder;
 }	t_oinfo;
 
 typedef struct s_object
 {
-	enum e_otype		type;
-	union u_oinfo		info;
-	struct s_object		*next;
+	int				index;
+	t_otype			type;
+	t_oinfo			info;
+	struct s_object	*next;
 }	t_object;
 
 typedef struct s_mini
 {
-	void					*mlx;
-	void					*win;
-	struct s_a_lightning	*a_lightning;
-	struct s_camera			*camera;
-	struct s_light			*light;
-	struct s_object			*object;
-	struct s_xyz			world_up;
-	struct s_xyz			right_vec;
-	struct s_xyz			up_vec;
-	double					distance;
-	double					x_pixel;
-	double					y_pixel;
-	int						status;
-	int						fd;
+	void			*mlx;
+	void			*win;
+	t_a_lightning	*a_lightning;
+	t_camera		*camera;
+	t_light			*light;
+	t_object		*object;
+	t_xyz			world_up;
+	t_xyz			right_vec;
+	t_xyz			up_vec;
+	double			distance;
+	double			x_pixel;
+	double			y_pixel;
+	int				status;
+	int				fd;
 }	t_mini;
 
 #endif
