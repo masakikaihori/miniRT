@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:38:32 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/08 19:55:40 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:08:45 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ typedef struct s_hit
 	int			index;
 	t_xyz		intersection;
 	t_cyl_inter	cylinder;
+	double		diff;
+	double		spec;
 }	t_hit;
 
 typedef union u_oinfo

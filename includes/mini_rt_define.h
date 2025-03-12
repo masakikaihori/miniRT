@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:38:34 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/19 17:23:29 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:08:18 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # define WIDTH 640.0
 # define HEIGHT 480.0
+# define SPE_REF 1.0
+# define DIF_REF 0.5
+# define SHINE 10.0
 
 # define A 0
 # define B 1
