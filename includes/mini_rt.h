@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:07:48 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/08 20:27:08 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/12 19:49:01 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ bool			in_downcircle(t_xyz ray, t_cylinder obj, t_xyz camera, double t);
 void			sphere_light(t_xyz ray, t_mini *mini, t_hit *hit, t_sphere obj);
 void			plane_light(t_xyz ray, t_mini *mini, t_hit *hit, t_plane obj);
 void			cylinder_light(t_xyz ray, t_mini *mini, t_hit *hit, t_cylinder obj);
+
+bool			is_shadow(t_object *head, t_xyz light, t_xyz point);
 
 //debug
 void			print_mini(t_mini *mini);

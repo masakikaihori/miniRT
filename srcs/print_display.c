@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:44:27 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/08 21:55:36 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/12 20:06:50 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,17 @@ void	cal_light(t_xyz ray, t_mini *mini, t_hit *hit)
 		return ;
 	hit->intersection = intersection_pos(mini->camera->coord, hit->t, ray);
 	obj = obj_ptr_index(mini->object, hit->index);
-	if (obj->type == SPHERE)
-		sphere_light(ray, mini, hit, obj->info.sphere);
-	else if (obj->type == PLANE)
-		plane_light(ray, mini, hit, obj->info.plane);
-	else if (obj->type == CYLINDER)
-		cylinder_light(ray, mini, hit, obj->info.cylinder);
+	hit->diff = 0.0;
+	hit->spec = 0.0;
+	if (!is_shadow(mini->object, mini->light->coord, hit->intersection))
+	{
+		if (obj->type == SPHERE)
+			sphere_light(ray, mini, hit, obj->info.sphere);
+		else if (obj->type == PLANE)
+			plane_light(ray, mini, hit, obj->info.plane);
+		else if (obj->type == CYLINDER)
+			cylinder_light(ray, mini, hit, obj->info.cylinder);
+	}
 	return ;
 }
 
@@ -68,9 +73,10 @@ void	expand_ray(t_mini *mini, t_xyz ray, int x, int y)
 		}
 		tmp_obj = tmp_obj->next;
 	}
-	cal_light(ray, mini, &hit);
 	if (hit.t < 0)
 		hit.color = int_color(0, 0, 0);
+	else
+		cal_light(ray, mini, &hit);
 	mlx_pixel_put(mini->mlx, mini->win, x, y, hit.color);
 	return ;
 }
@@ -102,36 +108,3 @@ void	print_display(t_mini *mini)
 	}
 	return ;
 }
-
-// void	print_display(t_mini *mini)
-// {
-// 	double	w;
-// 	double	h;
-// 	double	hfov;
-// 	double	vfov;
-// 	int		i;
-// 	t_xyz	tmp;
-
-// 	w = tan(mini->camera->hfov / 180 * M_PI);
-// 	h = tan(mini->camera->vfov / 180 * M_PI);
-// 	vfov = mini->camera->vfov;
-// 	tmp.x = -w;
-// 	tmp.y = h;
-// 	tmp.z = 1;
-// 	i = 1;
-// 	while (tmp.y > -h)
-// 	{
-// 		hfov = mini->camera->hfov;
-// 		tmp.x = -tan(hfov / 180 * M_PI);
-// 		while (tmp.x < w)
-// 		{
-// 			printf("%d:%f,%f   ", i, tmp.x, tmp.y);
-// 			i++;
-// 			hfov -= mini->camera->hfov/(WIDTH/2.0);
-// 			tmp.x = -tan(hfov / 180 * M_PI);
-// 		}
-// 		vfov -= mini->camera->vfov/(HEIGHT/2.0);
-// 		tmp.y = tan(vfov / 180 * M_PI);
-// 	}
-// 	return ;
-// }

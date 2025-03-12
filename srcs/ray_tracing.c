@@ -60,7 +60,7 @@ void	ray_cylinder_side(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera)
 			set_hit_cylinder(hit, t, obj, CYL_SIDE);
 		t = (-f[B] - sqrt(f[D])) / (2.0 * f[A]);
 		if (t >= 0.0 && in_height(t, h) && (hit->t == -1.0 || hit->t > t))
-		set_hit_cylinder(hit, t, obj, CYL_SIDE);
+			set_hit_cylinder(hit, t, obj, CYL_SIDE);
 	}
 	return ;
 }
@@ -72,10 +72,10 @@ void	ray_cylinder_surface(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera)
 	if (innner_product(ray, obj.vec) == 0)
 		return ;
 	t = -innner_product(vec_subtraction(camera, vec_addition(obj.coord, obj.upside)), obj.vec) / innner_product(ray, obj.vec);
-	if (t >=0 && in_upcircle(ray, obj, camera, t) && (hit->t == -1.0 || hit->t > t))
+	if (t >= 0.0 && in_upcircle(ray, obj, camera, t) && (hit->t == -1.0 || hit->t > t))
 		set_hit_cylinder(hit, t, obj, CYL_UP);
 	t = -innner_product(vec_subtraction(camera, vec_addition(obj.coord, obj.downside)), obj.vec) / innner_product(ray, obj.vec);
-	if (t >=0 && in_downcircle(ray, obj, camera, t) && (hit->t == -1.0 || hit->t > t))
+	if (t >= 0.0 && in_downcircle(ray, obj, camera, t) && (hit->t == -1.0 || hit->t > t))
 		set_hit_cylinder(hit, t, obj, CYL_DOWN);
 	return ;
 }
