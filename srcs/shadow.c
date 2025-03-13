@@ -25,10 +25,10 @@ bool	shadow_sphere(t_xyz ray, t_sphere obj, t_xyz camera, double max)
 	if (f[D] >= 0.0)
 	{
 		t = (-f[B] + sqrt(f[D])) / (2.0 * f[A]);
-		if (t > 0.0 && t <= max)
+		if (t > 1e-9 && t <= max)
 			return (true);
 		t = (-f[B] - sqrt(f[D])) / (2.0 * f[A]);
-		if (t > 0.0 && t <= max)
+		if (t > 1e-9 && t <= max)
 			return (true);
 	}
 	return (false);
@@ -43,7 +43,7 @@ bool	shadow_plane(t_xyz ray, t_plane obj, t_xyz camera, double max, int y)
 	if (d != 0.0)
 	{
 		t = innner_product(vec_subtraction(camera, obj.coord), obj.vec) / d;
-		if (t > 0.0 && t <= max)
+		if (t > 1e-9 && t <= max)
 		{
 			return (true);
 		}
@@ -70,10 +70,10 @@ bool	shadow_cylinder_side(t_xyz ray, t_cylinder obj, t_xyz camera, double max)
 	if (f[D] >= 0.0)
 	{
 		t = (-f[B] + sqrt(f[D])) / (2.0 * f[A]);
-		if (t > 0.0 && t <= max && in_height(t, h))
+		if (t > 1e-9 && t <= max && in_height(t, h))
 			return (true);
 		t = (-f[B] - sqrt(f[D])) / (2.0 * f[A]);
-		if (t > 0.0 && t <= max && in_height(t, h))
+		if (t > 1e-9 && t <= max && in_height(t, h))
 			return (true);
 	}
 	return (false);
@@ -86,10 +86,10 @@ bool	shadow_cylinder_surface(t_xyz ray, t_cylinder obj, t_xyz camera, double max
 	if (innner_product(ray, obj.vec) == 0)
 		return (false);
 	t = -innner_product(vec_subtraction(camera, vec_addition(obj.coord, obj.upside)), obj.vec) / innner_product(ray, obj.vec);
-	if (t > 0.0 && in_upcircle(ray, obj, camera, t) && t <= max)
+	if (t > 1e-9 && in_upcircle(ray, obj, camera, t) && t <= max)
 		return (true);
 	t = -innner_product(vec_subtraction(camera, vec_addition(obj.coord, obj.downside)), obj.vec) / innner_product(ray, obj.vec);
-	if (t > 0.0 && in_downcircle(ray, obj, camera, t) && t <= max)
+	if (t > 1e-9 && in_downcircle(ray, obj, camera, t) && t <= max)
 		return (true);
 	return (false);
 }
@@ -106,7 +106,6 @@ bool	is_shadow(t_object *head, t_xyz light, t_xyz point, int y)
 	ray = vec_subtraction(light, point);
 	max = vec_norm(ray);
 	normalize(&ray);
-	point = vec_addition(point, vec_multiplied(0.1, light));
 	while (tmp_obj && !hit)
 	{
 		if (tmp_obj->type == SPHERE)
