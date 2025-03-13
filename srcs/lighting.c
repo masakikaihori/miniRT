@@ -35,7 +35,7 @@ void	sphere_light(t_xyz ray, t_mini *mini, t_hit *hit, t_sphere obj)
 	normalize(&normal_vec);
 	normalize(&light_vec);
 	if (innner_product(normal_vec, light_vec) > 0)
-		hit->diff = DIF_REF * mini->light->ratio * innner_product(normal_vec, light_vec);
+		hit->diff = mini->light->ratio * innner_product(normal_vec, light_vec);
 	reflight_vec = vec_subtraction(vec_multiplied(2 * innner_product(normal_vec, light_vec), normal_vec), light_vec);
 	if (innner_product(normal_vec, light_vec) > 0)
 		hit->spec = SPE_REF * mini->light->ratio * pow(innner_product(reflight_vec, vec_multiplied(-1.0, ray)), SHINE);
@@ -55,7 +55,7 @@ void	plane_light(t_xyz ray, t_mini *mini, t_hit *hit, t_plane obj)
 	normalize(&normal_vec);
 	normalize(&light_vec);
 	if (innner_product(normal_vec, light_vec) > 0)
-		hit->diff = DIF_REF * mini->light->ratio * innner_product(normal_vec, light_vec);
+		hit->diff = mini->light->ratio * innner_product(normal_vec, light_vec);
 	reflight_vec = vec_subtraction(vec_multiplied(2 * innner_product(normal_vec, light_vec), normal_vec), light_vec);
 	if (innner_product(normal_vec, light_vec) > 0)
 		hit->spec = SPE_REF * mini->light->ratio * pow(innner_product(reflight_vec, vec_multiplied(-1.0, ray)), SHINE);
@@ -79,8 +79,10 @@ void	cylinder_light(t_xyz ray, t_mini *mini, t_hit *hit, t_cylinder obj)
 	light_vec = vec_subtraction(light, hit->intersection);
 	normalize(&normal_vec);
 	normalize(&light_vec);
+	if (innner_product(normal_vec, light_vec) < 0)
+		normal_vec = vec_multiplied(-1.0, normal_vec);
 	if (innner_product(normal_vec, light_vec) > 0)
-		hit->diff = DIF_REF * mini->light->ratio * innner_product(normal_vec, light_vec);
+		hit->diff = mini->light->ratio * innner_product(normal_vec, light_vec);
 	reflight_vec = vec_subtraction(vec_multiplied(2 * innner_product(normal_vec, light_vec), normal_vec), light_vec);
 	if (innner_product(normal_vec, light_vec) > 0)
 		hit->spec = SPE_REF * mini->light->ratio * pow(innner_product(reflight_vec, vec_multiplied(-1.0, ray)), SHINE);

@@ -92,13 +92,13 @@ bool	shadow_cylinder_surface(t_xyz ray, t_cylinder obj, t_xyz point, double max)
 	return (false);
 }
 
-bool	is_shadow(t_object *head, t_xyz light, t_xyz point, int y)
+bool	is_shadow(t_object *head, t_xyz light, t_xyz point)
 {
 	t_object	*tmp_obj;
 	t_xyz		ray;
 	bool		hit;
 	double		max;
-(void)y;
+
 	tmp_obj = head;
 	hit = false;
 	ray = vec_subtraction(light, point);

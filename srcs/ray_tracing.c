@@ -14,10 +14,10 @@ void	ray_sphere(t_xyz ray, t_sphere obj, t_hit *hit, t_xyz camera)
 	{
 		t = (-f[B] + sqrt(f[D])) / (2.0 * f[A]);
 		if (t >= NEAR_ZERO && (hit->t == -1.0 || hit->t > t))
-			set_hit(hit, obj.color, t, obj.index);
+			set_hit(hit, obj.colors, t, obj.index);
 		t = (-f[B] - sqrt(f[D])) / (2.0 * f[A]);
 		if (t >= NEAR_ZERO && (hit->t == -1.0 || hit->t > t))
-			set_hit(hit, obj.color, t, obj.index);
+			set_hit(hit, obj.colors, t, obj.index);
 	}
 	return ;
 }
@@ -32,7 +32,7 @@ void	ray_plane(t_xyz ray, t_plane obj, t_hit *hit, t_xyz camera)
 	{
 		t = innner_product(vec_subtraction(camera, obj.coord), obj.vec) / d;
 		if (t >= NEAR_ZERO && (hit->t == -1.0 || hit->t > t))
-			set_hit(hit, obj.color, t, obj.index);
+			set_hit(hit, obj.colors, t, obj.index);
 	}
 	return ;
 }

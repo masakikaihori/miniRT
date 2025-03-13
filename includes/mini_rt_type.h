@@ -103,6 +103,7 @@ typedef struct s_hit
 {
 	double		t;
 	int			color;
+	t_rgb		colors;
 	int			index;
 	t_xyz		intersection;
 	t_cyl_inter	cylinder;

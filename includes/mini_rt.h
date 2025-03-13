@@ -78,7 +78,7 @@ void			ray_cylinder_side(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera);
 void			ray_cylinder_surface(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera);
 
 bool			in_height(double t, double h[2]);
-void			set_hit(t_hit *hit, int color, double t, int index);
+void			set_hit(t_hit *hit, t_rgb colors, double t, int index);
 void			set_hit_cylinder(t_hit *hit, double t, t_cylinder obj, t_cyl_inter p);
 bool			in_upcircle(t_xyz ray, t_cylinder obj, t_xyz camera, double t);
 bool			in_downcircle(t_xyz ray, t_cylinder obj, t_xyz camera, double t);
@@ -87,7 +87,8 @@ void			sphere_light(t_xyz ray, t_mini *mini, t_hit *hit, t_sphere obj);
 void			plane_light(t_xyz ray, t_mini *mini, t_hit *hit, t_plane obj);
 void			cylinder_light(t_xyz ray, t_mini *mini, t_hit *hit, t_cylinder obj);
 
-bool			is_shadow(t_object *head, t_xyz light, t_xyz point, int y);
+bool			is_shadow(t_object *head, t_xyz light, t_xyz point);
+void  			cal_color(t_hit *hit, t_rgb t, double ratio);
 
 //debug
 void			print_mini(t_mini *mini);
