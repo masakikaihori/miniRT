@@ -22,7 +22,7 @@ t_xyz	cylinder_normal_vec(t_hit *hit, t_cylinder obj)
 	return (normal_vec);
 }
 
-void	sphere_light(t_xyz ray, t_mini *mini, t_hit *hit, t_sphere obj)
+void	sphere_light(t_xyz ray, t_mini *mini, t_hit *hit, t_sphere obj, int y)
 {
 	t_xyz	light;
 	t_xyz	normal_vec;
@@ -39,6 +39,8 @@ void	sphere_light(t_xyz ray, t_mini *mini, t_hit *hit, t_sphere obj)
 	reflight_vec = vec_subtraction(vec_multiplied(2 * innner_product(normal_vec, light_vec), normal_vec), light_vec);
 	if (innner_product(normal_vec, light_vec) > 0)
 		hit->spec = SPE_REF * mini->light->ratio * pow(innner_product(reflight_vec, vec_multiplied(-1.0, ray)), SHINE);
+	if (y == 150)
+		printf("sp %f,%f\n", hit->diff, hit->spec);
 	return ;
 }
 

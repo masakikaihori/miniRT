@@ -50,7 +50,6 @@ int	main(int ac, char *av[])
 		print_free_exit(NULL, "need a scene in format *.rt\n", -1);
 	mini = init_mini();
 	read_scene(mini, av[1]);
-	// print_mini(mini);
 	mini->mlx = mlx_init();
 	if (!mini->mlx)
 		print_free_exit(mini, "error at mlx_init\n", -1);

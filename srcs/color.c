@@ -21,12 +21,6 @@ void    cal_color(t_hit *hit, t_rgb t, double ratio)
     blue = 255;
     else if (blue < 0)
     blue = 0;
-    // if (hit->cylinder == CYL_SIDE || hit->cylinder == CYL_UP || hit->cylinder == CYL_DOWN)
-    // {
-    //     printf("%d,%d,%d\n", t.red, t.green, t.blue);
-    //     printf("%f,%f,%f\n", ratio, hit->diff, hit->spec);
-    //     printf("%f,%f,%f\n\n", red, green, blue);
-    // }
     hit->color = int_color((int)round(red), (int)round(green), (int)round(blue));
     return ;
 }
