@@ -31,7 +31,7 @@ t_xyz	intersection_pos(t_xyz camera, double t, t_xyz ray)
 	return (vec_addition(camera, vec_multiplied(t, ray)));
 }
 
-void	cal_light(t_xyz ray, t_mini *mini, t_hit *hit)
+void	cal_light(t_xyz ray, t_mini *mini, t_hit *hit, int y)
 {
 	t_object *obj;
 
@@ -41,7 +41,7 @@ void	cal_light(t_xyz ray, t_mini *mini, t_hit *hit)
 	obj = obj_ptr_index(mini->object, hit->index);
 	hit->diff = 0.0;
 	hit->spec = 0.0;
-	if (!is_shadow(mini->object, mini->light->coord, hit->intersection))
+	if (!is_shadow(mini->object, mini->light->coord, hit->intersection, y))
 	{
 		if (obj->type == SPHERE)
 			sphere_light(ray, mini, hit, obj->info.sphere);
@@ -49,7 +49,10 @@ void	cal_light(t_xyz ray, t_mini *mini, t_hit *hit)
 			plane_light(ray, mini, hit, obj->info.plane);
 		else if (obj->type == CYLINDER)
 			cylinder_light(ray, mini, hit, obj->info.cylinder);
+		// hit->color = int_color(255,255,255);
 	}
+	else
+		hit->color = int_color(255, 255, 255);
 	return ;
 }
 
@@ -76,7 +79,7 @@ void	expand_ray(t_mini *mini, t_xyz ray, int x, int y)
 	if (hit.t < 0)
 		hit.color = int_color(0, 0, 0);
 	else
-		cal_light(ray, mini, &hit);
+		cal_light(ray, mini, &hit, y);
 	mlx_pixel_put(mini->mlx, mini->win, x, y, hit.color);
 	return ;
 }

@@ -87,7 +87,7 @@ void			sphere_light(t_xyz ray, t_mini *mini, t_hit *hit, t_sphere obj);
 void			plane_light(t_xyz ray, t_mini *mini, t_hit *hit, t_plane obj);
 void			cylinder_light(t_xyz ray, t_mini *mini, t_hit *hit, t_cylinder obj);
 
-bool			is_shadow(t_object *head, t_xyz light, t_xyz point);
+bool			is_shadow(t_object *head, t_xyz light, t_xyz point, int y);
 
 //debug
 void			print_mini(t_mini *mini);

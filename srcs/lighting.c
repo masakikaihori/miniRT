@@ -24,13 +24,11 @@ t_xyz	cylinder_normal_vec(t_hit *hit, t_cylinder obj)
 
 void	sphere_light(t_xyz ray, t_mini *mini, t_hit *hit, t_sphere obj)
 {
-	t_xyz	camera;
 	t_xyz	light;
 	t_xyz	normal_vec;
 	t_xyz	light_vec;
 	t_xyz	reflight_vec;
 
-	camera = mini->camera->coord;
 	light = mini->light->coord;
 	normal_vec = vec_subtraction(hit->intersection, obj.coord);
 	light_vec = vec_subtraction(light, hit->intersection);
@@ -46,13 +44,11 @@ void	sphere_light(t_xyz ray, t_mini *mini, t_hit *hit, t_sphere obj)
 
 void	plane_light(t_xyz ray, t_mini *mini, t_hit *hit, t_plane obj)
 {
-	t_xyz	camera;
 	t_xyz	light;
 	t_xyz	normal_vec;
 	t_xyz	light_vec;
 	t_xyz	reflight_vec;
 
-	camera = mini->camera->coord;
 	light = mini->light->coord;
 	normal_vec = obj.vec;
 	light_vec = vec_subtraction(light, hit->intersection);
@@ -68,13 +64,11 @@ void	plane_light(t_xyz ray, t_mini *mini, t_hit *hit, t_plane obj)
 
 void	cylinder_light(t_xyz ray, t_mini *mini, t_hit *hit, t_cylinder obj)
 {
-	t_xyz	camera;
 	t_xyz	light;
 	t_xyz	normal_vec;
 	t_xyz	light_vec;
 	t_xyz	reflight_vec;
 
-	camera = mini->camera->coord;
 	light = mini->light->coord;
 	if (hit->cylinder == CYL_UP)
 		normal_vec = obj.vec;
