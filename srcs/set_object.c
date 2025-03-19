@@ -6,11 +6,19 @@
 /*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:36:55 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/19 17:38:00 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/19 18:21:46 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_rt.h"
+
+t_xyz	cal_side(t_cylinder obj, t_cyl_inter flag)
+{
+	if (flag == CYL_UP)
+		return (vec_mul(obj.height / 2.0, obj.vec));
+	else
+		return (vec_mul(obj.height / -2.0, obj.vec));
+}
 
 int	add_object(t_mini *mini, t_object *new)
 {
@@ -110,7 +118,7 @@ void	set_cylinder(t_mini *mini, char **strs)
 	obj->info.cylinder.colors = set_rgb(mini, strs, strs[5]);
 	obj->info.cylinder.color = int_color(obj->info.cylinder.colors.red,
 			obj->info.cylinder.colors.green, obj->info.cylinder.colors.blue);
-	obj->info.cylinder.upside = vec_mul(obj->info.cylinder.height / 2.0, obj->info.cylinder.vec);
-	obj->info.cylinder.downside = vec_mul(obj->info.cylinder.height / -2.0, obj->info.cylinder.vec);
+	obj->info.cylinder.upside = cal_side(obj->info.cylinder, CYL_UP);
+	obj->info.cylinder.downside = cal_side(obj->info.cylinder, CYL_DOWN);
 	return ;
 }

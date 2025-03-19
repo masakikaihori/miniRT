@@ -55,7 +55,7 @@ void	ray_cyl_side(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera)
 
 	ray_dot_objvec = vec_sub(ray, vec_mul(inner_pro(ray, obj.vec), obj.vec));
 	cam_center_dot_objvec = vec_sub(vec_sub(camera, obj.coord),
-		vec_mul(inner_pro(vec_sub(camera, obj.coord), obj.vec), obj.vec));
+			vec_mul(inner_pro(vec_sub(camera, obj.coord), obj.vec), obj.vec));
 	f[A] = pow(vec_norm(ray_dot_objvec), 2.0);
 	f[B] = 2 * inner_pro(cam_center_dot_objvec, ray_dot_objvec);
 	f[C] = pow(vec_norm(cam_center_dot_objvec), 2.0)
