@@ -79,16 +79,16 @@ void	ray_cyl_surface(
 {
 	double	t;
 
-	if (inner_pro(ray, obj.vec) == 0)
+	if (inner_pro(ray, obj.vec) >= NEAR_ZERO)
 		return ;
 	t = -inner_pro(vec_sub(camera, vec_addition(obj.coord, obj.upside)),
 			obj.vec) / inner_pro(ray, obj.vec);
-	if (fabs(t) > NEAR_ZERO
+	if (t > NEAR_ZERO
 		&& in_upcircle(ray, obj, camera, t) && (hit->t == -1.0 || hit->t > t))
 		set_hit_cylinder(hit, t, obj, CYL_UP);
 	t = -inner_pro(vec_sub(camera, vec_addition(obj.coord, obj.downside)),
 			obj.vec) / inner_pro(ray, obj.vec);
-	if (fabs(t) > NEAR_ZERO
+	if (t > NEAR_ZERO
 		&& in_downcircle(ray, obj, camera, t) && (hit->t == -1.0 || hit->t > t))
 		set_hit_cylinder(hit, t, obj, CYL_DOWN);
 	return ;
