@@ -6,7 +6,7 @@
 /*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 19:31:21 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/19 19:22:45 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/19 19:25:15 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,11 +114,9 @@ bool	is_shadow(t_object *head, t_xyz light, t_xyz point)
 		else if (tmp_obj->type == PLANE)
 			hit = shadow_plane(ray, tmp_obj->info.plane, point, max);
 		else if (tmp_obj->type == CYLINDER)
-		{
 			hit = shadow_cyl_side(ray, tmp_obj->info.cylinder, point, max);
-			if (!hit)
-				hit = shadow_cyl_surface(ray, tmp_obj->info.cylinder, point, max);
-		}
+		if (tmp_obj->type == CYLINDER && !hit)
+			hit = shadow_cyl_surface(ray, tmp_obj->info.cylinder, point, max);
 		tmp_obj = tmp_obj->next;
 	}
 	return (hit);
