@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_display.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
+/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:44:27 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/12 20:06:50 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:24:02 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_xyz	intersection_pos(t_xyz camera, double t, t_xyz ray)
 void	cal_light(t_xyz ray, t_mini *mini, t_hit *hit, int y)
 {
 	t_object *obj;
-
+(void)y;
 	if (hit->t == -1)
 		return ;
 	hit->intersection = intersection_pos(mini->camera->coord, hit->t, ray);
@@ -44,7 +44,7 @@ void	cal_light(t_xyz ray, t_mini *mini, t_hit *hit, int y)
 	if (!is_shadow(mini->object, mini->light->coord, hit->intersection))
 	{
 		if (obj->type == SPHERE)
-			sphere_light(ray, mini, hit, obj->info.sphere, y);
+			sphere_light(ray, mini, hit, obj->info.sphere);
 		else if (obj->type == PLANE)
 			plane_light(ray, mini, hit, obj->info.plane);
 		else if (obj->type == CYLINDER)
@@ -78,8 +78,6 @@ void	expand_ray(t_mini *mini, t_xyz ray, int x, int y)
 		hit.color = int_color(0, 0, 0);
 	else
 		cal_light(ray, mini, &hit, y);
-	if (y == 150)
-		hit.color = int_color(0, 255, 0);
 	mlx_pixel_put(mini->mlx, mini->win, x, y, hit.color);
 	return ;
 }

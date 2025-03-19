@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_rt.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
+/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:07:48 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/12 19:49:01 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:22:35 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void			set_hit_cylinder(t_hit *hit, double t, t_cylinder obj, t_cyl_inter p);
 bool			in_upcircle(t_xyz ray, t_cylinder obj, t_xyz camera, double t);
 bool			in_downcircle(t_xyz ray, t_cylinder obj, t_xyz camera, double t);
 
-void			sphere_light(t_xyz ray, t_mini *mini, t_hit *hit, t_sphere obj, int y);
+void			sphere_light(t_xyz ray, t_mini *mini, t_hit *hit, t_sphere obj);
 void			plane_light(t_xyz ray, t_mini *mini, t_hit *hit, t_plane obj);
 void			cylinder_light(t_xyz ray, t_mini *mini, t_hit *hit, t_cylinder obj);
 
