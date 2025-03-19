@@ -6,13 +6,14 @@
 /*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 17:38:38 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/19 17:39:47 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/19 18:42:48 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_rt.h"
 
-t_xyz	get_ray(t_mini *mini, double distance, double display_x, double display_y)
+t_xyz	get_ray(
+		t_mini *mini, double distance, double display_x, double display_y)
 {
 	t_xyz	toward_dir;
 	t_xyz	right_dir;
@@ -25,21 +26,6 @@ t_xyz	get_ray(t_mini *mini, double distance, double display_x, double display_y)
 	ray_direction = vec_addition(toward_dir, vec_addition(right_dir, up_dir));
 	normalize(&ray_direction);
 	return (ray_direction);
-}
-
-t_xyz	vec_sub(t_xyz a, t_xyz b)
-{
-	return (set_vec(a.x - b.x, a.y - b.y, a.z - b.z));
-}
-
-t_xyz	vec_addition(t_xyz a, t_xyz b)
-{
-	return (set_vec(a.x + b.x, a.y + b.y, a.z + b.z));
-}
-
-t_xyz	vec_mul(double scalar, t_xyz vec)
-{
-	return (set_vec(vec.x * scalar, vec.y * scalar, vec.z * scalar));
 }
 
 double	vec_norm(t_xyz a)
@@ -56,21 +42,6 @@ void	normalize(t_xyz *a)
 	a->y /= norm;
 	a->z /= norm;
 	return ;
-}
-
-t_xyz	cross_pro(t_xyz a, t_xyz b)
-{
-	t_xyz	cross;
-
-	cross.x = a.y * b.z - a.z * b.y + 0.0;
-	cross.y = a.z * b.x - a.x * b.z + 0.0;
-	cross.z = a.x * b.y - a.y * b.x + 0.0;
-	return (cross);
-}
-
-double	inner_pro(t_xyz a, t_xyz b)
-{
-	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
 t_xyz	set_vec(double x, double y, double z)
