@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
+/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 17:38:38 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/08 20:25:11 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:39:47 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ t_xyz	get_ray(t_mini *mini, double distance, double display_x, double display_y)
 	t_xyz	up_dir;
 	t_xyz	ray_direction;
 
-	toward_dir = vec_multiplied(distance, mini->camera->vec);
-	right_dir = vec_multiplied(display_x, mini->right_vec);
-	up_dir = vec_multiplied(display_y, mini->up_vec);
+	toward_dir = vec_mul(distance, mini->camera->vec);
+	right_dir = vec_mul(display_x, mini->right_vec);
+	up_dir = vec_mul(display_y, mini->up_vec);
 	ray_direction = vec_addition(toward_dir, vec_addition(right_dir, up_dir));
 	normalize(&ray_direction);
 	return (ray_direction);
 }
 
-t_xyz	vec_subtraction(t_xyz a, t_xyz b)
+t_xyz	vec_sub(t_xyz a, t_xyz b)
 {
 	return (set_vec(a.x - b.x, a.y - b.y, a.z - b.z));
 }
@@ -37,7 +37,7 @@ t_xyz	vec_addition(t_xyz a, t_xyz b)
 	return (set_vec(a.x + b.x, a.y + b.y, a.z + b.z));
 }
 
-t_xyz	vec_multiplied(double scalar, t_xyz vec)
+t_xyz	vec_mul(double scalar, t_xyz vec)
 {
 	return (set_vec(vec.x * scalar, vec.y * scalar, vec.z * scalar));
 }
@@ -58,7 +58,7 @@ void	normalize(t_xyz *a)
 	return ;
 }
 
-t_xyz	cross_product(t_xyz a, t_xyz b)
+t_xyz	cross_pro(t_xyz a, t_xyz b)
 {
 	t_xyz	cross;
 
@@ -68,7 +68,7 @@ t_xyz	cross_product(t_xyz a, t_xyz b)
 	return (cross);
 }
 
-double	innner_product(t_xyz a, t_xyz b)
+double	inner_pro(t_xyz a, t_xyz b)
 {
 	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }

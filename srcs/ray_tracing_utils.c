@@ -6,8 +6,8 @@ bool	in_upcircle(t_xyz ray, t_cylinder obj, t_xyz camera, double t)
 	t_xyz	from_center;
 	t_xyz	vector;
 
-	vector = vec_addition(camera, vec_multiplied(t, ray));
-	from_center = vec_subtraction(vector, vec_addition(obj.coord, obj.upside));
+	vector = vec_addition(camera, vec_mul(t, ray));
+	from_center = vec_sub(vector, vec_addition(obj.coord, obj.upside));
 	distance = vec_norm(from_center);
 	if (distance > obj.diameter / 2.0)
 		return (false);
@@ -20,8 +20,8 @@ bool	in_downcircle(t_xyz ray, t_cylinder obj, t_xyz camera, double t)
 	t_xyz	from_center;
 	t_xyz	vector;
 
-	vector = vec_addition(camera, vec_multiplied(t, ray));
-	from_center = vec_subtraction(vector, vec_addition(obj.coord, obj.downside));
+	vector = vec_addition(camera, vec_mul(t, ray));
+	from_center = vec_sub(vector, vec_addition(obj.coord, obj.downside));
 	distance = vec_norm(from_center);
 	if (distance > obj.diameter / 2.0)
 		return (false);
@@ -58,10 +58,11 @@ void	set_hit_cylinder(t_hit *hit, double t, t_cylinder obj, t_cyl_inter p)
 	return ;
 }
 
-void	set_hit(t_hit *hit, t_rgb colors, double t, int index)
+void	cal_height(t_cylinder obj, t_xyz camera, t_xyz ray, double h[2])
 {
-	hit->t = t;
-	hit->colors = colors;
-	hit->index = index;
+	h[0] = (obj.height / -2.0 - inner_pro(vec_sub(camera, obj.coord), obj.vec))
+		/ (inner_pro(ray, obj.vec));
+	h[1] = (obj.height / 2.0 - inner_pro(vec_sub(camera, obj.coord), obj.vec))
+		/ (inner_pro(ray, obj.vec));
 	return ;
 }

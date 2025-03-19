@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
+/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:40:02 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/03 19:16:54 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:39:47 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void	set_screen(t_mini *mini)
 {
 	if (mini->camera->vec.x == 0 && mini->camera->vec.z == 0)
 		mini->camera->vec.z = 0.000001;
-	mini->right_vec = cross_product(mini->world_up, mini->camera->vec);
-	mini->up_vec = cross_product(mini->camera->vec, mini->right_vec);
+	mini->right_vec = cross_pro(mini->world_up, mini->camera->vec);
+	mini->up_vec = cross_pro(mini->camera->vec, mini->right_vec);
 	normalize(&(mini->right_vec));
 	normalize(&(mini->up_vec));
 	return ;

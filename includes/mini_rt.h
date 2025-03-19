@@ -6,7 +6,7 @@
 /*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:07:48 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/19 17:22:35 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/19 18:11:29 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,29 +63,34 @@ int				int_color(short red, short green, short blue);
 //vec
 double			vec_norm(t_xyz a);
 void			normalize(t_xyz *a);
-double			innner_product(t_xyz a, t_xyz b);
-t_xyz			cross_product(t_xyz a, t_xyz b);
+double			inner_pro(t_xyz a, t_xyz b);
+t_xyz			cross_pro(t_xyz a, t_xyz b);
 t_xyz			set_vec(double x, double y, double z);
-t_xyz			vec_multiplied(double scalar, t_xyz vec);
+t_xyz			vec_mul(double scalar, t_xyz vec);
 t_xyz			vec_addition(t_xyz a, t_xyz b);
-t_xyz			vec_subtraction(t_xyz a, t_xyz b);
+t_xyz			vec_sub(t_xyz a, t_xyz b);
 t_xyz			get_ray(t_mini *mini, double distance, double display_x, double display_y);
 //display
 void			print_display(t_mini *mini);
 void			ray_sphere(t_xyz ray, t_sphere obj, t_hit *hit, t_xyz camera);
 void			ray_plane(t_xyz ray, t_plane obj, t_hit *hit, t_xyz camera);
-void			ray_cylinder_side(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera);
-void			ray_cylinder_surface(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera);
+void			ray_cyl_side(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera);
+void			ray_cyl_surface(t_xyz ray, t_cylinder obj, t_hit *hit, t_xyz camera);
 
 bool			in_height(double t, double h[2]);
 void			set_hit(t_hit *hit, t_rgb colors, double t, int index);
 void			set_hit_cylinder(t_hit *hit, double t, t_cylinder obj, t_cyl_inter p);
 bool			in_upcircle(t_xyz ray, t_cylinder obj, t_xyz camera, double t);
 bool			in_downcircle(t_xyz ray, t_cylinder obj, t_xyz camera, double t);
+void			cal_height(t_cylinder obj, t_xyz camera, t_xyz ray, double h[2]);
 
 void			sphere_light(t_xyz ray, t_mini *mini, t_hit *hit, t_sphere obj);
 void			plane_light(t_xyz ray, t_mini *mini, t_hit *hit, t_plane obj);
 void			cylinder_light(t_xyz ray, t_mini *mini, t_hit *hit, t_cylinder obj);
+
+t_xyz			cylinder_normal_vec(t_hit *hit, t_cylinder obj);
+t_xyz			reflection_vec(t_xyz normal_vec, t_xyz light_vec);
+double			spec_light(double ratio, t_xyz reflight_vec, t_xyz ray);
 
 bool			is_shadow(t_object *head, t_xyz light, t_xyz point);
 void  			cal_color(t_hit *hit, t_rgb t, double ratio);

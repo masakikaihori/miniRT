@@ -6,7 +6,7 @@
 /*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:44:27 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/19 17:24:02 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:53:30 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,18 @@ t_object	*obj_ptr_index(t_object *head, int index)
 
 t_xyz	intersection_pos(t_xyz camera, double t, t_xyz ray)
 {
-	return (vec_addition(camera, vec_multiplied(t, ray)));
+	return (vec_addition(camera, vec_mul(t, ray)));
 }
 
 void	cal_light(t_xyz ray, t_mini *mini, t_hit *hit, int y)
 {
-	t_object *obj;
+	t_object	*obj;
 (void)y;
 	if (hit->t == -1)
+	{
+		hit->color = int_color(0, 0, 0);
 		return ;
+	}
 	hit->intersection = intersection_pos(mini->camera->coord, hit->t, ray);
 	obj = obj_ptr_index(mini->object, hit->index);
 	hit->diff = 0.0;
@@ -58,26 +61,25 @@ void	expand_ray(t_mini *mini, t_xyz ray, int x, int y)
 {
 	t_object	*tmp_obj;
 	t_hit		hit;
+	t_xyz		camera_pos;
 
 	tmp_obj = mini->object;
 	hit.t = -1;
+	camera_pos = mini->camera->coord;
 	while (tmp_obj)
 	{
 		if (tmp_obj->type == SPHERE)
-			ray_sphere(ray, tmp_obj->info.sphere, &hit, mini->camera->coord);
+			ray_sphere(ray, tmp_obj->info.sphere, &hit, camera_pos);
 		else if (tmp_obj->type == PLANE)
-			ray_plane(ray, tmp_obj->info.plane, &hit, mini->camera->coord);
+			ray_plane(ray, tmp_obj->info.plane, &hit, camera_pos);
 		else if (tmp_obj->type == CYLINDER)
 		{
-			ray_cylinder_side(ray, tmp_obj->info.cylinder, &hit, mini->camera->coord);
-			ray_cylinder_surface(ray, tmp_obj->info.cylinder, &hit, mini->camera->coord);
+			ray_cyl_side(ray, tmp_obj->info.cylinder, &hit, camera_pos);
+			ray_cyl_surface(ray, tmp_obj->info.cylinder, &hit, camera_pos);
 		}
 		tmp_obj = tmp_obj->next;
 	}
-	if (hit.t < 0)
-		hit.color = int_color(0, 0, 0);
-	else
-		cal_light(ray, mini, &hit, y);
+	cal_light(ray, mini, &hit, y);
 	mlx_pixel_put(mini->mlx, mini->win, x, y, hit.color);
 	return ;
 }

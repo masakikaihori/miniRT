@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
+/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 19:31:21 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/12 19:56:44 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:39:33 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ bool	shadow_sphere(t_xyz ray, t_sphere obj, t_xyz point, double max)
 	double	f[4];
 
 	f[A] = pow(vec_norm(ray), 2.0);
-	f[B] = 2.0 * (innner_product(point, ray) - innner_product(obj.coord, ray));
-	f[C] = pow(vec_norm(vec_subtraction(point, obj.coord)), 2.0)
+	f[B] = 2.0 * (inner_pro(point, ray) - inner_pro(obj.coord, ray));
+	f[C] = pow(vec_norm(vec_sub(point, obj.coord)), 2.0)
 		- pow(obj.diameter / 2.0, 2.0);
 	f[D] = pow(f[B], 2.0) - (4.0 * f[A] * f[C]);
 	if (f[D] >= NEAR_ZERO)
@@ -39,10 +39,10 @@ bool	shadow_plane(t_xyz ray, t_plane obj, t_xyz point, double max)
 	double	t;
 	double	d;
 
-	d = innner_product(vec_multiplied(-1.0, ray), obj.vec);
+	d = inner_pro(vec_mul(-1.0, ray), obj.vec);
 	if (d > NEAR_ZERO)
 	{
-		t = innner_product(vec_subtraction(point, obj.coord), obj.vec) / d;
+		t = inner_pro(vec_sub(point, obj.coord), obj.vec) / d;
 		if (t > NEAR_ZERO && t <= max)
 			return (true);
 	}
@@ -57,14 +57,14 @@ bool	shadow_cylinder_side(t_xyz ray, t_cylinder obj, t_xyz point, double max)
 	t_xyz	ray_dot_objvec;
 	t_xyz	cam_center_dot_objvec;
 
-	ray_dot_objvec = vec_subtraction(ray, vec_multiplied(innner_product(ray, obj.vec), obj.vec));
-	cam_center_dot_objvec = vec_subtraction(vec_subtraction(point, obj.coord), vec_multiplied(innner_product(vec_subtraction(point, obj.coord), obj.vec), obj.vec));
+	ray_dot_objvec = vec_sub(ray, vec_mul(inner_pro(ray, obj.vec), obj.vec));
+	cam_center_dot_objvec = vec_sub(vec_sub(point, obj.coord), vec_mul(inner_pro(vec_sub(point, obj.coord), obj.vec), obj.vec));
 	f[A] = pow(vec_norm(ray_dot_objvec), 2.0);
-	f[B] = 2 * innner_product(cam_center_dot_objvec, ray_dot_objvec);
+	f[B] = 2 * inner_pro(cam_center_dot_objvec, ray_dot_objvec);
 	f[C] = pow(vec_norm(cam_center_dot_objvec), 2.0) - pow(obj.diameter / 2.0, 2.0);
 	f[D] = pow(f[B], 2.0) - (4.0 * f[A] * f[C]);
-	h[0] = (obj.height / -2.0 - innner_product(vec_subtraction(point, obj.coord), obj.vec)) / (innner_product(ray, obj.vec));
-	h[1] = (obj.height / 2.0 - innner_product(vec_subtraction(point, obj.coord), obj.vec)) / (innner_product(ray, obj.vec));
+	h[0] = (obj.height / -2.0 - inner_pro(vec_sub(point, obj.coord), obj.vec)) / (inner_pro(ray, obj.vec));
+	h[1] = (obj.height / 2.0 - inner_pro(vec_sub(point, obj.coord), obj.vec)) / (inner_pro(ray, obj.vec));
 	if (f[D] >= NEAR_ZERO)
 	{
 		t = (-f[B] + sqrt(f[D])) / (2.0 * f[A]);
@@ -81,12 +81,12 @@ bool	shadow_cylinder_surface(t_xyz ray, t_cylinder obj, t_xyz point, double max)
 {
 	double	t;
 
-	if (innner_product(ray, obj.vec) == 0)
+	if (inner_pro(ray, obj.vec) == 0)
 		return (false);
-	t = -innner_product(vec_subtraction(point, vec_addition(obj.coord, obj.upside)), obj.vec) / innner_product(ray, obj.vec);
+	t = -inner_pro(vec_sub(point, vec_addition(obj.coord, obj.upside)), obj.vec) / inner_pro(ray, obj.vec);
 	if (t > NEAR_ZERO && in_upcircle(ray, obj, point, t) && t <= max)
 		return (true);
-	t = -innner_product(vec_subtraction(point, vec_addition(obj.coord, obj.downside)), obj.vec) / innner_product(ray, obj.vec);
+	t = -inner_pro(vec_sub(point, vec_addition(obj.coord, obj.downside)), obj.vec) / inner_pro(ray, obj.vec);
 	if (t > NEAR_ZERO && in_downcircle(ray, obj, point, t) && t <= max)
 		return (true);
 	return (false);
@@ -101,7 +101,7 @@ bool	is_shadow(t_object *head, t_xyz light, t_xyz point)
 
 	tmp_obj = head;
 	hit = false;
-	ray = vec_subtraction(light, point);
+	ray = vec_sub(light, point);
 	max = vec_norm(ray);
 	normalize(&ray);
 	while (tmp_obj && !hit)

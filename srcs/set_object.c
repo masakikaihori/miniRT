@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_object.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
+/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:36:55 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/08 20:33:18 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:38:00 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	set_cylinder(t_mini *mini, char **strs)
 	obj->info.cylinder.colors = set_rgb(mini, strs, strs[5]);
 	obj->info.cylinder.color = int_color(obj->info.cylinder.colors.red,
 			obj->info.cylinder.colors.green, obj->info.cylinder.colors.blue);
-	obj->info.cylinder.upside = vec_multiplied(obj->info.cylinder.height / 2.0, obj->info.cylinder.vec);
-	obj->info.cylinder.downside = vec_multiplied(obj->info.cylinder.height / -2.0, obj->info.cylinder.vec);
+	obj->info.cylinder.upside = vec_mul(obj->info.cylinder.height / 2.0, obj->info.cylinder.vec);
+	obj->info.cylinder.downside = vec_mul(obj->info.cylinder.height / -2.0, obj->info.cylinder.vec);
 	return ;
 }
