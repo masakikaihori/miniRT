@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:01:20 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/20 16:01:21 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:54:41 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ray_cyl_surface(
 {
 	double	t;
 
-	if (inner_pro(ray, obj.vec) >= NEAR_ZERO)
+	if (inner_pro(ray, obj.vec) <= NEAR_ZERO)
 		return ;
 	t = -inner_pro(vec_sub(camera, vec_addition(obj.coord, obj.upside)),
 			obj.vec) / inner_pro(ray, obj.vec);
