@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:50:47 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/19 17:48:44 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:46:57 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ void	sphere_light(t_xyz ray, t_mini *mini, t_hit *hit, t_sphere obj)
 	normalize(&normal_vec);
 	normalize(&light_vec);
 	if (inner_pro(normal_vec, light_vec) > NEAR_ZERO)
+	{
 		hit->diff = mini->light->ratio * inner_pro(normal_vec, light_vec);
-	reflight_vec = reflection_vec(normal_vec, light_vec);
-	if (inner_pro(reflight_vec, vec_mul(-1.0, ray)) > NEAR_ZERO)
-		hit->spec = spec_light(mini->light->ratio, reflight_vec, ray);
+		reflight_vec = reflection_vec(normal_vec, light_vec);
+		if (inner_pro(reflight_vec, vec_mul(-1.0, ray)) > NEAR_ZERO)
+			hit->spec = spec_light(mini->light->ratio, reflight_vec, ray);
+	}
 	return ;
 }
 
@@ -45,10 +47,12 @@ void	plane_light(t_xyz ray, t_mini *mini, t_hit *hit, t_plane obj)
 	normalize(&normal_vec);
 	normalize(&light_vec);
 	if (inner_pro(normal_vec, light_vec) > NEAR_ZERO)
+	{
 		hit->diff = mini->light->ratio * inner_pro(normal_vec, light_vec);
-	reflight_vec = reflection_vec(normal_vec, light_vec);
-	if (inner_pro(reflight_vec, vec_mul(-1.0, ray)) > NEAR_ZERO)
-		hit->spec = spec_light(mini->light->ratio, reflight_vec, ray);
+		reflight_vec = reflection_vec(normal_vec, light_vec);
+		if (inner_pro(reflight_vec, vec_mul(-1.0, ray)) > NEAR_ZERO)
+			hit->spec = spec_light(mini->light->ratio, reflight_vec, ray);
+	}
 	return ;
 }
 
@@ -69,12 +73,12 @@ void	cylinder_light(t_xyz ray, t_mini *mini, t_hit *hit, t_cylinder obj)
 	light_vec = vec_sub(light, hit->intersection);
 	normalize(&normal_vec);
 	normalize(&light_vec);
-	if (inner_pro(normal_vec, light_vec) < 0)
-		normal_vec = vec_mul(-1.0, normal_vec);
 	if (inner_pro(normal_vec, light_vec) > NEAR_ZERO)
+	{
 		hit->diff = mini->light->ratio * inner_pro(normal_vec, light_vec);
-	reflight_vec = reflection_vec(normal_vec, light_vec);
-	if (inner_pro(reflight_vec, vec_mul(-1.0, ray)) > NEAR_ZERO)
-		hit->spec = spec_light(mini->light->ratio, reflight_vec, ray);
+		reflight_vec = reflection_vec(normal_vec, light_vec);
+		if (inner_pro(reflight_vec, vec_mul(-1.0, ray)) > NEAR_ZERO)
+			hit->spec = spec_light(mini->light->ratio, reflight_vec, ray);
+	}
 	return ;
 }
