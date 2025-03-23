@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec3_operators.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:01:31 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/20 16:01:32 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/23 14:56:55 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_xyz	vec_sub(t_xyz a, t_xyz b)
 	return (set_vec(a.x - b.x, a.y - b.y, a.z - b.z));
 }
 
-t_xyz	vec_addition(t_xyz a, t_xyz b)
+t_xyz	vec_add(t_xyz a, t_xyz b)
 {
 	return (set_vec(a.x + b.x, a.y + b.y, a.z + b.z));
 }

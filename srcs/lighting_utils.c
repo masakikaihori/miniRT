@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:01:04 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/20 16:01:05 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/23 14:57:48 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ t_xyz	cylinder_normal_vec(t_hit *hit, t_cylinder obj)
 	t_xyz	normal_vec;
 
 	t = inner_pro(vec_sub(hit->intersection, obj.coord), obj.vec);
-	normal_vec = vec_sub(hit->intersection, vec_mul(t, obj.vec));
+	normal_vec = vec_sub(hit->intersection, vec_add(vec_mul(t, obj.vec), obj.coord));
 	return (normal_vec);
 }

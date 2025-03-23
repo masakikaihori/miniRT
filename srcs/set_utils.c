@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:35:54 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/19 16:35:58 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:23:08 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	vec_range(t_xyz vec)
 	return (false);
 }
 
-t_xyz	set_xyz(t_mini *mini, char **strs, char *str)
+t_xyz	set_xyz(t_mini *mini, char **strs, char *str, int sign)
 {
 	int		index;
 	t_xyz	new;
@@ -39,7 +39,9 @@ t_xyz	set_xyz(t_mini *mini, char **strs, char *str)
 		print_frees_exit(mini, "xyz element error2\n", -1, strs);
 	new.z = rt_atof(mini, strs, str + index, &index);
 	if (str[index] != '\0')
-		print_frees_exit(mini, "xyz element error2\n", -1, strs);
+		print_frees_exit(mini, "xyz element error3\n", -1, strs);
+	if (sign && vec_norm(new) == 0.0)
+		print_frees_exit(mini, "vec must have direction\n", -1, strs);
 	return (new);
 }
 

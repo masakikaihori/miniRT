@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_rt.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:07:48 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/20 16:04:32 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/23 14:56:55 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void			set_plane(t_mini *mini, char **strs);
 void			set_cylinder(t_mini *mini, char **strs);
 void			set_screen(t_mini *mini);
 //set_utiles
-t_xyz			set_xyz(t_mini *mini, char **strs, char *str);
+t_xyz			set_xyz(t_mini *mini, char **strs, char *str, int sign);
 t_rgb			set_rgb(t_mini *mini, char **strs, char *str);
 bool			not_available(char **strs);
 bool			vec_range(t_xyz vec);
@@ -67,7 +67,7 @@ double			inner_pro(t_xyz a, t_xyz b);
 t_xyz			cross_pro(t_xyz a, t_xyz b);
 t_xyz			set_vec(double x, double y, double z);
 t_xyz			vec_mul(double scalar, t_xyz vec);
-t_xyz			vec_addition(t_xyz a, t_xyz b);
+t_xyz			vec_add(t_xyz a, t_xyz b);
 t_xyz			vec_sub(t_xyz a, t_xyz b);
 t_xyz			get_ray(t_mini *mini, double distance,
 					double display_x, double display_y);
@@ -93,13 +93,13 @@ void			cal_height(t_cylinder obj, t_xyz camera,
 void			sphere_light(t_xyz ray, t_mini *mini, t_hit *hit, t_sphere obj);
 void			plane_light(t_xyz ray, t_mini *mini, t_hit *hit, t_plane obj);
 void			cylinder_light(t_xyz ray, t_mini *mini,
-					t_hit *hit, t_cylinder obj);
+					t_hit *hit, t_cylinder obj, int y);
 
 t_xyz			cylinder_normal_vec(t_hit *hit, t_cylinder obj);
 t_xyz			reflection_vec(t_xyz normal_vec, t_xyz light_vec);
 double			spec_light(double ratio, t_xyz reflight_vec, t_xyz ray);
 
-bool			is_shadow(t_object *head, t_xyz light, t_xyz point);
+int				is_shadow(t_object *head, t_xyz light, t_xyz point);
 void			cal_color(t_hit *hit, t_rgb t, double ratio);
 
 //debug

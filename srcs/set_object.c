@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_object.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:36:55 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/19 19:01:37 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:19:51 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	set_sphere(t_mini *mini, char **strs)
 		print_frees_exit(mini, "sphere amout of element\n", -1, strs);
 	if (not_available(strs + 1))
 		print_frees_exit(mini, "sphere character\n", -1, strs);
-	obj->info.sphere.coord = set_xyz(mini, strs, strs[1]);
+	obj->info.sphere.coord = set_xyz(mini, strs, strs[1], 0);
 	obj->info.sphere.diameter = rt_atof(mini, strs, strs[2], NULL);
 	obj->info.sphere.colors = set_rgb(mini, strs, strs[3]);
 	obj->info.sphere.color = int_color(obj->info.sphere.colors.red,
@@ -82,8 +82,8 @@ void	set_plane(t_mini *mini, char **strs)
 		print_frees_exit(mini, "plane amout of element\n", -1, strs);
 	if (not_available(strs + 1))
 		print_frees_exit(mini, "plane character\n", -1, strs);
-	obj->info.plane.coord = set_xyz(mini, strs, strs[1]);
-	obj->info.plane.vec = set_xyz(mini, strs, strs[2]);
+	obj->info.plane.coord = set_xyz(mini, strs, strs[1], 0);
+	obj->info.plane.vec = set_xyz(mini, strs, strs[2], 1);
 	if (!vec_range(obj->info.plane.vec))
 		print_frees_exit(mini, "plane vec is out of range", -1, strs);
 	normalize(&(obj->info.plane.vec));
@@ -107,8 +107,8 @@ void	set_cylinder(t_mini *mini, char **strs)
 		print_frees_exit(mini, "cylinder amout of element\n", -1, strs);
 	if (not_available(strs + 1))
 		print_frees_exit(mini, "cylinder character\n", -1, strs);
-	obj->info.cylinder.coord = set_xyz(mini, strs, strs[1]);
-	obj->info.cylinder.vec = set_xyz(mini, strs, strs[2]);
+	obj->info.cylinder.coord = set_xyz(mini, strs, strs[1], 0);
+	obj->info.cylinder.vec = set_xyz(mini, strs, strs[2], 1);
 	if (!vec_range(obj->info.cylinder.vec))
 		print_frees_exit(mini, "cylinder vec is out of range\n", -1, strs);
 	normalize(&(obj->info.cylinder.vec));

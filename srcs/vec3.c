@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 17:38:38 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/19 18:42:48 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/23 14:56:55 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_xyz	get_ray(
 	toward_dir = vec_mul(distance, mini->camera->vec);
 	right_dir = vec_mul(display_x, mini->right_vec);
 	up_dir = vec_mul(display_y, mini->up_vec);
-	ray_direction = vec_addition(toward_dir, vec_addition(right_dir, up_dir));
+	ray_direction = vec_add(toward_dir, vec_add(right_dir, up_dir));
 	normalize(&ray_direction);
 	return (ray_direction);
 }

@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:01:20 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/20 16:54:41 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/23 14:56:55 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,12 @@ void	ray_cyl_surface(
 
 	if (inner_pro(ray, obj.vec) <= NEAR_ZERO)
 		return ;
-	t = -inner_pro(vec_sub(camera, vec_addition(obj.coord, obj.upside)),
+	t = -inner_pro(vec_sub(camera, vec_add(obj.coord, obj.upside)),
 			obj.vec) / inner_pro(ray, obj.vec);
 	if (t > NEAR_ZERO
 		&& in_upcircle(ray, obj, camera, t) && (hit->t == -1.0 || hit->t > t))
 		set_hit_cylinder(hit, t, obj, CYL_UP);
-	t = -inner_pro(vec_sub(camera, vec_addition(obj.coord, obj.downside)),
+	t = -inner_pro(vec_sub(camera, vec_add(obj.coord, obj.downside)),
 			obj.vec) / inner_pro(ray, obj.vec);
 	if (t > NEAR_ZERO
 		&& in_downcircle(ray, obj, camera, t) && (hit->t == -1.0 || hit->t > t))

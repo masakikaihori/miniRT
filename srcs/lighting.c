@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:50:47 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/20 16:46:57 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/23 14:58:29 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ void	plane_light(t_xyz ray, t_mini *mini, t_hit *hit, t_plane obj)
 	return ;
 }
 
-void	cylinder_light(t_xyz ray, t_mini *mini, t_hit *hit, t_cylinder obj)
+void	cylinder_light(t_xyz ray, t_mini *mini, t_hit *hit, t_cylinder obj, int y)
 {
 	t_xyz	light;
 	t_xyz	normal_vec;
 	t_xyz	light_vec;
 	t_xyz	reflight_vec;
-
+(void)y;
 	light = mini->light->coord;
 	if (hit->cylinder == CYL_UP)
 		normal_vec = obj.vec;

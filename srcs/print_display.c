@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:44:27 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/20 16:54:09 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/23 14:56:55 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ t_object	*obj_ptr_index(t_object *head, int index)
 
 t_xyz	intersection_pos(t_xyz camera, double t, t_xyz ray)
 {
-	return (vec_addition(camera, vec_mul(t, ray)));
+	return (vec_add(camera, vec_mul(t, ray)));
 }
 
 void	cal_light(t_xyz ray, t_mini *mini, t_hit *hit, int y)
 {
 	t_object	*obj;
-(void)y;
+// (void)y;
 	if (hit->t == -1)
 	{
 		hit->color = int_color(0, 0, 0);
@@ -51,7 +51,8 @@ void	cal_light(t_xyz ray, t_mini *mini, t_hit *hit, int y)
 		else if (obj->type == PLANE)
 			plane_light(ray, mini, hit, obj->info.plane);
 		else if (obj->type == CYLINDER)
-			cylinder_light(ray, mini, hit, obj->info.cylinder);
+			cylinder_light(ray, mini, hit, obj->info.cylinder, y);
+		hit->color = int_color(hit->colors.red, hit->colors.green, hit->colors.blue);
 	}
 	cal_color(hit, hit->colors, mini->a_lightning->ratio);
 	return ;
@@ -80,6 +81,8 @@ void	expand_ray(t_mini *mini, t_xyz ray, int x, int y)
 		tmp_obj = tmp_obj->next;
 	}
 	cal_light(ray, mini, &hit, y);
+	// if (y == 200)
+	// 	hit.color = int_color(0, 255, 0);
 	mlx_pixel_put(mini->mlx, mini->win, x, y, hit.color);
 	return ;
 }

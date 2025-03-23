@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   shadow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 19:31:21 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/19 19:25:15 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/23 14:56:55 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_rt.h"
 
-bool	shadow_sphere(t_xyz ray, t_sphere obj, t_xyz point, double max)
+int	shadow_sphere(t_xyz ray, t_sphere obj, t_xyz point, double max)
 {
 	double	t;
 	double	f[4];
@@ -26,15 +26,15 @@ bool	shadow_sphere(t_xyz ray, t_sphere obj, t_xyz point, double max)
 	{
 		t = (-f[B] - sqrt(f[D])) / (2.0 * f[A]);
 		if (t > NEAR_ZERO && t <= max)
-			return (true);
+			return (1);
 		t = (-f[B] + sqrt(f[D])) / (2.0 * f[A]);
 		if (t > NEAR_ZERO && t <= max)
-			return (true);
+			return (1);
 	}
-	return (false);
+	return (0);
 }
 
-bool	shadow_plane(t_xyz ray, t_plane obj, t_xyz point, double max)
+int	shadow_plane(t_xyz ray, t_plane obj, t_xyz point, double max)
 {
 	double	t;
 	double	d;
@@ -44,12 +44,12 @@ bool	shadow_plane(t_xyz ray, t_plane obj, t_xyz point, double max)
 	{
 		t = inner_pro(vec_sub(point, obj.coord), obj.vec) / d;
 		if (t > NEAR_ZERO && t <= max)
-			return (true);
+			return (2);
 	}
-	return (false);
+	return (0);
 }
 
-bool	shadow_cyl_side(t_xyz ray, t_cylinder obj, t_xyz point, double max)
+int	shadow_cyl_side(t_xyz ray, t_cylinder obj, t_xyz point, double max)
 {
 	double	t;
 	double	f[4];
@@ -70,40 +70,40 @@ bool	shadow_cyl_side(t_xyz ray, t_cylinder obj, t_xyz point, double max)
 	{
 		t = (-f[B] + sqrt(f[D])) / (2.0 * f[A]);
 		if (t > NEAR_ZERO && t <= max && in_height(t, h))
-			return (true);
+			return (3);
 		t = (-f[B] - sqrt(f[D])) / (2.0 * f[A]);
 		if (t > NEAR_ZERO && t <= max && in_height(t, h))
-			return (true);
+			return (3);
 	}
-	return (false);
+	return (0);
 }
 
-bool	shadow_cyl_surface(t_xyz ray, t_cylinder obj, t_xyz point, double max)
+int	shadow_cyl_surface(t_xyz ray, t_cylinder obj, t_xyz point, double max)
 {
 	double	t;
 
 	if (inner_pro(ray, obj.vec) >= NEAR_ZERO)
-		return (false);
-	t = -inner_pro(vec_sub(point, vec_addition(obj.coord, obj.upside)),
+		return (0);
+	t = -inner_pro(vec_sub(point, vec_add(obj.coord, obj.upside)),
 			obj.vec) / inner_pro(ray, obj.vec);
 	if (t > NEAR_ZERO && in_upcircle(ray, obj, point, t) && t <= max)
-		return (true);
-	t = -inner_pro(vec_sub(point, vec_addition(obj.coord, obj.downside)),
+		return (4);
+	t = -inner_pro(vec_sub(point, vec_add(obj.coord, obj.downside)),
 			obj.vec) / inner_pro(ray, obj.vec);
 	if (t > NEAR_ZERO && in_downcircle(ray, obj, point, t) && t <= max)
-		return (true);
-	return (false);
+		return (4);
+	return (0);
 }
 
-bool	is_shadow(t_object *head, t_xyz light, t_xyz point)
+int	is_shadow(t_object *head, t_xyz light, t_xyz point)
 {
 	t_object	*tmp_obj;
 	t_xyz		ray;
-	bool		hit;
+	int			hit;
 	double		max;
 
 	tmp_obj = head;
-	hit = false;
+	hit = 0;
 	ray = vec_sub(light, point);
 	max = vec_norm(ray);
 	normalize(&ray);

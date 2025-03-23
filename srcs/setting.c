@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:40:02 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/19 17:39:47 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:20:14 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	set_camera(t_mini *mini, char **strs)
 			"camera amount of element\n", -1, strs);
 	if (not_available(strs + 1))
 		print_frees_exit(mini, "camera character\n", -1, strs);
-	mini->camera->coord = set_xyz(mini, strs, strs[1]);
-	mini->camera->vec = set_xyz(mini, strs, strs[2]);
+	mini->camera->coord = set_xyz(mini, strs, strs[1], 0);
+	mini->camera->vec = set_xyz(mini, strs, strs[2], 1);
 	if (!vec_range(mini->camera->vec))
 		print_frees_exit(mini, "camera vec is out of range\n", -1, strs);
 	normalize(&(mini->camera->vec));
@@ -73,7 +73,7 @@ void	set_light(t_mini *mini, char **strs)
 		print_frees_exit(mini, "light amount of element\n", -1, strs);
 	if (not_available(strs + 1))
 		print_frees_exit(mini, "light character\n", -1, strs);
-	mini->light->coord = set_xyz(mini, strs, strs[1]);
+	mini->light->coord = set_xyz(mini, strs, strs[1], 0);
 	mini->light->ratio = rt_atof(mini, strs, strs[2], NULL);
 	if (mini->light->ratio > 1.0 || mini->light->ratio < 0.0)
 		print_frees_exit(mini, "light ratio is out of range\n", -1, strs);
