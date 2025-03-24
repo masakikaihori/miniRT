@@ -6,21 +6,21 @@
 /*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:00:54 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/20 16:00:55 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/24 17:23:54 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_rt.h"
 
-void	cal_color(t_hit *hit, t_rgb t, double ratio)
+void	cal_color(t_hit *hit, t_rgb t, t_a_lighting *amb, t_light *light)
 {
 	double	red;
 	double	green;
 	double	blue;
 
-	red = (t.red * ratio / 255.0 + t.red * hit->diff / 255.0 + hit->spec) * 255.0;
-	green = (t.green * ratio / 255.0 + t.green * hit->diff / 255.0 + hit->spec) * 255.0;
-	blue = (t.blue * ratio / 255.0 + t.blue * hit->diff / 255.0 + hit->spec) * 255.0;
+	red = (t.red / 255.0 * amb->ratio * amb->colors.red / 255.0 + hit->diff * light->colors.red / 255.0 * t.red / 255.0 + hit->spec * light->colors.red) * 255.0;
+	green = (t.green / 255.0 * amb->ratio * amb->colors.green / 255.0 + hit->diff * light->colors.green / 255.0 * t.green / 255.0 + hit->spec * light->colors.green) * 255.0;
+	blue = (t.blue / 255.0 * amb->ratio * amb->colors.blue / 255.0 + hit->diff * light->colors.blue / 255.0 * t.blue / 255.0 + hit->spec * light->colors.blue) * 255.0;
 	if (red >= 255)
 	red = 255;
 	else if (red < 0)

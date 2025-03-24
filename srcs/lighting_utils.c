@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
+/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:01:04 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/23 14:57:48 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/24 16:39:22 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 double	spec_light(double ratio, t_xyz reflight_vec, t_xyz ray)
 {
+	if (inner_pro(reflight_vec, vec_mul(-1.0, ray)) <= NEAR_ZERO)
+		return (0);
 	return (SPE_REF * ratio
 		* pow(inner_pro(reflight_vec, vec_mul(-1.0, ray)), SHINE));
 }

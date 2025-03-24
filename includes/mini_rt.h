@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_rt.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
+/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:07:48 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/24 15:34:18 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/24 17:01:03 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ t_xyz			reflection_vec(t_xyz normal_vec, t_xyz light_vec);
 double			spec_light(double ratio, t_xyz reflight_vec, t_xyz ray);
 
 int				is_shadow(t_object *head, t_xyz light, t_xyz point);
-void			cal_color(t_hit *hit, t_rgb t, double ratio);
+void			cal_color(t_hit *hit, t_rgb t, t_a_lighting *amb, t_light *light);
 
 //debug
 void			print_mini(t_mini *mini);
