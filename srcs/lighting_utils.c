@@ -6,7 +6,7 @@
 /*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:01:04 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/24 16:39:22 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/24 17:37:59 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_xyz	cylinder_normal_vec(t_hit *hit, t_cylinder obj)
 	t_xyz	normal_vec;
 
 	t = inner_pro(vec_sub(hit->intersection, obj.coord), obj.vec);
-	normal_vec = vec_sub(hit->intersection, vec_add(vec_mul(t, obj.vec), obj.coord));
+	normal_vec
+		= vec_sub(hit->intersection, vec_add(vec_mul(t, obj.vec), obj.coord));
 	return (normal_vec);
 }
