@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:37:04 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/19 17:26:05 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/24 16:10:39 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ void	print_colors(t_rgb colors, char *str)
 void	print_mini(t_mini *mini)
 {
 	t_object	*tmp;
+	t_light		*tmp_l;
 
 	tmp = mini->object;
+	tmp_l = mini->light;
 	if (mini)
 	{
 		if (mini->mlx)
@@ -60,14 +62,14 @@ void	print_mini(t_mini *mini)
 			printf("win ptr : %p\n", mini->win);
 		else
 			printf("no win ptr\n");
-		if (mini->a_lightning)
+		if (mini->a_lighting)
 		{
-			printf("a_lightning ptr : %p\n", mini->a_lightning);
-			printf("a_lightning ratio : %f\n", mini->a_lightning->ratio);
-			print_colors(mini->a_lightning->colors, "a_lightning colors");
+			printf("a_lighting ptr : %p\n", mini->a_lighting);
+			printf("a_lighting ratio : %f\n", mini->a_lighting->ratio);
+			print_colors(mini->a_lighting->colors, "a_lighting colors");
 		}
 		else
-			printf("no a_lightning ptr\n");
+			printf("no a_lighting ptr\n");
 		if (mini->camera)
 		{
 			printf("camera ptr : %p\n", mini->camera);
@@ -78,12 +80,17 @@ void	print_mini(t_mini *mini)
 		}
 		else
 			printf("no camera ptr\n");
-		if (mini->light)
+		if (tmp_l)
 		{
-			printf("light ptr : %p\n", mini->light);
-			print_xyz(mini->light->coord, "light coord");
-			printf("light ratio : %f\n", mini->light->ratio);
-			print_colors(mini->light->colors, "light colors");
+			while (tmp_l)
+			{
+				printf("light ptr : %p\n", tmp_l);
+				print_xyz(mini->light->coord, "light coord");
+				printf("light ratio : %f\n", tmp_l->ratio);
+				print_colors(mini->light->colors, "light colors");
+				printf("light next : %p\n", tmp_l->next);
+				tmp_l = tmp_l->next;
+			}
 		}
 		else
 			printf("no light ptr\n");

@@ -6,30 +6,46 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:40:02 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/20 17:20:14 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/24 16:07:57 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_rt.h"
 
+void	add_light(t_mini *mini, t_light *new)
+{
+	t_light	*tmp;
+
+	tmp = mini->light;
+	if (tmp == NULL)
+		mini->light = new;
+	else
+	{
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+	return ;
+}
+
 void	set_amb(t_mini *mini, char **strs)
 {
-	if (mini->a_lightning)
+	if (mini->a_lighting)
 		print_frees_exit(mini,
 			"ambient_lightning is declared more than once\n", -1, strs);
-	mini->a_lightning = (t_a_lightning *)malloc(sizeof(t_a_lightning));
-	if (!mini->a_lightning)
+	mini->a_lighting = (t_a_lighting *)malloc(sizeof(t_a_lighting));
+	if (!mini->a_lighting)
 		print_frees_exit(mini, NULL, errno, strs);
 	if (rt_strslen(strs) != AMB_ELE)
 		print_frees_exit(mini,
 			"ambient_lightning amount of element\n", -1, strs);
 	if (not_available(strs + 1))
 		print_frees_exit(mini, "ambient lightning character\n", -1, strs);
-	mini->a_lightning->ratio = rt_atof(mini, strs, strs[1], NULL);
-	if (mini->a_lightning->ratio > 1.0 || mini->a_lightning->ratio < 0.0)
+	mini->a_lighting->ratio = rt_atof(mini, strs, strs[1], NULL);
+	if (mini->a_lighting->ratio > 1.0 || mini->a_lighting->ratio < 0.0)
 		print_frees_exit(mini,
 			"ambient_lightning ratio is out of range\n", -1, strs);
-	mini->a_lightning->colors = set_rgb(mini, strs, strs[2]);
+	mini->a_lighting->colors = set_rgb(mini, strs, strs[2]);
 	return ;
 }
 
@@ -64,20 +80,22 @@ void	set_camera(t_mini *mini, char **strs)
 
 void	set_light(t_mini *mini, char **strs)
 {
-	if (mini->light)
-		print_frees_exit(mini, "light is declared more than once\n", -1, strs);
-	mini->light = (t_light *)malloc(sizeof(t_light));
-	if (!mini->light)
+	t_light	*light;
+
+	light = (t_light *)malloc(sizeof(t_light));
+	if (!light)
 		print_frees_exit(mini, NULL, errno, strs);
+	light->next = NULL;
+	add_light(mini, light);
 	if (rt_strslen(strs) != LIG_ELE)
 		print_frees_exit(mini, "light amount of element\n", -1, strs);
 	if (not_available(strs + 1))
 		print_frees_exit(mini, "light character\n", -1, strs);
-	mini->light->coord = set_xyz(mini, strs, strs[1], 0);
-	mini->light->ratio = rt_atof(mini, strs, strs[2], NULL);
-	if (mini->light->ratio > 1.0 || mini->light->ratio < 0.0)
+	light->coord = set_xyz(mini, strs, strs[1], 0);
+	light->ratio = rt_atof(mini, strs, strs[2], NULL);
+	if (light->ratio > 1.0 || light->ratio < 0.0)
 		print_frees_exit(mini, "light ratio is out of range\n", -1, strs);
-	mini->light->colors = set_rgb(mini, strs, strs[3]);
+	light->colors = set_rgb(mini, strs, strs[3]);
 	return ;
 }
 

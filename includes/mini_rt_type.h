@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:38:32 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/12 15:08:45 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/24 15:51:16 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ typedef struct s_xyz
 	double	z;
 }	t_xyz;
 
-typedef struct s_a_lightning
+typedef struct s_a_lighting
 {
 	double	ratio;
 	t_rgb	colors;
 	int		color;
-}	t_a_lightning;
+}	t_a_lighting;
 
 typedef struct s_camera
 {
@@ -62,10 +62,11 @@ typedef struct s_camera
 
 typedef struct s_light
 {
-	t_xyz	coord;
-	double	ratio;
-	t_rgb	colors;
-	int		color;
+	t_xyz			coord;
+	double			ratio;
+	t_rgb			colors;
+	int				color;
+	struct s_light	*next;
 }	t_light;
 
 typedef struct s_sphere
@@ -130,7 +131,7 @@ typedef struct s_mini
 {
 	void			*mlx;
 	void			*win;
-	t_a_lightning	*a_lightning;
+	t_a_lighting	*a_lighting;
 	t_camera		*camera;
 	t_light			*light;
 	t_object		*object;

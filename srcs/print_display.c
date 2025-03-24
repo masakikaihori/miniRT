@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:44:27 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/24 15:37:53 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/24 15:51:16 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	cal_light(t_xyz ray, t_mini *mini, t_hit *hit, int y, int x)
 	}
 	// else
 	// 	hit->color = int_color(0, 255, 0);
-	cal_color(hit, hit->colors, mini->a_lightning->ratio);
+	cal_color(hit, hit->colors, mini->a_lighting->ratio);
 	return ;
 }
 

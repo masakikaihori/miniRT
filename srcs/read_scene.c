@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 17:44:59 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/02/19 16:09:20 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/24 15:51:57 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,10 @@ void	read_scene(t_mini *mini, char *file)
 	}
 	if (!mini->camera)
 		print_free_exit(mini, "no camera\n", -1);
+	if (!mini->a_lighting)
+		print_free_exit(mini, "no ambient lighting\n", -1);
+	if (!mini->light)
+		print_free_exit(mini, "no light\n", -1);
 	rt_close(mini);
 	return ;
 }

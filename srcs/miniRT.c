@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:17:02 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/08 16:11:37 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/24 16:11:28 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_mini	*init_mini(void)
 		print_free_exit(mini, NULL, errno);
 	mini->mlx = NULL;
 	mini->win = NULL;
-	mini->a_lightning = NULL;
+	mini->a_lighting = NULL;
 	mini->camera = NULL;
 	mini->light = NULL;
 	mini->object = NULL;
