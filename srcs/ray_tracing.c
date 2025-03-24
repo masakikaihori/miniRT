@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:01:20 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/23 14:56:55 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/24 15:38:12 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ray_cyl_surface(
 {
 	double	t;
 
-	if (inner_pro(ray, obj.vec) <= NEAR_ZERO)
+	if (fabs(inner_pro(ray, obj.vec)) <= NEAR_ZERO)
 		return ;
 	t = -inner_pro(vec_sub(camera, vec_add(obj.coord, obj.upside)),
 			obj.vec) / inner_pro(ray, obj.vec);

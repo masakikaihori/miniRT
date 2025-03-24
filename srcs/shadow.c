@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 19:31:21 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/24 15:15:50 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/24 15:33:26 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,10 @@ int	shadow_cyl_side(t_xyz ray, t_cylinder obj, t_xyz point, double max)
 	return (0);
 }
 
-int	shadow_cyl_surface(t_xyz ray, t_cylinder obj, t_xyz point, double max, int y, int x)
+int	shadow_cyl_surface(t_xyz ray, t_cylinder obj, t_xyz point, double max)
 {
 	double	t;
-(void)x;
-(void)y;
+
 	if (fabs(inner_pro(ray, obj.vec)) <= NEAR_ZERO)
 		return (0);
 	t = -inner_pro(vec_sub(point, vec_add(obj.coord, obj.upside)),
@@ -96,7 +95,7 @@ int	shadow_cyl_surface(t_xyz ray, t_cylinder obj, t_xyz point, double max, int y
 	return (0);
 }
 
-int	is_shadow(t_object *head, t_xyz light, t_xyz point, int y, int x)
+int	is_shadow(t_object *head, t_xyz light, t_xyz point)
 {
 	t_object	*tmp_obj;
 	t_xyz		ray;
@@ -117,7 +116,7 @@ int	is_shadow(t_object *head, t_xyz light, t_xyz point, int y, int x)
 		else if (tmp_obj->type == CYLINDER)
 			hit = shadow_cyl_side(ray, tmp_obj->info.cylinder, point, max);
 		if (tmp_obj->type == CYLINDER && !hit)
-			hit = shadow_cyl_surface(ray, tmp_obj->info.cylinder, point, max, y, x);
+			hit = shadow_cyl_surface(ray, tmp_obj->info.cylinder, point, max);
 		tmp_obj = tmp_obj->next;
 	}
 	return (hit);

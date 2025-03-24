@@ -6,7 +6,7 @@
 /*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:07:48 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/24 15:10:43 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/24 15:34:18 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,13 @@ void			cal_height(t_cylinder obj, t_xyz camera,
 void			sphere_light(t_xyz ray, t_mini *mini, t_hit *hit, t_sphere obj);
 void			plane_light(t_xyz ray, t_mini *mini, t_hit *hit, t_plane obj);
 void			cylinder_light(t_xyz ray, t_mini *mini,
-					t_hit *hit, t_cylinder obj, int y);
+					t_hit *hit, t_cylinder obj);
 
 t_xyz			cylinder_normal_vec(t_hit *hit, t_cylinder obj);
 t_xyz			reflection_vec(t_xyz normal_vec, t_xyz light_vec);
 double			spec_light(double ratio, t_xyz reflight_vec, t_xyz ray);
 
-int				is_shadow(t_object *head, t_xyz light, t_xyz point, int y, int x);
+int				is_shadow(t_object *head, t_xyz light, t_xyz point);
 void			cal_color(t_hit *hit, t_rgb t, double ratio);
 
 //debug
