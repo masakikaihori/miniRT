@@ -40,9 +40,9 @@ void	print_xyz(t_xyz xyz, char *str)
 
 void	print_colors(t_rgb colors, char *str)
 {
-	printf("%s red : %d\n", str, colors.red);
-	printf("%s green : %d\n", str, colors.green);
-	printf("%s blue : %d\n", str, colors.blue);
+	printf("%s red : %f\n", str, colors.red * 255.0);
+	printf("%s green : %f\n", str, colors.green * 255.0);
+	printf("%s blue : %f\n", str, colors.blue * 255.0);
 }
 
 void	print_mini(t_mini *mini)
@@ -52,16 +52,19 @@ void	print_mini(t_mini *mini)
 
 	tmp = mini->object;
 	tmp_l = mini->light;
+	printf("-----debug-----\n");
 	if (mini)
 	{
 		if (mini->mlx)
 			printf("mlx ptr : %p\n", mini->mlx);
 		else
 			printf("no mlx ptr\n");
+		printf("\n");
 		if (mini->win)
 			printf("win ptr : %p\n", mini->win);
 		else
 			printf("no win ptr\n");
+		printf("\n");
 		if (mini->a_lighting)
 		{
 			printf("a_lighting ptr : %p\n", mini->a_lighting);
@@ -70,6 +73,7 @@ void	print_mini(t_mini *mini)
 		}
 		else
 			printf("no a_lighting ptr\n");
+		printf("\n");
 		if (mini->camera)
 		{
 			printf("camera ptr : %p\n", mini->camera);
@@ -80,20 +84,26 @@ void	print_mini(t_mini *mini)
 		}
 		else
 			printf("no camera ptr\n");
+		printf("\n");
 		if (tmp_l)
 		{
 			while (tmp_l)
 			{
+				printf("light index : %d\n", tmp_l->index);
 				printf("light ptr : %p\n", tmp_l);
 				print_xyz(mini->light->coord, "light coord");
 				printf("light ratio : %f\n", tmp_l->ratio);
 				print_colors(mini->light->colors, "light colors");
 				printf("light next : %p\n", tmp_l->next);
 				tmp_l = tmp_l->next;
+				printf("\n");
 			}
 		}
 		else
+		{
 			printf("no light ptr\n");
+			printf("\n");
+		}
 		if (tmp)
 		{
 			while (tmp)
@@ -125,17 +135,23 @@ void	print_mini(t_mini *mini)
 					print_colors(tmp->info.cylinder.colors, "cylinder colors");
 					printf("next ptr : %p\n", tmp->next);
 				}
+				printf("\n");
 				tmp = tmp->next;
 			}
 		}
 		else
+		{
 			printf("no bject ptr\n");
+			printf("\n");
+		}
 		if (mini->fd)
 			printf("fd : %d\n", mini->fd);
 		else
 			printf("no fds available\n");
+		printf("\n");
 	}
 	else
 		printf("debug : no mini\n");
+	printf("-----debug-----\n");
 	return ;
 }

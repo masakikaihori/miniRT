@@ -12,20 +12,26 @@
 
 #include "../includes/mini_rt.h"
 
-void	add_light(t_mini *mini, t_light *new)
+int	add_light(t_mini *mini, t_light *new)
 {
 	t_light	*tmp;
+	int		index;
 
 	tmp = mini->light;
+	index = 0;
 	if (tmp == NULL)
 		mini->light = new;
 	else
 	{
+		index++;
 		while (tmp->next)
+		{
+			index++;
 			tmp = tmp->next;
+		}
 		tmp->next = new;
 	}
-	return ;
+	return ((int)pow(2, LIGHT_MAX - 1 - index));
 }
 
 void	set_amb(t_mini *mini, char **strs)
@@ -82,11 +88,13 @@ void	set_light(t_mini *mini, char **strs)
 {
 	t_light	*light;
 
+	if (light_count(mini) >= LIGHT_MAX)
+		print_frees_exit(mini, "light max : 8\n", -1, strs);
 	light = (t_light *)malloc(sizeof(t_light));
 	if (!light)
 		print_frees_exit(mini, NULL, errno, strs);
 	light->next = NULL;
-	add_light(mini, light);
+	light->index = add_light(mini, light);
 	if (rt_strslen(strs) != LIG_ELE)
 		print_frees_exit(mini, "light amount of element\n", -1, strs);
 	if (not_available(strs + 1))

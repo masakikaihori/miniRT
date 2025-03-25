@@ -33,9 +33,9 @@ typedef enum e_cyl_inter
 
 typedef struct s_rgb
 {
-	short	red;
-	short	green;
-	short	blue;
+	double	red;
+	double	green;
+	double	blue;
 }	t_rgb;
 
 typedef struct s_xyz
@@ -49,7 +49,6 @@ typedef struct s_a_lighting
 {
 	double	ratio;
 	t_rgb	colors;
-	int		color;
 }	t_a_lighting;
 
 typedef struct s_camera
@@ -62,10 +61,10 @@ typedef struct s_camera
 
 typedef struct s_light
 {
+	int				index;
 	t_xyz			coord;
 	double			ratio;
 	t_rgb			colors;
-	int				color;
 	struct s_light	*next;
 }	t_light;
 
@@ -75,7 +74,6 @@ typedef struct s_sphere
 	t_xyz	coord;
 	double	diameter;
 	t_rgb	colors;
-	int		color;
 }	t_sphere;
 
 typedef struct s_plane
@@ -84,7 +82,6 @@ typedef struct s_plane
 	t_xyz	coord;
 	t_xyz	vec;
 	t_rgb	colors;
-	int		color;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -95,7 +92,6 @@ typedef struct s_cylinder
 	double	diameter;
 	double	height;
 	t_rgb	colors;
-	int		color;
 	t_xyz	upside;
 	t_xyz	downside;
 }	t_cylinder;
@@ -106,10 +102,11 @@ typedef struct s_hit
 	int			color;
 	t_rgb		colors;
 	int			index;
+	int			lights;
 	t_xyz		intersection;
 	t_cyl_inter	cylinder;
-	double		diff;
-	double		spec;
+	t_rgb		diff;
+	t_rgb		spec;
 }	t_hit;
 
 typedef union u_oinfo
@@ -141,8 +138,8 @@ typedef struct s_mini
 	double			distance;
 	double			x_pixel;
 	double			y_pixel;
-	int				status;
 	int				fd;
+	int				status;
 }	t_mini;
 
 #endif

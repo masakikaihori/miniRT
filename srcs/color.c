@@ -12,28 +12,31 @@
 
 #include "../includes/mini_rt.h"
 
-void	cal_color(t_hit *hit, t_rgb t, t_a_lighting *amb, t_light *light)
+int	int_color(short red, short green, short blue)
 {
-	double	red;
-	double	green;
-	double	blue;
+	return (red << 16 | green << 8 | blue);
+}
 
-	red = (t.red / 255.0 * amb->ratio * amb->colors.red / 255.0 + hit->diff * light->colors.red / 255.0 * t.red / 255.0 + hit->spec * light->colors.red / 255.0) * 255.0;
-	green = (t.green / 255.0 * amb->ratio * amb->colors.green / 255.0 + hit->diff * light->colors.green / 255.0 * t.green / 255.0 + hit->spec * light->colors.green / 255.0) * 255.0;
-	blue = (t.blue / 255.0 * amb->ratio * amb->colors.blue / 255.0 + hit->diff * light->colors.blue / 255.0 * t.blue / 255.0 + hit->spec * light->colors.blue / 255.0) * 255.0;
-	if (red >= 255)
-	red = 255;
-	else if (red < 0)
-	red = 0;
-	if (green >= 255)
-	green = 255;
-	else if (green < 0)
-	green = 0;
-	if (blue >= 255)
-	blue = 255;
-	else if (blue < 0)
-	blue = 0;
+void	cal_color(t_hit *hit, t_rgb t, t_a_lighting *amb_light)
+{
+	double	r;
+	double	g;
+	double	b;
+	t_rgb	amb;
+
+	amb.red = t.red * amb_light->ratio * amb_light->colors.red;
+	amb.green = t.green * amb_light->ratio * amb_light->colors.green;
+	amb.blue = t.blue * amb_light->ratio * amb_light->colors.blue;
+	r = (amb.red + hit->diff.red + hit->spec.red) * 255.0;
+	g = (amb.green + hit->diff.green + hit->spec.green) * 255.0;
+	b = (amb.blue + hit->diff.blue + hit->spec.blue) * 255.0;
+	if (r >= 255)
+		r = 255;
+	if (g >= 255)
+		g = 255;
+	if (b >= 255)
+		b = 255;
 	hit->color
-		= int_color((int)round(red), (int)round(green), (int)round(blue));
+		= int_color((int)round(r), (int)round(g), (int)round(b));
 	return ;
 }

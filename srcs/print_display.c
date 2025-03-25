@@ -40,20 +40,21 @@ void	cal_light(t_xyz ray, t_mini *mini, t_hit *hit)
 		hit->color = int_color(0, 0, 0);
 		return ;
 	}
+	hit->lights = 0;
 	hit->intersection = intersection_pos(mini->camera->coord, hit->t, ray);
 	obj = obj_ptr_index(mini->object, hit->index);
-	hit->diff = 0.0;
-	hit->spec = 0.0;
-	if (!is_shadow(mini->object, mini->light->coord, hit->intersection))
+	ft_bzero(&(hit->diff), sizeof(hit->diff));
+	ft_bzero(&(hit->spec), sizeof(hit->spec));
+	if (not_shadow(mini->object, mini->light, hit->intersection, hit))
 	{
 		if (obj->type == SPHERE)
-			sphere_light(ray, mini, hit, obj->info.sphere);
+			sphere_light(ray, mini->light, hit, obj->info.sphere);
 		else if (obj->type == PLANE)
-			plane_light(ray, mini, hit, obj->info.plane);
+			plane_light(ray, mini->light, hit, obj->info.plane);
 		else if (obj->type == CYLINDER)
-			cylinder_light(ray, mini, hit, obj->info.cylinder);
+			cylinder_light(ray, mini->light, hit, obj->info.cylinder);
 	}
-	cal_color(hit, hit->colors, mini->a_lighting, mini->light);
+	cal_color(hit, hit->colors, mini->a_lighting);
 	return ;
 }
 

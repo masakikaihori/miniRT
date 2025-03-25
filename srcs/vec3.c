@@ -53,3 +53,11 @@ t_xyz	set_vec(double x, double y, double z)
 	vec.z = z;
 	return (vec);
 }
+
+bool	vec_range(t_xyz vec)
+{
+	if (vec.x <= 1 && vec.y >= -1 && vec.y <= 1 && vec.y >= -1
+		&& vec.z <= 1 && vec.z >= -1)
+		return (true);
+	return (false);
+}

@@ -59,7 +59,7 @@ bool			vec_range(t_xyz vec);
 short			rt_atos(t_mini *mini, char **strs, char *str, int *index);
 double			rt_atof(t_mini *mini, char **strs, char *str, int *index);
 int				rt_strslen(char **strs);
-int				int_color(short red, short green, short blue);
+int				light_count(t_mini *mini);
 //vec
 double			vec_norm(t_xyz a);
 void			normalize(t_xyz *a);
@@ -90,17 +90,23 @@ bool			in_downcircle(t_xyz ray, t_cylinder obj,
 void			cal_height(t_cylinder obj, t_xyz camera,
 					t_xyz ray, double h[2]);
 
-void			sphere_light(t_xyz ray, t_mini *mini, t_hit *hit, t_sphere obj);
-void			plane_light(t_xyz ray, t_mini *mini, t_hit *hit, t_plane obj);
-void			cylinder_light(t_xyz ray, t_mini *mini,
+int				not_shadow(t_object *objs, t_light *light, t_xyz point, t_hit *hit);
+int				shadow_sphere(t_xyz ray, t_sphere obj, t_xyz point, double max);
+int				shadow_plane(t_xyz ray, t_plane obj, t_xyz point, double max);
+int				shadow_cyl_side(t_xyz ray, t_cylinder obj, t_xyz point, double max);
+int				shadow_cyl_surface(t_xyz ray, t_cylinder obj, t_xyz point, double max);
+
+void			sphere_light(t_xyz ray, t_light *light, t_hit *hit, t_sphere obj);
+void			plane_light(t_xyz ray, t_light *light, t_hit *hit, t_plane obj);
+void			cylinder_light(t_xyz ray, t_light *light,
 					t_hit *hit, t_cylinder obj);
 
 t_xyz			cylinder_normal_vec(t_hit *hit, t_cylinder obj);
 t_xyz			reflection_vec(t_xyz normal_vec, t_xyz light_vec);
 double			spec_light(double ratio, t_xyz reflight_vec, t_xyz ray);
 
-int				is_shadow(t_object *head, t_xyz light, t_xyz point);
-void			cal_color(t_hit *hit, t_rgb t, t_a_lighting *amb, t_light *light);
+void			cal_color(t_hit *hit, t_rgb t, t_a_lighting *amb_light);
+int				int_color(short red, short green, short blue);
 
 //debug
 void			print_mini(t_mini *mini);

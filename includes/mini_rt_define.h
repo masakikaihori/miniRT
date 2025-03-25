@@ -25,6 +25,11 @@
 # define C 2
 # define D 3
 
+# define P_LIGHT 0
+# define V_NORMAL 1
+# define V_LIGHT 2
+# define V_REFLIGHT 3
+
 # define AMB_ELE 3
 # define CAM_ELE 4
 # define LIG_ELE 4
@@ -34,6 +39,8 @@
 
 # define ATOS_MAX 255
 # define HFOV_MAX 180
+# define LIGHT_MAX 8
+# define LIGHT_BITS 128
 
 # define ESC_KEY 65307
 

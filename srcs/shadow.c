@@ -12,112 +12,46 @@
 
 #include "../includes/mini_rt.h"
 
-int	shadow_sphere(t_xyz ray, t_sphere obj, t_xyz point, double max)
+int	shadow_objects(t_xyz ray, t_object *obj, t_xyz point, double max)
 {
-	double	t;
-	double	f[4];
+	int	sign;
 
-	f[A] = pow(vec_norm(ray), 2.0);
-	f[B] = 2.0 * (inner_pro(point, ray) - inner_pro(obj.coord, ray));
-	f[C] = pow(vec_norm(vec_sub(point, obj.coord)), 2.0)
-		- pow(obj.diameter / 2.0, 2.0);
-	f[D] = pow(f[B], 2.0) - (4.0 * f[A] * f[C]);
-	if (f[D] >= NEAR_ZERO)
-	{
-		t = (-f[B] - sqrt(f[D])) / (2.0 * f[A]);
-		if (t > NEAR_ZERO && t <= max)
-			return (1);
-		t = (-f[B] + sqrt(f[D])) / (2.0 * f[A]);
-		if (t > NEAR_ZERO && t <= max)
-			return (1);
-	}
-	return (0);
+	sign = 0;
+	if (obj->type == SPHERE)
+		sign = shadow_sphere(ray, obj->info.sphere, point, max);
+	else if (obj->type == PLANE)
+		sign = shadow_plane(ray, obj->info.plane, point, max);
+	else if (obj->type == CYLINDER)
+		sign = shadow_cyl_side(ray, obj->info.cylinder, point, max);
+	if (obj->type == CYLINDER && !sign)
+		sign = shadow_cyl_surface(ray, obj->info.cylinder, point, max);
+	return (sign);
 }
 
-int	shadow_plane(t_xyz ray, t_plane obj, t_xyz point, double max)
-{
-	double	t;
-	double	d;
-
-	d = inner_pro(vec_mul(-1.0, ray), obj.vec);
-	if (d > NEAR_ZERO)
-	{
-		t = inner_pro(vec_sub(point, obj.coord), obj.vec) / d;
-		if (t > NEAR_ZERO && t <= max)
-			return (2);
-	}
-	return (0);
-}
-
-int	shadow_cyl_side(t_xyz ray, t_cylinder obj, t_xyz point, double max)
-{
-	double	t;
-	double	f[4];
-	double	h[2];
-	t_xyz	ray_dot_objvec;
-	t_xyz	cam_center_dot_objvec;
-
-	ray_dot_objvec = vec_sub(ray, vec_mul(inner_pro(ray, obj.vec), obj.vec));
-	cam_center_dot_objvec = vec_sub(vec_sub(point, obj.coord),
-			vec_mul(inner_pro(vec_sub(point, obj.coord), obj.vec), obj.vec));
-	f[A] = pow(vec_norm(ray_dot_objvec), 2.0);
-	f[B] = 2 * inner_pro(cam_center_dot_objvec, ray_dot_objvec);
-	f[C] = pow(vec_norm(cam_center_dot_objvec), 2.0)
-		- pow(obj.diameter / 2.0, 2.0);
-	f[D] = pow(f[B], 2.0) - (4.0 * f[A] * f[C]);
-	cal_height(obj, point, ray, h);
-	if (f[D] >= NEAR_ZERO)
-	{
-		t = (-f[B] + sqrt(f[D])) / (2.0 * f[A]);
-		if (t > NEAR_ZERO && t <= max && in_height(t, h))
-			return (3);
-		t = (-f[B] - sqrt(f[D])) / (2.0 * f[A]);
-		if (t > NEAR_ZERO && t <= max && in_height(t, h))
-			return (3);
-	}
-	return (0);
-}
-
-int	shadow_cyl_surface(t_xyz ray, t_cylinder obj, t_xyz point, double max)
-{
-	double	t;
-
-	if (fabs(inner_pro(ray, obj.vec)) <= NEAR_ZERO)
-		return (0);
-	t = -inner_pro(vec_sub(point, vec_add(obj.coord, obj.upside)),
-			obj.vec) / inner_pro(ray, obj.vec);
-	if (t > NEAR_ZERO && in_upcircle(ray, obj, point, t) && t <= max)
-		return (4);
-	t = -inner_pro(vec_sub(point, vec_add(obj.coord, obj.downside)),
-			obj.vec) / inner_pro(ray, obj.vec);
-	if (t > NEAR_ZERO && in_downcircle(ray, obj, point, t) && t <= max)
-		return (4);
-	return (0);
-}
-
-int	is_shadow(t_object *head, t_xyz light, t_xyz point)
+int	not_shadow(t_object *objs, t_light *light, t_xyz point, t_hit *hit)
 {
 	t_object	*tmp_obj;
+	t_light		*tmp_light;
 	t_xyz		ray;
-	int			hit;
 	double		max;
+	int			sign;
 
-	tmp_obj = head;
-	hit = 0;
-	ray = vec_sub(light, point);
-	max = vec_norm(ray);
-	normalize(&ray);
-	while (tmp_obj && !hit)
+	tmp_light = light;
+	while (tmp_light)
 	{
-		if (tmp_obj->type == SPHERE)
-			hit = shadow_sphere(ray, tmp_obj->info.sphere, point, max);
-		else if (tmp_obj->type == PLANE)
-			hit = shadow_plane(ray, tmp_obj->info.plane, point, max);
-		else if (tmp_obj->type == CYLINDER)
-			hit = shadow_cyl_side(ray, tmp_obj->info.cylinder, point, max);
-		if (tmp_obj->type == CYLINDER && !hit)
-			hit = shadow_cyl_surface(ray, tmp_obj->info.cylinder, point, max);
-		tmp_obj = tmp_obj->next;
+		tmp_obj = objs;
+		ray = vec_sub(tmp_light->coord, point);
+		max = vec_norm(ray);
+		normalize(&ray);
+		sign = 0;
+		while (tmp_obj && !sign)
+		{
+			sign = shadow_objects(ray, tmp_obj, point, max);
+			tmp_obj = tmp_obj->next;
+		}
+		if (!sign)
+			hit->lights += tmp_light->index;
+		tmp_light = tmp_light->next;
 	}
-	return (hit);
+	return (hit->lights);
 }

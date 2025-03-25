@@ -14,8 +14,6 @@
 
 double	spec_light(double ratio, t_xyz reflight_vec, t_xyz ray)
 {
-	if (inner_pro(reflight_vec, vec_mul(-1.0, ray)) <= NEAR_ZERO)
-		return (0);
 	return (SPE_REF * ratio
 		* pow(inner_pro(reflight_vec, vec_mul(-1.0, ray)), SHINE));
 }
@@ -31,6 +29,10 @@ t_xyz	cylinder_normal_vec(t_hit *hit, t_cylinder obj)
 	double	t;
 	t_xyz	normal_vec;
 
+	if (hit->cylinder == CYL_UP)
+		return (obj.vec);
+	else if (hit->cylinder == CYL_DOWN)
+		return (vec_mul(-1.0, obj.vec));
 	t = inner_pro(vec_sub(hit->intersection, obj.coord), obj.vec);
 	normal_vec
 		= vec_sub(hit->intersection, vec_add(vec_mul(t, obj.vec), obj.coord));

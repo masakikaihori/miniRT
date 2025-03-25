@@ -12,76 +12,107 @@
 
 #include "../includes/mini_rt.h"
 
-void	sphere_light(t_xyz ray, t_mini *mini, t_hit *hit, t_sphere obj)
+void	cal_reflection(t_xyz xyz[4], t_hit *hit, t_light *tmp_light, t_xyz ray)
 {
-	t_xyz	light;
-	t_xyz	normal_vec;
-	t_xyz	light_vec;
-	t_xyz	reflight_vec;
+	double	diff;
+	double	spec;
 
-	light = mini->light->coord;
-	normal_vec = vec_sub(hit->intersection, obj.coord);
-	light_vec = vec_sub(light, hit->intersection);
-	normalize(&normal_vec);
-	normalize(&light_vec);
-	if (inner_pro(normal_vec, light_vec) > NEAR_ZERO)
+	diff = DIF_REF * tmp_light->ratio
+		* inner_pro(xyz[V_NORMAL], xyz[V_LIGHT]);
+	xyz[V_REFLIGHT] = reflection_vec(xyz[V_NORMAL], xyz[V_LIGHT]);
+	if (inner_pro(xyz[V_REFLIGHT], vec_mul(-1.0, ray)) > NEAR_ZERO)
+		spec = spec_light(tmp_light->ratio, xyz[V_REFLIGHT], ray);
+	hit->diff.red += diff * tmp_light->colors.red * hit->colors.red;
+	hit->diff.green += diff * tmp_light->colors.green * hit->colors.green;
+	hit->diff.blue += diff * tmp_light->colors.blue * hit->colors.blue;
+	hit->spec.red += spec * tmp_light->colors.red;
+	hit->spec.green += spec * tmp_light->colors.green;
+	hit->spec.blue += spec * tmp_light->colors.blue;
+	return ;
+}
+
+void	sphere_light(t_xyz ray, t_light *light, t_hit *hit, t_sphere obj)
+{
+	t_xyz	xyz[4];
+	t_light	*tmp_light;
+	int		light_num;
+
+	light_num = LIGHT_BITS;
+	tmp_light = light;
+	while (hit->lights)
 	{
-		hit->diff = DIF_REF * mini->light->ratio
-			* inner_pro(normal_vec, light_vec);
-		reflight_vec = reflection_vec(normal_vec, light_vec);
-		if (inner_pro(reflight_vec, vec_mul(-1.0, ray)) > NEAR_ZERO)
-			hit->spec = spec_light(mini->light->ratio, reflight_vec, ray);
+		if (hit->lights >= light_num)
+		{
+			if (!tmp_light)
+			{
+				printf("%d\n", hit->lights);
+				exit(123);
+			}
+			xyz[P_LIGHT] = tmp_light->coord;
+			xyz[V_NORMAL] = vec_sub(hit->intersection, obj.coord);
+			xyz[V_LIGHT] = vec_sub(xyz[P_LIGHT], hit->intersection);
+			normalize(&xyz[V_NORMAL]);
+			normalize(&xyz[V_LIGHT]);
+			if (inner_pro(xyz[V_NORMAL], xyz[V_LIGHT]) > NEAR_ZERO)
+				cal_reflection(xyz, hit, tmp_light, ray);
+			hit->lights -= light_num;
+		}
+		light_num /= 2;
+		tmp_light = tmp_light->next;
 	}
 	return ;
 }
 
-void	plane_light(t_xyz ray, t_mini *mini, t_hit *hit, t_plane obj)
+void	plane_light(t_xyz ray, t_light *light, t_hit *hit, t_plane obj)
 {
-	t_xyz	light;
-	t_xyz	normal_vec;
-	t_xyz	light_vec;
-	t_xyz	reflight_vec;
+	t_xyz	xyz[4];
+	t_light	*tmp_light;
+	int		light_num;
 
-	light = mini->light->coord;
-	normal_vec = obj.vec;
-	light_vec = vec_sub(light, hit->intersection);
-	normalize(&normal_vec);
-	normalize(&light_vec);
-	if (inner_pro(normal_vec, light_vec) > NEAR_ZERO)
+	light_num = LIGHT_BITS;
+	tmp_light = light;
+	while (hit->lights)
 	{
-		hit->diff = DIF_REF * mini->light->ratio
-			* inner_pro(normal_vec, light_vec);
-		reflight_vec = reflection_vec(normal_vec, light_vec);
-		if (inner_pro(reflight_vec, vec_mul(-1.0, ray)) > NEAR_ZERO)
-			hit->spec = spec_light(mini->light->ratio, reflight_vec, ray);
+		if (hit->lights >= light_num)
+		{
+			xyz[P_LIGHT] = tmp_light->coord;
+			xyz[V_NORMAL] = obj.vec;
+			xyz[V_LIGHT] = vec_sub(xyz[P_LIGHT], hit->intersection);
+			normalize(&xyz[V_NORMAL]);
+			normalize(&xyz[V_LIGHT]);
+			if (inner_pro(xyz[V_NORMAL], xyz[V_LIGHT] ) > NEAR_ZERO)
+				cal_reflection(xyz, hit, tmp_light, ray);
+			hit->lights -= light_num;
+		}
+		light_num /= 2;
+		tmp_light = tmp_light->next;
 	}
 	return ;
 }
 
-void	cylinder_light(t_xyz ray, t_mini *mini, t_hit *hit, t_cylinder obj)
+void	cylinder_light(t_xyz ray, t_light *light, t_hit *hit, t_cylinder obj)
 {
-	t_xyz	light;
-	t_xyz	normal_vec;
-	t_xyz	light_vec;
-	t_xyz	reflight_vec;
+	t_xyz	xyz[4];
+	t_light	*tmp_light;
+	int		light_num;
 
-	light = mini->light->coord;
-	if (hit->cylinder == CYL_UP)
-		normal_vec = obj.vec;
-	else if (hit->cylinder == CYL_DOWN)
-		normal_vec = vec_mul(-1.0, obj.vec);
-	else
-		normal_vec = cylinder_normal_vec(hit, obj);
-	light_vec = vec_sub(light, hit->intersection);
-	normalize(&normal_vec);
-	normalize(&light_vec);
-	if (inner_pro(normal_vec, light_vec) > NEAR_ZERO)
+	light_num = LIGHT_BITS;
+	tmp_light = light;
+	while (hit->lights)
 	{
-		hit->diff = DIF_REF * mini->light->ratio
-			* inner_pro(normal_vec, light_vec);
-		reflight_vec = reflection_vec(normal_vec, light_vec);
-		if (inner_pro(reflight_vec, vec_mul(-1.0, ray)) > NEAR_ZERO)
-			hit->spec = spec_light(mini->light->ratio, reflight_vec, ray);
+		if (hit->lights >= light_num)
+		{
+			xyz[P_LIGHT] = tmp_light->coord;
+			xyz[V_NORMAL] = cylinder_normal_vec(hit, obj);
+			xyz[V_LIGHT] = vec_sub(xyz[P_LIGHT], hit->intersection);
+			normalize(&xyz[V_NORMAL]);
+			normalize(&xyz[V_LIGHT]);
+			if (inner_pro(xyz[V_NORMAL], xyz[V_LIGHT] ) > NEAR_ZERO)
+				cal_reflection(xyz, hit, tmp_light, ray);
+			hit->lights -= light_num;
+		}
+		light_num /= 2;
+		tmp_light = tmp_light->next;
 	}
 	return ;
 }
