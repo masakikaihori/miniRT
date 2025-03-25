@@ -39,19 +39,14 @@ void	sphere_light(t_xyz ray, t_light *light, t_hit *hit, t_sphere obj)
 
 	light_num = LIGHT_BITS;
 	tmp_light = light;
+	xyz[V_NORMAL] = vec_sub(hit->intersection, obj.coord);
+	normalize(&xyz[V_NORMAL]);
 	while (hit->lights)
 	{
 		if (hit->lights >= light_num)
 		{
-			if (!tmp_light)
-			{
-				printf("%d\n", hit->lights);
-				exit(123);
-			}
 			xyz[P_LIGHT] = tmp_light->coord;
-			xyz[V_NORMAL] = vec_sub(hit->intersection, obj.coord);
 			xyz[V_LIGHT] = vec_sub(xyz[P_LIGHT], hit->intersection);
-			normalize(&xyz[V_NORMAL]);
 			normalize(&xyz[V_LIGHT]);
 			if (inner_pro(xyz[V_NORMAL], xyz[V_LIGHT]) > NEAR_ZERO)
 				cal_reflection(xyz, hit, tmp_light, ray);
@@ -71,14 +66,14 @@ void	plane_light(t_xyz ray, t_light *light, t_hit *hit, t_plane obj)
 
 	light_num = LIGHT_BITS;
 	tmp_light = light;
+	xyz[V_NORMAL] = obj.vec;
+	normalize(&xyz[V_NORMAL]);
 	while (hit->lights)
 	{
 		if (hit->lights >= light_num)
 		{
 			xyz[P_LIGHT] = tmp_light->coord;
-			xyz[V_NORMAL] = obj.vec;
 			xyz[V_LIGHT] = vec_sub(xyz[P_LIGHT], hit->intersection);
-			normalize(&xyz[V_NORMAL]);
 			normalize(&xyz[V_LIGHT]);
 			if (inner_pro(xyz[V_NORMAL], xyz[V_LIGHT] ) > NEAR_ZERO)
 				cal_reflection(xyz, hit, tmp_light, ray);
@@ -98,14 +93,14 @@ void	cylinder_light(t_xyz ray, t_light *light, t_hit *hit, t_cylinder obj)
 
 	light_num = LIGHT_BITS;
 	tmp_light = light;
+	xyz[V_NORMAL] = cylinder_normal_vec(hit, obj);
+	normalize(&xyz[V_NORMAL]);
 	while (hit->lights)
 	{
 		if (hit->lights >= light_num)
 		{
 			xyz[P_LIGHT] = tmp_light->coord;
-			xyz[V_NORMAL] = cylinder_normal_vec(hit, obj);
 			xyz[V_LIGHT] = vec_sub(xyz[P_LIGHT], hit->intersection);
-			normalize(&xyz[V_NORMAL]);
 			normalize(&xyz[V_LIGHT]);
 			if (inner_pro(xyz[V_NORMAL], xyz[V_LIGHT] ) > NEAR_ZERO)
 				cal_reflection(xyz, hit, tmp_light, ray);
