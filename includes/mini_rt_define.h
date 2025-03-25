@@ -16,8 +16,8 @@
 # define WIDTH 640.0
 # define HEIGHT 480.0
 # define DIF_REF 0.7
-# define SPE_REF 0.2
-# define SHINE 30.0
+# define SPE_REF 0.8
+# define SHINE 5.0
 # define NEAR_ZERO 1e-6
 
 # define A 0
