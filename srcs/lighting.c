@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:50:47 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/24 17:37:02 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/03/25 22:52:45 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	cal_reflection(t_xyz xyz[4], t_hit *hit, t_light *tmp_light, t_xyz ray)
 	double	diff;
 	double	spec;
 
+	diff = 0;
+	spec = 0;
 	diff = DIF_REF * tmp_light->ratio
 		* inner_pro(xyz[V_NORMAL], xyz[V_LIGHT]);
 	xyz[V_REFLIGHT] = reflection_vec(xyz[V_NORMAL], xyz[V_LIGHT]);
@@ -67,6 +69,8 @@ void	plane_light(t_xyz ray, t_light *light, t_hit *hit, t_plane obj)
 	light_num = LIGHT_BITS;
 	tmp_light = light;
 	xyz[V_NORMAL] = obj.vec;
+	if (inner_pro(obj.vec, vec_mul(-1.0, ray)) < NEAR_ZERO)
+		xyz[V_NORMAL] = vec_mul(-1.0, obj.vec);
 	normalize(&xyz[V_NORMAL]);
 	while (hit->lights)
 	{
