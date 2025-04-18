@@ -47,6 +47,12 @@ void	ray_plane(t_xyz ray, t_plane obj, t_hit *hit, t_xyz camera)
 	double	t;
 	double	d;
 
+	if (fabs(inner_pro(ray, obj.vec)) <= NEAR_ZERO
+		&& fabs(inner_pro(vec_sub(camera, obj.coord), obj.vec)) <= NEAR_ZERO)
+	{
+		set_hit(hit, obj.colors, 0, obj.index);
+		return ;
+	}
 	d = inner_pro(vec_mul(-1.0, ray), obj.vec);
 	if (fabs(d) > NEAR_ZERO)
 	{

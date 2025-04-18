@@ -13,10 +13,10 @@ int	shadow_sphere(t_xyz ray, t_sphere obj, t_xyz point, double max)
 	if (f[D] >= NEAR_ZERO)
 	{
 		t = (-f[B] - sqrt(f[D])) / (2.0 * f[A]);
-		if (t > NEAR_ZERO && t <= max)
+		if (t > NEAR_ZERO && t < max - NEAR_ZERO)
 			return (1);
 		t = (-f[B] + sqrt(f[D])) / (2.0 * f[A]);
-		if (t > NEAR_ZERO && t <= max)
+		if (t > NEAR_ZERO && t < max - NEAR_ZERO)
 			return (1);
 	}
 	return (0);
@@ -28,10 +28,10 @@ int	shadow_plane(t_xyz ray, t_plane obj, t_xyz point, double max)
 	double	d;
 
 	d = inner_pro(vec_mul(-1.0, ray), obj.vec);
-	if (d > NEAR_ZERO)
+	if (fabs(d) > NEAR_ZERO)
 	{
 		t = inner_pro(vec_sub(point, obj.coord), obj.vec) / d;
-		if (t > NEAR_ZERO && t <= max)
+		if (t > NEAR_ZERO && t < max - NEAR_ZERO)
 			return (2);
 	}
 	return (0);
@@ -57,10 +57,10 @@ int	shadow_cyl_side(t_xyz ray, t_cylinder obj, t_xyz point, double max)
 	if (f[D] >= NEAR_ZERO)
 	{
 		t = (-f[B] + sqrt(f[D])) / (2.0 * f[A]);
-		if (t > NEAR_ZERO && t <= max && in_height(t, h))
+		if (t > NEAR_ZERO && t < max - NEAR_ZERO && in_height(t, h))
 			return (3);
 		t = (-f[B] - sqrt(f[D])) / (2.0 * f[A]);
-		if (t > NEAR_ZERO && t <= max && in_height(t, h))
+		if (t > NEAR_ZERO && t < max - NEAR_ZERO && in_height(t, h))
 			return (3);
 	}
 	return (0);
@@ -74,11 +74,11 @@ int	shadow_cyl_surface(t_xyz ray, t_cylinder obj, t_xyz point, double max)
 		return (0);
 	t = -inner_pro(vec_sub(point, vec_add(obj.coord, obj.upside)),
 			obj.vec) / inner_pro(ray, obj.vec);
-	if (t > NEAR_ZERO && in_upcircle(ray, obj, point, t) && t <= max)
+	if (t > NEAR_ZERO && in_upcircle(ray, obj, point, t) && t < max - NEAR_ZERO)
 		return (4);
 	t = -inner_pro(vec_sub(point, vec_add(obj.coord, obj.downside)),
 			obj.vec) / inner_pro(ray, obj.vec);
-	if (t > NEAR_ZERO && in_downcircle(ray, obj, point, t) && t <= max)
+	if (t > NEAR_ZERO && in_downcircle(ray, obj, point, t) && t < max - NEAR_ZERO)
 		return (4);
 	return (0);
 }
