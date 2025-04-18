@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
+/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 17:44:59 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/04/18 08:41:32 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/04/19 01:05:32 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	open_rtfile(t_mini *mini, char *file)
 	while (file[i])
 		i++;
 	if (i <= 3)
-		print_free_exit(mini, "not *.rt file", -1);
+		print_free_exit(mini, "not *.rt file\n", -1);
 	if (file[--i] == 't' && file[--i] == 'r' && file[--i] == '.')
 	{
 		fd = open(file, O_RDONLY);

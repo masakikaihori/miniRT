@@ -12,7 +12,26 @@ MLX_REPO =		git@github.com:42Paris/minilibx-linux.git
 LIBFT_LIB =		$(LIBFT_DIR)/libft.a
 MLX_LIB =		$(MLX_DIR)/libmlx_Linux.a
 
-SRCS = 			$(shell find $(SRC_DIR) -name "*.c")
+SRCS = 			$(SRC_DIR)/color.c \
+				$(SRC_DIR)/exit.c \
+				$(SRC_DIR)/free.c \
+				$(SRC_DIR)/lighting.c \
+				$(SRC_DIR)/lighting_utils.c \
+				$(SRC_DIR)/miniRT.c \
+				$(SRC_DIR)/print_display.c \
+				$(SRC_DIR)/ray_tracing.c \
+				$(SRC_DIR)/ray_tracing_utils.c \
+				$(SRC_DIR)/read_scene.c \
+				$(SRC_DIR)/read_scene_utils.c \
+				$(SRC_DIR)/rt_atof.c \
+				$(SRC_DIR)/rt_split.c \
+				$(SRC_DIR)/set_object.c \
+				$(SRC_DIR)/setting.c \
+				$(SRC_DIR)/set_utils.c \
+				$(SRC_DIR)/shadow.c \
+				$(SRC_DIR)/shadow_utils.c \
+				$(SRC_DIR)/vec3.c \
+				$(SRC_DIR)/vec3_operators.c
 OBJS = 			$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 CC =		cc
@@ -59,4 +78,4 @@ repoclean:
 
 re:fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all bonus clean fclean re repoclean
