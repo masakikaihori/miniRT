@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shadow_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/18 20:09:20 by mkaihori          #+#    #+#             */
+/*   Updated: 2025/04/18 20:09:47 by mkaihori         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/mini_rt.h"
 
 int	shadow_sphere(t_xyz ray, t_sphere obj, t_xyz point, double max)
@@ -74,11 +86,13 @@ int	shadow_cyl_surface(t_xyz ray, t_cylinder obj, t_xyz point, double max)
 		return (0);
 	t = -inner_pro(vec_sub(point, vec_add(obj.coord, obj.upside)),
 			obj.vec) / inner_pro(ray, obj.vec);
-	if (t > NEAR_ZERO && in_upcircle(ray, obj, point, t) && t < max - NEAR_ZERO)
+	if (t > NEAR_ZERO && in_upcircle(ray, obj, point, t)
+		&& t < max - NEAR_ZERO)
 		return (4);
 	t = -inner_pro(vec_sub(point, vec_add(obj.coord, obj.downside)),
 			obj.vec) / inner_pro(ray, obj.vec);
-	if (t > NEAR_ZERO && in_downcircle(ray, obj, point, t) && t < max - NEAR_ZERO)
+	if (t > NEAR_ZERO && in_downcircle(ray, obj, point, t)
+		&& t < max - NEAR_ZERO)
 		return (4);
 	return (0);
 }

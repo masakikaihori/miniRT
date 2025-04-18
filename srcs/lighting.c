@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
+/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:50:47 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/25 22:52:45 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/04/18 20:08:28 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	plane_light(t_xyz ray, t_light *light, t_hit *hit, t_plane obj)
 			xyz[P_LIGHT] = tmp_light->coord;
 			xyz[V_LIGHT] = vec_sub(xyz[P_LIGHT], hit->intersection);
 			normalize(&xyz[V_LIGHT]);
-			if (inner_pro(xyz[V_NORMAL], xyz[V_LIGHT] ) > NEAR_ZERO)
+			if (inner_pro(xyz[V_NORMAL], xyz[V_LIGHT]) > NEAR_ZERO)
 				cal_reflection(xyz, hit, tmp_light, ray);
 			hit->lights -= light_num;
 		}
@@ -106,7 +106,7 @@ void	cylinder_light(t_xyz ray, t_light *light, t_hit *hit, t_cylinder obj)
 			xyz[P_LIGHT] = tmp_light->coord;
 			xyz[V_LIGHT] = vec_sub(xyz[P_LIGHT], hit->intersection);
 			normalize(&xyz[V_LIGHT]);
-			if (inner_pro(xyz[V_NORMAL], xyz[V_LIGHT] ) > NEAR_ZERO)
+			if (inner_pro(xyz[V_NORMAL], xyz[V_LIGHT]) > NEAR_ZERO)
 				cal_reflection(xyz, hit, tmp_light, ray);
 			hit->lights -= light_num;
 		}
