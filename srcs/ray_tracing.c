@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaihori <nana7hachi89gmail.com>           +#+  +:+       +#+        */
+/*   By: mkaihori <mkaihori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:01:20 by mkaihori          #+#    #+#             */
-/*   Updated: 2025/03/24 15:38:12 by mkaihori         ###   ########.fr       */
+/*   Updated: 2025/04/18 20:27:47 by mkaihori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ray_plane(t_xyz ray, t_plane obj, t_hit *hit, t_xyz camera)
 	if (fabs(inner_pro(ray, obj.vec)) <= NEAR_ZERO
 		&& fabs(inner_pro(vec_sub(camera, obj.coord), obj.vec)) <= NEAR_ZERO)
 	{
-		set_hit(hit, obj.colors, 0, obj.index);
+		set_hit(hit, obj.colors, 0.0, obj.index);
 		return ;
 	}
 	d = inner_pro(vec_mul(-1.0, ray), obj.vec);
