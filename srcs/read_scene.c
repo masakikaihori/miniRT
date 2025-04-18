@@ -21,7 +21,7 @@ int	open_rtfile(t_mini *mini, char *file)
 	while (file[i])
 		i++;
 	if (i <= 3)
-		print_free_exit(mini, NULL, -1);
+		print_free_exit(mini, "not *.rt file", -1);
 	if (file[--i] == 't' && file[--i] == 'r' && file[--i] == '.')
 	{
 		fd = open(file, O_RDONLY);
